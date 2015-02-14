@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app = "linkerApp">
+<head>
+    <meta charset = "UTF-8"/>
+    <title>Linker</title>
+    <link rel = "stylesheet/less" type = "text/css" href = "{{ url_for( 'static', filename = './css/default.less' ) }}"/>
+    <script src = "{{ url_for( 'static', filename = './js/less.min.js' ) }}"></script>
+    <script src = "{{ url_for( 'static', filename = './js/angular.min.js' ) }}"></script>
+    <script src = "{{ url_for( 'static', filename = './js/ngapp.js' ) }}"></script>
+</head>
+<body ng-controller = "groupCtrl">
+    <div class = "popup-wrapper" ng-show = "popup">
+        <div class = "popup">
+            <header class = "popup-header">
+                <h2>Share a link</h2>
+            </header>
+            <form method = "post" action = "/link" autocomplete = "off">
+                <div class = "form-line">
+                    <label for = "link-url">Link url:</label>
+                    <input type = "text" name = "link-url"/>
+                </div>
+                <div class = "form-line abs-anchor">
+                    <label for = "link-descr">Short description:</label>
+                    <textarea name = "link-descr"></textarea>
+                    <input type = "text" style = "display : none" name = "group-id" value = "{{ group.id }}"/>
+                </div>
+                <div class = "form-line">
+                    <button type = "submit" class = "smaller">Share</button>
+                    <button type = "button" class = "smaller right" ng-click = "popup = false;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <header class = "top-header">
+        <div class = "logo">
+            <img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/>
+        </div>
+        <div class = "userbox">
+            <div class = "userbox-settings"></div>
+            <h4>{{ user.name }}</h4>
+            <span class = "userbox-email">{{ user.email }}</span>
+        </div>
+    </header>
+    {% with messages = get_flashed_messages( with_categories = true ) %}
+        {% if messages %}
+            <div class = "info-box" ng-hide = "hideInfos">
+            {% for category, message in messages %}
+                <div class = "info-elem {{ category }}">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class = "main-content">
+        <header class = "content-header">
+            <div class = "header-left">
+                <h1>{{ group.name }}</h1>
+            </div>
+            <button class = "option" ng-click = "popup = true;">Share link</button>
+        </header>
+        <div class = "links-list">
+            {% if group.links %}
+                {% for l in group.links %}
+                <div class = "link-wrapper">
+                    <div class = "author">
+                        <div class = "author-inside">
+                            <img class = "user-icon" src = "{{ url_for( 'static', filename = './img/contacts-48.png' ) }}"/>
+                            <h3 class = "name">{{ l.owner.name }}</h3>
+                            <p class = "email">{{ l.owner.email }}</p>
+                        </div>
+                    </div>
+                    <div class = "link">
+                        <header class = "link-header">
+                            <a href = "{{ l.url }}">{{ l.url }}</a>
+                        </header>
+                        <div class = "link-content">
+                            <p class = "link-descr">{{ l.description }}</p>
+                            <p class = "link-date small">Shared <b>{{ l.date }}</b></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No links</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

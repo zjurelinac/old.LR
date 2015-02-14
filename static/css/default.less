@@ -1,0 +1,589 @@
+@import url( http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic|Ubuntu+Mono:700&subset=latin-ext );
+
+@import "reset.css";
+@import "ui-base.less";
+
+body{
+    background      :   #eee;
+    color           :   #222;
+    font-family     :   "Open Sans";
+    font-size       :   16px;
+    line-height     :   24px;
+}
+
+h1{
+    color           :   #222;
+    font-size       :   36px;
+    font-weight     :   300;
+    line-height     :   48px;
+}
+
+h2{
+    color           :   #444;
+    font-size       :   16px;
+    font-weight     :   700;
+    line-height     :   48px;
+}
+
+h3{
+    font-weight     :   300;
+    font-size       :   18px;
+}
+
+h4{
+    color           :   #555;
+    font-size       :   20px;
+    font-weight     :   300;
+}
+
+b{
+    font-weight     :   bold;
+}
+
+a[ href ]{
+    color           :   #FF4455;
+    text-decoration :   none;
+
+    &:hover{
+        text-decoration :   underline;
+    }
+}
+
+p{
+
+}
+
+p.small{
+    color           :   #777;
+    font-size       :   12px;
+}
+
+button{
+    font-size       :   16px;
+    line-height     :   24px;
+    padding         :   12px 24px;
+
+    &.smaller{
+        font-size   :   15px;
+        padding     :   6px 18px;
+    }
+
+    &.right{
+        float       :   right;
+    }
+}
+
+input[ type = "text" ],
+input[ type = "email" ],
+input[ type = "password" ]{
+    background      :   #fafafa;
+    border          :   1px solid #ddd;
+    color           :   #333;
+    display         :   block;
+    float           :   left;
+    font-family     :   "Open Sans";
+    font-size       :   15px;
+    font-weight     :   700;
+    height          :   48px;
+    padding         :   11px;
+    width           :   384px;
+}
+
+textarea{
+    background      :   #fafafa;
+    border          :   1px solid #ddd;
+    box-sizing      :   border-box;
+    color           :   #333;
+    display         :   block;
+    float           :   left;
+    font-family     :   "Open Sans";
+    font-size       :   15px;
+    font-weight     :   700;
+    min-height      :   144px;
+    padding         :   11px;
+    resize          :   none;
+    width           :   100%;
+}
+
+label{
+    color           :   #09f;
+    display         :   block;
+    float           :   left;
+    font-size       :   18px;
+    font-weight     :   300;
+    line-height     :   48px;
+    width           :   192px;
+}
+
+.abs-anchor{
+    position        :   relative;
+}
+
+.form-line{
+    .grid();
+    margin-bottom   :   24px;
+}
+
+form.compact{
+
+    label{
+        clear           :   both;
+        float           :   none;
+        //margin-bottom   :   12px;
+    }
+
+    input[ type = "text" ],
+    input[ type = "email" ],
+    input[ type = "password" ]{
+        float           :   none;
+        width           :   100%;
+    }
+
+    .form-line{
+        margin-bottom   :   12px;
+    }
+}
+
+
+.top-header{
+    background      :   #f5f5f5;
+    border-bottom   :   1px solid #e5e5e5;
+    color           :   #fff;
+    height          :   72px;
+    width           :   100%;
+}
+
+.logo{
+    float           :   left;
+}
+
+.userbox{
+    float           :   right;
+    padding         :   12px 24px;
+
+    h4{
+        width           :   200px;
+        white-space     :   nowrap;
+    }
+}
+
+.userbox-email{
+    color           :   #09f;
+    font-size       :   12px;
+    font-weight     :   700;
+}
+
+.userbox-settings{
+    background      :   url( ../img/settings-24.png ) no-repeat center center;
+    float           :   right;
+    height          :   48px;
+    margin-left     :   24px;
+    width           :   48px;
+
+    &:hover{
+        background-color    :   #fff;
+    }
+}
+
+
+.main-content{
+    margin          :   0 auto;
+    clear           :   both;
+    padding         :   48px 0;
+    width           :   960px;
+}
+
+.content-header{
+    .grid();
+
+    padding         :   0 24px;
+    padding-bottom  :   24px;
+
+    .header-left{
+        float           :   left;
+    }
+
+    button{
+        float           :   right;
+    }
+}
+
+.group-list{
+    .grid();
+}
+
+.group-item{
+    .column( 1, 2 );
+
+    padding         :   24px;
+}
+
+.group-item-inside{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    border-radius   :   2px;
+}
+
+.group-item-header{
+    background      :   #09f;
+    height          :   48px;
+    padding         :   0 18px;
+    width           :   100%;
+
+    &:hover{
+        background      :   #ff4455;//lighten( #09f, 10% );
+        cursor          :   pointer;
+        transition      :   background-color 0.1s;
+    }
+
+    a[ href ]{
+        text-decoration :   none;
+    }
+
+    h2{
+        color           :   #fff;
+    }
+}
+
+.group-item-content{
+    padding         :   24px;
+}
+
+.people{
+    .grid();
+    margin-bottom   :   24px;
+    max-height      :   120px;
+    overflow        :   hidden;
+
+    li{
+        .column( 1, 2 );
+
+        box-sizing      :   border-box;
+        height          :   36px;
+        margin-bottom   :   4px;
+
+
+        &:nth-child( odd ){
+            padding-right    :   2px;
+        }
+
+        &:nth-child( even ){
+            padding-left   :   2px;
+        }
+
+
+        .inside{
+            background      :   #f5f5f5 url( ../img/contacts-32.png ) no-repeat 8px center;
+            border          :   1px solid #ddd;
+            box-sizing      :   border-box;
+            color           :   #555;
+            display         :   block;
+            font-size       :   14px;
+            font-weight     :   700;
+            line-height     :   36px;
+            height          :   36px;
+            padding         :   0 12px;
+            padding-left    :   32px;
+            width           :   100%;
+        }
+    }
+}
+
+p.others{
+    font-size       :   24px;
+    font-weight     :   700;
+    margin          :   -30px 0 6px 0;
+    text-align      :   center;
+}
+
+p.link-count{
+    color       :   #09f;
+}
+
+
+.links-list{
+    padding         :   24px;
+}
+
+.link-wrapper{
+    .grid();
+
+    margin-bottom   :   48px;
+}
+
+.link{
+    .column( 3, 4 );
+
+    background      :   #fff;
+    border          :   1px solid #ddd;
+}
+
+.link-header{
+    background      :   #09f;
+    height          :   48px;
+    padding         :   0 24px;
+
+    a{
+        color           :   #fff;
+        font-family     :   "Ubuntu Mono";
+        font-size       :   16px;
+        font-weight     :   700;
+        line-height     :   48px;
+        text-decoration :   none;
+    }
+}
+
+.link-content{
+    padding         :   24px;
+}
+
+.link-descr{
+    color           :   #444;
+    font-style      :   italic;
+    margin-bottom   :   24px;
+}
+
+p.email{
+    color           :   #09f;
+    font-size       :   12px;
+    font-weight     :   700;
+}
+
+.author{
+    .column( 1, 4 );
+}
+
+.author-inside{
+    margin-right    :   24px;
+    padding         :   12px 24px;
+    text-align      :   center;
+}
+
+.user-icon{
+    margin          :   12px auto;
+}
+
+
+.login-box{
+    .grid();
+
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    margin          :   24px auto;
+    padding         :   48px 72px;
+    padding-bottom  :   24px;
+    width           :   480px;
+}
+
+button.login-btn{
+    display         :   block;
+    float           :   right;
+    margin-top      :   24px;
+    width           :   100%;
+}
+
+
+.signup-box{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    margin          :   24px auto;
+    padding         :   72px;
+    padding-bottom  :   48px;
+}
+
+.info{
+    margin-bottom   :   48px;
+}
+
+p.tos{
+    margin-left     :   192px;
+    margin-top      :   24px;
+    width           :   384px;
+    text-align      :   center;
+}
+
+.errors{
+    border-bottom   :   1px solid #eee;
+    margin-bottom   :   24px;
+    padding-bottom  :   24px;
+
+    &:before{
+        color           :   #FF4455;
+        content         :   "Error";
+        display         :   block;
+        float           :   left;
+        font-size       :   22px;
+        font-weight     :   300;
+        width           :   192px;
+    }
+}
+
+p.error{
+    color           :   #777;
+    font-weight     :   700;
+}
+
+.signup-btn{
+    margin-left     :   288px;
+    width           :   192px;
+}
+
+.error-box{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    margin-top      :   24px;
+    padding         :   48px;
+    width           :   960px;
+
+    h3{
+        font-size       :   22px;
+        margin-bottom   :   24px;
+    }
+
+    p{
+        font-size       :   15px;
+    }
+}
+
+form.compact .errors{
+    margin-bottom   :   12px;
+    padding-bottom  :   12px;
+
+    &:before{
+        width           :   80px;
+    }
+}
+
+
+
+.info-box{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    margin          :   24px auto;
+    padding         :   24px;
+    width           :   912px;
+}
+
+.info-elem{
+    color           :   #777;
+    font-size       :   16px;
+}
+
+.error:before{
+    content         :   "Error: ";
+    color           :   #f45;
+    float           :   left;
+    font-size       :   20px;
+    font-weight     :   300;
+    margin-right    :   24px;
+}
+
+
+.popup-wrapper{
+    background      :   rgba( 0, 0, 0, 0.2 );
+    height          :   100%;
+    left            :   0;
+    position        :   fixed;
+    top             :   0;
+    width           :   100%;
+}
+
+.popup{
+    background      :   #fff;
+    border          :   1px solid #bbb;
+    height          :   504px;
+    left            :   50%;
+    margin-left     :   -300px;
+    margin-top      :   -252px;
+    padding         :   24px 48px;
+    position        :   absolute;
+    top             :   50%;
+    width           :   600px;
+
+    input{
+        width           :   100%;
+    }
+}
+
+.popup-header{
+    background      :   #09f;
+    margin          :   -24px -48px;
+    margin-bottom   :   24px;
+    padding         :   0 24px;
+
+    h2{
+        color           :   #fff;
+    }
+}
+
+.user-list{
+    background      :   #fafafa;
+    border          :   1px solid #ddd;
+    box-sizing      :   border-box;
+    float           :   left;
+    height          :   96px;
+    margin-top      :   12px;
+    padding         :   4px;
+    width           :   100%;
+
+    li{
+        background      :   #fff;
+        border          :   1px solid #ddd;
+        color           :   #777;
+        float           :   left;
+        font-size       :   14px;
+        font-weight     :   700;
+        margin          :   4px;
+        padding         :   4px 12px;
+
+        &:hover{
+            color           :   #FF4455;
+            cursor          :   pointer;
+        }
+    }
+}
+
+.autocomplete{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    border-top      :   none;
+    box-sizing      :   border-box;
+    display         :   block;
+    position        :   absolute;
+    width           :   100%;
+}
+
+.ac-userlist{
+    box-shadow      :   1px 2px 2px rgba( 0, 0, 0, 0.25 );
+    top             :   96px;
+
+    li{
+        border-bottom   :   1px solid #eee;
+        height          :   24px;
+        padding         :   12px;
+
+        a{
+            color           :   inherit;
+            text-decoration :   none;
+            height          :   100%;
+            width           :   100%;
+        }
+
+        .name{
+            font-size       :   16px;
+            font-weight     :   300;
+            line-height     :   24px;
+            margin-right    :   6px;
+        }
+
+        .email{
+            color           :   #09f;
+            font-size       :   12px;
+            font-weight     :   700;
+        }
+
+        &:last-child{
+            border-bottom   :   none;
+        }
+    }
+}

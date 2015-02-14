@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8"/>
+    <title>Linker</title>
+    <link rel = "stylesheet/less" type = "text/css" href = "{{ url_for( 'static', filename = './css/default.less' ) }}"/>
+    <script src = "{{ url_for( 'static', filename = './js/less.min.js' ) }}"></script>
+</head>
+<body>
+    <header class = "top-header">
+        <div class = "logo">
+            <img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/>
+        </div>
+    </header>
+    <div class = "main-content">
+        <header class = "content-header">
+            <div class = "header-left">
+                <h1>Login</h1>
+            </div>
+        </header>
+        <div class = "login-box">
+            <form class = "compact" method = "post" action = "/login">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class = "errors">
+                        {% for message in messages %}
+                            <p class = "{{ category }}">{{ message }}</p>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <div class = "form-line">
+                    <label for = "email">Email</label>
+                    <input type = "email" name = "email"/>
+                </div>
+                <div class = "form-line">
+                    <label for = "password">Password</label>
+                    <input type = "password" name = "password"/>
+                </div>
+                <div class = "form-line">
+                    <button type = "submit" class = "login-btn">Login</button>
+                </div>
+                <div class = "form-line">
+                    <p class = "small">Don't have an account? <b><a href = "/signup" style = "float: right;">Sign up!</a></b></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

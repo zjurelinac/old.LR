@@ -1,0 +1,47 @@
+@import "reset.css";
+
+
+/* Additional 'reset' rules */
+
+div, article, section, header, footer, input, button{
+	box-sizing 		: 	border-box; 
+}
+
+img{
+	display 		: 	block;
+}
+
+*:focus, *:active{
+	outline 		: 	0;
+}
+
+button::-moz-focus-inner{
+	border 			: 	0;
+	margin 			: 	0;
+	padding 		: 	0;
+}
+
+/* Clearfix class */
+.clear{
+	&:before, &:after{
+		content 		: 	"";
+		display 		: 	table;		
+	}
+
+	&:after{
+		clear 			: 	both;
+	}
+}
+
+/* A simple fluid grid */
+
+.grid{
+	.clear();
+}
+
+.column( @x, @n ){
+	float 		: 	left;
+	width 		: 	100% * @x / @n;
+}
+
+
