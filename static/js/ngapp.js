@@ -18,12 +18,12 @@ angular.module( 'linkerApp', [],
     };
 })
 
-.controller( 'indexCtrl', function( $scope, $http ){
+.controller( 'indexCtrl', function( $http, $scope ){
     $scope.popup = false;
     $scope.inviteUser = "";
     $scope.autocompletes = [];
     $scope.invitedUsers = [];
-    $scope._invitedUsers = "Hello";
+    $scope._invitedUsers = "";
 
     $scope.autoCompleteUser = function(){
         if( $scope.inviteUser.length < 3 ){
@@ -31,7 +31,7 @@ angular.module( 'linkerApp', [],
             return;
         }
 
-        $http.post( '/user-ac', { hello : "World", nameStart : $scope.inviteUser } )
+        $http.post( '/user/suggest', { nameStart : $scope.inviteUser } )
             .success( function( data ){
                 $scope.autocompletes = data.users;
             } )
@@ -59,9 +59,16 @@ angular.module( 'linkerApp', [],
     };
 })
 
-.controller( 'groupCtrl', function( $scope, $timeout ){
-    $scope.popup = false;
+.controller( 'groupCtrl', function( $http, $scope, $timeout ){
+    $scope.popupInvite = false;
+    $scope.popupDelete = false;
+    $scope.popupShare = false;
     $scope.hideInfos = false;
+
+    $scope.inviteUser = "";
+    $scope.autocompletes = [];
+    $scope.invitedUsers = [];
+    $scope._invitedUsers = "";
 
     clearInfos = function(){
         $scope.hideInfos = true;
@@ -69,4 +76,37 @@ angular.module( 'linkerApp', [],
     }
 
     $timeout( clearInfos, 3000 );
+
+    $scope.autoCompleteUser = function(){
+        if( $scope.inviteUser.length < 3 ){
+            autocompletes = [];
+            return;
+        }
+
+        $http.post( '/user/suggest', { nameStart : $scope.inviteUser } )
+            .success( function( data ){
+                $scope.autocompletes = data.users;
+            } )
+    };
+
+    $scope.autocompleteClick = function( id ){
+        $scope.invitedUsers.push( $scope.autocompletes[ id ].name );
+        $scope._invitedUsers = $scope.invitedUsers.toString();
+
+        $scope.inviteUser = "";
+        $scope.autocompletes = [];
+    };
+
+    $scope.enterUser = function(){
+        $scope.invitedUsers.push( $scope.inviteUser );
+        $scope._invitedUsers = $scope.invitedUsers.toString();
+
+        $scope.inviteUser = "";
+        $scope.autocompletes = [];
+    };
+
+    $scope.removeUser = function( id ){
+        $scope.invitedUsers.splice( id, 1 );
+        $scope._invitedUsers = $scope.invitedUsers.toString();
+    };
 });

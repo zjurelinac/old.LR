@@ -46,12 +46,20 @@
     </div>
     <header class = "top-header">
         <div class = "logo">
-            <img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/>
+            <a href = "/"><img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/></a>
         </div>
         <div class = "userbox">
-            <div class = "userbox-settings"></div>
-            <h4>{{ user.name }}</h4>
-            <span class = "userbox-email">{{ user.email }}</span>
+            <div class = "userbox-user">
+                <h4>{{ user.name }}</h4>
+                <span class = "userbox-email">{{ user.email }}</span>
+            </div>
+            <div class = "userbox-settings">
+                <ul class = "settings-dropdown">
+                    <li><a href = "/change-password">Change password</a></li>
+                    <li><a href = "/delete-acc">Delete account</a></li>
+                    <li><a href = "/signout">Sign out</a></li>
+                </ul>
+            </div>
         </div>
     </header>
     <div class = "main-content">
@@ -72,7 +80,7 @@
         </header>
         <div class = "group-list">
             {% if groups %}
-                {% for g in groups %}
+                {% for g in groups | sort( reverse = true, attribute = 'last_activity' ) %}
                     <div class = "group-item">
                         <div class = "group-item-inside">
                             <header class = "group-item-header">
@@ -89,7 +97,7 @@
                                 {% if g.users_count > 6 %}
                                     <p class = "others">&hellip;</p>
                                 {% endif %}
-                                <p class = "activity small">Last activity: <b>{{ g.last_activity }}</b></p>
+                                <p class = "activity small">Last activity: <b>{{ g.last_activity | prettify }}</b></p>
                                 <p class = "link-count small">{{ g.links_count }} link{{ 's' if g.links_count != 1 }} shared</p>
                             </div>
                         </div>

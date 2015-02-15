@@ -15,11 +15,12 @@
     <div class = "main-content">
         <header class = "content-header">
             <div class = "header-left">
-                <h1>Internal server error</h1>
+                <h1>Error 500:</h1>
             </div>
         </header>
         <div class = "error-box">
-            <h3>Unfortunately... {{ error }}</h3>
+            <h3>Internal server error.</h3>
+            <p><code>{{ error.message }}</code></p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum unde esse, nisi impedit placeat laudantium labore quisquam necessitatibus sit fuga nemo molestiae dolor, numquam reprehenderit quae accusamus sint quam. Nesciunt.</p>
         </div>
     </div>

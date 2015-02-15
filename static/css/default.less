@@ -4,7 +4,7 @@
 @import "ui-base.less";
 
 body{
-    background      :   #eee;
+    background      :   #DEECF3;
     color           :   #222;
     font-family     :   "Open Sans";
     font-size       :   16px;
@@ -16,6 +16,12 @@ h1{
     font-size       :   36px;
     font-weight     :   300;
     line-height     :   48px;
+
+    .small{
+        font-size       :   14px;
+        font-weight     :   700;
+        margin-left     :   12px;
+    }
 }
 
 h2{
@@ -47,10 +53,16 @@ a[ href ]{
     &:hover{
         text-decoration :   underline;
     }
+
+    &.blue{
+        color           :   #09f;
+    }
 }
 
-p{
-
+p.dialog-text{
+    color           :   #777;
+    font-weight     :   300;
+    margin-top      :   12px;
 }
 
 p.small{
@@ -129,7 +141,6 @@ form.compact{
     label{
         clear           :   both;
         float           :   none;
-        //margin-bottom   :   12px;
     }
 
     input[ type = "text" ],
@@ -146,7 +157,7 @@ form.compact{
 
 
 .top-header{
-    background      :   #f5f5f5;
+    background      :   #fff;
     border-bottom   :   1px solid #e5e5e5;
     color           :   #fff;
     height          :   72px;
@@ -159,12 +170,15 @@ form.compact{
 
 .userbox{
     float           :   right;
-    padding         :   12px 24px;
 
     h4{
-        width           :   200px;
         white-space     :   nowrap;
     }
+}
+
+.userbox-user{
+    float           :   left;
+    padding         :   12px 0;
 }
 
 .userbox-email{
@@ -174,17 +188,66 @@ form.compact{
 }
 
 .userbox-settings{
-    background      :   url( ../img/settings-24.png ) no-repeat center center;
+    background      :   #fff url( ../img/settings-24.png ) no-repeat center center;
+    border-left     :   1px solid #ddd;
     float           :   right;
-    height          :   48px;
+    height          :   71px;
     margin-left     :   24px;
-    width           :   48px;
+    width           :   72px;
 
     &:hover{
-        background-color    :   #fff;
+        cursor              :   pointer;
+        opacity             :   1;
+    }
+
+    &:hover{
+        background-color    :   #eee;
+
+        .settings-dropdown{
+            display         :   block;
+        }
     }
 }
 
+.settings-dropdown{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    border-top      :   none;
+    border-right    :   none;
+    box-sizing      :   border-box;
+    display         :   none;
+    position        :   absolute;
+    right           :   0;
+    top             :   72px;
+    z-index         :   100;
+
+    li{
+        border-bottom   :   1px solid #eee;
+        font-size       :   14px;
+        font-weight     :   700;
+        padding         :   12px 24px;
+        width           :   200px;
+
+        a[ href ]{
+            color           :   #777;
+            display         :   block;
+            width           :   100%;
+        }
+
+        &:last-child{
+            border-bottom   :   none;
+        }
+
+        &:hover{
+            background      :   #f45;
+
+            a[ href ]{
+                color           :   #fff;
+                text-decoration :   none;
+            }
+        }
+    }
+}
 
 .main-content{
     margin          :   0 auto;
@@ -253,6 +316,7 @@ form.compact{
     .grid();
     margin-bottom   :   24px;
     max-height      :   120px;
+    min-height      :   80px;
     overflow        :   hidden;
 
     li{
@@ -323,13 +387,18 @@ p.link-count{
     height          :   48px;
     padding         :   0 24px;
 
-    a{
+    a[ href ]{
         color           :   #fff;
         font-family     :   "Ubuntu Mono";
         font-size       :   16px;
         font-weight     :   700;
         line-height     :   48px;
         text-decoration :   none;
+    }
+
+    &:hover{
+        background      :   #f45;
+        cursor          :   pointer;
     }
 }
 
@@ -442,6 +511,12 @@ p.error{
 
     p{
         font-size       :   15px;
+        margin-bottom   :   24px;
+        width           :   720px;
+    }
+
+    a[ href ]{
+        font-weight     :   700;
     }
 }
 

@@ -2,7 +2,7 @@ from flask      import  flash, jsonify, redirect, render_template, request, sess
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
 from run        import  app
-from utils      import  hashfunc
+from utils      import  hashfunc, pretty_date
 
 
 @app.errorhandler( 404 )
@@ -13,6 +13,9 @@ def error404( e ):
 def error500( e ):
     return render_template( '500.html', error = e ), 500
 
+@app.template_filter( 'prettify' )
+def prettify( s ):
+    return pretty_date( s )
 
 
 
@@ -24,8 +27,8 @@ def index():
                      'name'         : r.group.name,
                      'links_count'  : r.group.links.count(),
                      'users'        : [ rr.user.name for rr in r.group.user_rels.select() ],
-                     'users_count'  : r.group.user_rels.count()}
-                     #'last_activity': r.group.links.select().order_by( Link.date.desc() ).get() }
+                     'users_count'  : r.group.user_rels.count(),
+                     'last_activity': r.group.getLastActivity() }
                  for r in user.group_rels.select() ]
 
         return render_template( 'index.html', user = { 'name' : session[ 'name' ],
@@ -111,7 +114,7 @@ def signout():
     return redirect( url_for( 'index' ) )
 
 
-@app.route( '/user-ac', methods = [ 'POST' ] )
+@app.route( '/user/suggest', methods = [ 'POST' ] )
 def autocompleteUser():
     if 'logged_in' not in session:
         return jsonify( message = "Error" ), 404
@@ -128,6 +131,15 @@ def autocompleteUser():
     return jsonify( users = possible )
 
 
+@app.route( '/user/change-password' )
+def changePassword():
+    return 'Unimplemented'
+
+
+@app.route( '/user/delete' )
+def deleteUser():
+    return 'Unimplemented'
+
 
 @app.route( '/group/<int:id>', methods = [ 'GET' ] )
 def showGroup( id ):
@@ -135,16 +147,21 @@ def showGroup( id ):
         return redirect( url_for( 'login' ) )
 
     user    = User.get( User.id == session[ 'user_id' ] )
-    group   = Group.get( Group.id == id )
+
+    try:
+        group   = Group.get( Group.id == id )
+    except Group.DoesNotExist:
+        abort( 500 )
 
 
     if group not in [ r.group for r in user.group_rels.select() ]:
         return "unauthorized"
 
-    g = { 'name' : group.name,
-          'id' : group.id,
-          'users' : [ u.user for u in group.user_rels.select() ],
-          'links' : [ l for l in group.links.select() ] }
+    g = { 'name'    : group.name,
+          'id'      : group.id,
+          'users'   : [ u.user for u in group.user_rels.select() ],
+          'links'   : [ l for l in group.links.select().order_by( Link.date.desc() ) ],
+          'isOwner' : group.owner == user }
 
     return render_template( 'group.html', user = user, group = g )
 
@@ -172,8 +189,17 @@ def createGroup():
 
     UserToGroup.create( user = owner, group = group )
 
-    return redirect( '/group' )
+    return redirect( '/group/' + str( group.id ) )
 
+
+@app.route( '/group/invite', methods = [ 'POST' ] )
+def inviteUsers():
+    return 'Unimplemented'
+
+
+@app.route( '/group/delete/<int:id>', methods = [ 'GET' ] )
+def deleteGroup( id ):
+    return 'Unimplemented'
 
 
 @app.route( '/link', methods = [ 'POST' ] )
@@ -188,7 +214,22 @@ def shareLink():
     link_descr  = request.form.get( 'link-descr' )
 
     if not link_url:
-        flash( 'Please provide the url.', 'error' )
+        flash( 'Please provide the URL of the link you\'d like to share.', 'error' )
         return redirect( "/group/" + group_id )
 
-    return "Hi " + link_url
+    try:
+        group = Group.get( Group.id == group_id )
+    except Group.DoesNotExist:
+        flash( 'Cannot share a link, it\'s group does not exist.', 'error' )
+        return redirect( "/group/" + group_id )
+
+    Link.create( owner = user, group = group, url = link_url, description = link_descr )
+    return redirect( "/group/" + group_id )
+
+
+@app.route( '/link/delete/<int:id>' )
+def deleteLink( id ):
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+
+

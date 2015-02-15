@@ -21,6 +21,10 @@ class Group( MetaModel ):
     name = CharField( unique = True )
     owner = ForeignKeyField( User, related_name = 'owned_groups' )
 
+    def getLastActivity( self ):
+        q = self.links.select().order_by( Link.date.desc() )
+        return q.get().date if q.count() > 0 else datetime.min
+
 
 class Link( MetaModel ):
     url = CharField()
