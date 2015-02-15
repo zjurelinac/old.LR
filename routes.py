@@ -194,7 +194,34 @@ def createGroup():
 
 @app.route( '/group/invite', methods = [ 'POST' ] )
 def inviteUsers():
-    return 'Unimplemented'
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+
+    group_id    = request.form.get( 'group-id' )
+    users_str   = request.form.get( 'users-list' )
+
+    if not group_id:
+        flash( 'Wrong group id.', 'error' )
+        return redirect( url_for( 'index' ) )
+
+    if not users_str:
+        flash( 'Please enter all the required data.', 'error' )
+        return redirect( url_for( '/group/' + str( group_id ) ) )
+
+    owner       = User.get( User.id == session[ 'user_id' ] )
+
+    try:
+        group   = Group.get( Group.id == group_id )
+    except Group.DoesNotExist:
+        flash( 'Please enter all the required data.', 'error' )
+        return redirect( url_for( 'index' ) )
+
+    users = [ User.get( User.name == u ) for u in users_str.split( ',' ) ]
+
+    for u in users:
+        UserToGroup.create( user = u, group = group )
+
+    return redirect( '/group/' + str( group_id ) )
 
 
 @app.route( '/group/delete/<int:id>', methods = [ 'GET' ] )
@@ -223,7 +250,7 @@ def shareLink():
         flash( 'Cannot share a link, it\'s group does not exist.', 'error' )
         return redirect( "/group/" + group_id )
 
-    Link.create( owner = user, group = group, url = link_url, description = link_descr )
+    Link.create( owner = user, group = group, url = link_url, description = link_descr, date = datetime.now() )
     return redirect( "/group/" + group_id )
 
 
@@ -231,5 +258,22 @@ def shareLink():
 def deleteLink( id ):
     if 'logged_in' not in session:
         return redirect( url_for( 'login' ) )
+
+    try:
+        link = Link.get( Link.id == id )
+    except Link.DoesNotExist:
+        flash( 'Link with a given id does not exist', 'error' )
+        return redirect( '/index' )
+
+    user = User.get( User.id == session[ 'user_id' ] )
+
+    if link.owner != user and link.group.owner != user:
+        return 'Unauthorized'
+
+    gid = link.group.id
+
+    link.delete_instance()
+
+    return redirect( '/group/' + str( gid ) )
 
 

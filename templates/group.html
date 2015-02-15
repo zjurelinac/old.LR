@@ -61,6 +61,7 @@
                         <li ng-repeat = "u in invitedUsers" ng-click = "$parent.removeUser( $index )">[[ u ]]</li>
                     </ul>
                     <input type = "text" style = "display : none;" name = "users-list" ng-model = "_invitedUsers"/>
+                    <input type = "text" style = "display : none;" name = "group-id" value = "{{ group.id }}"/>
                 </div>
                 <div class = "form-line">
                     <button type = "submit" class = "smaller">Invite</button>
@@ -89,7 +90,7 @@
     <!-- Main page content -->
     <header class = "top-header">
         <div class = "logo">
-            <a href = "/"><img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/></a>
+            <a href = "/"><div class = "logo-img"></div></a>
         </div>
         <div class = "userbox">
             <div class = "userbox-user">
@@ -157,7 +158,10 @@
                 </div>
                 {% endfor %}
             {% else %}
-                <p>No links</p>
+                <div class = "empty-message">
+                    <h3 class = "empty-title">No links</h3>
+                    <p>There are as of yet <b>no links</b> shared in this group. You can be the first one to do so!</p>
+                </div>
             {% endif %}
         </div>
     </div>

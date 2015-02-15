@@ -30,7 +30,7 @@ class Link( MetaModel ):
     url = CharField()
     description = TextField()
     owner = ForeignKeyField( User, related_name = 'shared_links' )
-    date = DateTimeField( default = datetime.now() )
+    date = DateTimeField()
     group = ForeignKeyField( Group, related_name = 'links' )
 
 

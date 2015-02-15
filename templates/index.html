@@ -46,7 +46,7 @@
     </div>
     <header class = "top-header">
         <div class = "logo">
-            <a href = "/"><img src = "{{ url_for( 'static', filename = './img/link-48.png' ) }}"/></a>
+            <a href = "/"><div class = "logo-img"></div></a>
         </div>
         <div class = "userbox">
             <div class = "userbox-user">
@@ -104,7 +104,11 @@
                     </div>
                 {% endfor %}
             {% else %}
-                <p>No groups yet.</p>
+                <div class = "empty-message">
+                    <h3 class = "empty-title">No groups</h3>
+                    <p>You are not yet a member of any group. You can either <b>create</b> a new one,
+                        or ask someone to <b>invite you</b> into his group.</p>
+                </div>
             {% endif %}
         </div>
     </div>

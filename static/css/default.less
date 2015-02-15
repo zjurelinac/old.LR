@@ -168,6 +168,17 @@ form.compact{
     float           :   left;
 }
 
+.logo-img{
+    background      :   #09f url( ../img/link-48.png ) no-repeat center center;
+    height          :   72px;
+    width           :   72px;
+
+    &:hover{
+        background-color:   #f45;
+        cursor          :   pointer;
+    }
+}
+
 .userbox{
     float           :   right;
 
@@ -389,11 +400,13 @@ p.link-count{
 
     a[ href ]{
         color           :   #fff;
+        display         :   block;
         font-family     :   "Ubuntu Mono";
         font-size       :   16px;
         font-weight     :   700;
         line-height     :   48px;
         text-decoration :   none;
+        width           :   100%;
     }
 
     &:hover{
@@ -634,13 +647,16 @@ form.compact .errors{
 
     li{
         border-bottom   :   1px solid #eee;
-        height          :   24px;
-        padding         :   12px;
+        height          :   48px;
+        overflow        :   hidden;
 
-        a{
+        a[ href ]{
+            box-sizing      :   border-box;
             color           :   inherit;
+            display         :   block;
             text-decoration :   none;
-            height          :   100%;
+            height          :   48px;
+            padding         :   12px;
             width           :   100%;
         }
 
@@ -657,8 +673,36 @@ form.compact .errors{
             font-weight     :   700;
         }
 
+        &:hover{
+            background      :   #09f;
+            cursor          :   pointer;
+            color           :   #fff;
+
+            .email{
+                color           :   #fff;
+            }
+        }
+
         &:last-child{
             border-bottom   :   none;
         }
     }
+}
+
+
+.empty-message{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    padding         :   36px;
+
+    p{
+        color           :   #555;
+        width           :   720px;
+    }
+}
+
+.empty-title{
+    color           :   #09f;
+    font-size       :   20px;
+    margin-bottom   :   12px;
 }
