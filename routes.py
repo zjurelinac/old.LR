@@ -193,6 +193,21 @@ def deleteUser():
     if 'logged_in' not in session:
         return redirect( url_for( 'login' ) )
 
+    password = request.form.get( 'password' )
+
+    if not password:
+        flash( 'Please enter your password to proceed.', 'error' )
+        return redirect( url_for( 'showDeleteUser' ) )
+
+    user = User.get( User.id == session[ 'user_id' ] )
+
+    if user.password != hashfunc( password ):
+        flash( 'Incorrect password.', 'error' )
+        return redirect( url_for( 'showDeleteUser' ) )
+
+    user.delete_instance( recursive = True )
+
+    return redirect( '/signout' )
 
 
 @app.route( '/group/<int:id>', methods = [ 'GET' ] )
