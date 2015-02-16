@@ -1,4 +1,4 @@
-from flask      import  flash, jsonify, redirect, render_template, request, session, url_for
+from flask      import  abort, flash, jsonify, redirect, render_template, request, session, url_for
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
 from run        import  app
@@ -11,11 +11,24 @@ def error404( e ):
 
 @app.errorhandler( 500 )
 def error500( e ):
-    return render_template( '500.html', error = e ), 500
+    return render_template( '500.html', error = e.description ), 500
 
 @app.template_filter( 'prettify' )
 def prettify( s ):
     return pretty_date( s )
+
+@app.after_request
+def add_header( response ):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers[ 'X-UA-Compatible' ] = 'IE=Edge,chrome=1'
+    response.headers[ 'Last-Modified' ] = datetime.now()
+    response.headers[ 'Cache-Control' ] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers[ 'Pragma' ] = 'no-cache'
+    response.headers[ 'Expires' ] = '-1'
+    return response
 
 
 
@@ -66,10 +79,10 @@ def processSignup():
         user = User( name = name, email = email, password = hashfunc( pass1 ) )
         user.save()
     except IntegrityError:
-        flash( 'Given email already in use.' )
+        flash( 'Given email already in use.', 'error' )
         return redirect( url_for( 'showSignup' ) )
 
-    flash( 'Successfully signed up.', 'info' )
+    flash( 'Successfully signed up.', 'success' )
     return redirect( url_for( 'index' ) )
 
 
@@ -93,7 +106,7 @@ def processLogin():
     try:
         user = User.get( User.email == email )
     except User.DoesNotExist:
-        flash( 'Wrong email address' )
+        flash( 'Wrong email address', 'error' )
         return redirect( url_for( 'showLogin' ) )
 
     if user.password != hashfunc( passwd ):
@@ -131,14 +144,55 @@ def autocompleteUser():
     return jsonify( users = possible )
 
 
-@app.route( '/user/change-password' )
+@app.route( '/user/change-password', methods = [ 'GET' ] )
+def showChangePassword():
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+    return render_template( 'change_password.html', user = { 'name' : session[ 'name' ],
+                                                             'email' : session[ 'email' ] } )
+
+
+@app.route( '/user/change-password', methods = [ 'POST' ] )
 def changePassword():
-    return 'Unimplemented'
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+
+    oldpass     = request.form.get( 'old-password' )
+    newpass1    = request.form.get( 'new-password' )
+    newpass2    = request.form.get( 'new-password-repeat' )
+
+    if not oldpass or not newpass1 or not newpass2:
+        flash( 'Please provide all the data', 'error' )
+        return redirect( url_for( 'showChangePassword' ) )
+
+    user = User.get( User.id == session[ 'user_id' ] )
+
+    if user.password != hashfunc( oldpass ):
+        flash( 'The password you entered does not match your old password.', 'error' )
+        return redirect( url_for( 'showChangePassword' ) )
+
+    if newpass1 != newpass2:
+        flash( 'The new passwords do not match.', 'error' )
+        return redirect( url_for( 'showChangePassword' ) )
+
+    user.password = hashfunc( newpass1 )
+    user.save()
+    flash( 'Password successfully changed.', 'success' )
+
+    return redirect( '/' )
 
 
-@app.route( '/user/delete' )
+@app.route( '/user/delete', methods = [ 'GET' ] )
+def showDeleteUser():
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+    return render_template( 'delete_account.html', user = { 'name' : session[ 'name' ],
+                                                            'email' : session[ 'email' ] } )
+@app.route( '/user/delete', methods = [ 'POST' ] )
 def deleteUser():
-    return 'Unimplemented'
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+
 
 
 @app.route( '/group/<int:id>', methods = [ 'GET' ] )
@@ -151,7 +205,7 @@ def showGroup( id ):
     try:
         group   = Group.get( Group.id == id )
     except Group.DoesNotExist:
-        abort( 500 )
+        abort( 500, { 'message' : 'Group does not exist.' } )
 
 
     if group not in [ r.group for r in user.group_rels.select() ]:
@@ -174,18 +228,20 @@ def createGroup():
     name        = request.form.get( 'group-name' )
     users_str   = request.form.get( 'users-list' )
 
-    if not name or not users_str:
-        flash( 'Please enter all the required data.', 'error' )
+    if not name:
+        flash( 'Please choose the name of the new group.', 'error' )
         return redirect( url_for( 'index' ) )
 
     owner       = User.get( User.id == session[ 'user_id' ] )
 
-    users       = [ User.get( User.name == u ) for u in users_str.split( ',' ) ]
     group       = Group( name = name, owner = owner )
     group.save()
 
-    for u in users:
-        UserToGroup.create( user = u, group = group )
+    if users_str:
+        users       = [ User.get( User.name == u ) for u in users_str.split( ',' ) ]
+
+        for u in users:
+            UserToGroup.create( user = u, group = group )
 
     UserToGroup.create( user = owner, group = group )
 
@@ -226,7 +282,17 @@ def inviteUsers():
 
 @app.route( '/group/delete/<int:id>', methods = [ 'GET' ] )
 def deleteGroup( id ):
-    return 'Unimplemented'
+    if 'logged_in' not in session:
+        return redirect( url_for( 'login' ) )
+
+    user = User.get( User.id == session[ 'user_id' ] )
+
+    try:
+        group = Group.get( Group.id == id )
+    except Group.DoesNotExist:
+        abort( 500, { 'message' : 'Group does not exist.' } )
+
+
 
 
 @app.route( '/link', methods = [ 'POST' ] )

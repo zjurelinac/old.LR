@@ -4,46 +4,13 @@
     <meta charset = "UTF-8"/>
     <title>Linker</title>
     <link rel = "stylesheet/less" type = "text/css" href = "{{ url_for( 'static', filename = './css/default.less' ) }}"/>
+    <link rel = "shortcut icon" href = "{{ url_for( 'static', filename = 'favicon.ico' ) }}"/>
     <script src = "{{ url_for( 'static', filename = './js/less.min.js' ) }}"></script>
     <script src = "{{ url_for( 'static', filename = './js/angular.min.js' ) }}"></script>
     <script src = "{{ url_for( 'static', filename = './js/ngapp.js' ) }}"></script>
 </head>
 <body ng-controller = "indexCtrl">
-    <div class = "popup-wrapper" ng-show = "popup">
-        <div class = "popup">
-            <header class = "popup-header">
-                <h2>Create new group</h2>
-            </header>
-            <form method = "post" action = "/group" autocomplete = "off">
-                <div class = "form-line">
-                    <label for = "group-name">Group name:</label>
-                    <input type = "text" name = "group-name"/>
-                </div>
-                <div class = "form-line abs-anchor">
-                    <label for = "user-list">Invite users:</label>
-                    <input type = "text" name = "invite-user" ng-model = "inviteUser" ng-enter = "enterUser()" ng-change = "autoCompleteUser()"/>
-                    <div class = "autocomplete-wrap">
-                        <ul class = "autocomplete ac-userlist" ng-show = "autocompletes.length > 0;">
-                            <li ng-repeat = "u in autocompletes" >
-                                <a href = "" ng-click = "$parent.autocompleteClick( $index )">
-                                    <span class = "name">[[ u.name ]]</span>
-                                    <span class = "email">[[ u.email ]]</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <ul class = "user-list">
-                        <li ng-repeat = "u in invitedUsers" ng-click = "$parent.removeUser( $index )">[[ u ]]</li>
-                    </ul>
-                    <input type = "text" style = "display : none;" name = "users-list" ng-model = "_invitedUsers"/>
-                </div>
-                <div class = "form-line">
-                    <button type = "submit" class = "smaller">Create</button>
-                    <button type = "button" class = "smaller right" ng-click = "popup = false;">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
     <header class = "top-header">
         <div class = "logo">
             <a href = "/"><div class = "logo-img"></div></a>
@@ -55,27 +22,29 @@
             </div>
             <div class = "userbox-settings">
                 <ul class = "settings-dropdown">
-                    <li><a href = "/change-password">Change password</a></li>
-                    <li><a href = "/delete-acc">Delete account</a></li>
+                    <li><a href = "/user/change-password">Change password</a></li>
+                    <li><a href = "/user/delete">Delete account</a></li>
                     <li><a href = "/signout">Sign out</a></li>
                 </ul>
             </div>
         </div>
     </header>
+    {% with messages = get_flashed_messages( with_categories = true ) %}
+        {% if messages %}
+            <div class = "info-box" ng-hide = "hideInfos">
+            {% for category, message in messages %}
+                <div class = "info-elem {{ category }}">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
     <div class = "main-content">
         <header class = "content-header">
             <div class = "header-left">
                 <h1>All groups</h1>
             </div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class = "errors">
-                    {% for message in messages %}
-                        <p class = "{{ category }}">{{ message }}</p>
-                    {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
             <button class = "option" ng-click = "popup = true;">New group</button>
         </header>
         <div class = "group-list">
@@ -110,6 +79,42 @@
                         or ask someone to <b>invite you</b> into his group.</p>
                 </div>
             {% endif %}
+        </div>
+    </div>
+
+    <div class = "popup-wrapper" ng-show = "popup">
+        <div class = "popup">
+            <header class = "popup-header">
+                <h2>Create new group</h2>
+            </header>
+            <form method = "post" action = "/group" autocomplete = "off">
+                <div class = "form-line">
+                    <label for = "group-name">Group name:</label>
+                    <input type = "text" name = "group-name"/>
+                </div>
+                <div class = "form-line abs-anchor">
+                    <label for = "user-list">Invite users:</label>
+                    <input type = "text" name = "invite-user" ng-model = "inviteUser" ng-enter = "enterUser()" ng-change = "autoCompleteUser()"/>
+                    <div class = "autocomplete-wrap">
+                        <ul class = "autocomplete ac-userlist" ng-show = "autocompletes.length > 0;">
+                            <li ng-repeat = "u in autocompletes" >
+                                <a href = "" ng-click = "$parent.autocompleteClick( $index )">
+                                    <span class = "name">[[ u.name ]]</span>
+                                    <span class = "email">[[ u.email ]]</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class = "user-list">
+                        <li ng-repeat = "u in invitedUsers" ng-click = "$parent.removeUser( $index )">[[ u ]]</li>
+                    </ul>
+                    <input type = "text" style = "display : none;" name = "users-list" ng-model = "_invitedUsers"/>
+                </div>
+                <div class = "form-line">
+                    <button type = "submit" class = "smaller">Create</button>
+                    <button type = "button" class = "smaller right" ng-click = "popup = false;">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

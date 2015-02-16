@@ -18,8 +18,9 @@ angular.module( 'linkerApp', [],
     };
 })
 
-.controller( 'indexCtrl', function( $http, $scope ){
+.controller( 'indexCtrl', function( $http, $scope, $timeout ){
     $scope.popup = false;
+    $scope.hideInfos = false;
     $scope.inviteUser = "";
     $scope.autocompletes = [];
     $scope.invitedUsers = [];
@@ -57,6 +58,13 @@ angular.module( 'linkerApp', [],
         $scope.invitedUsers.splice( id, 1 );
         $scope._invitedUsers = $scope.invitedUsers.toString();
     };
+
+    clearInfos = function(){
+        $scope.hideInfos = true;
+        console.log( $scope.hideInfos )
+    };
+
+    $timeout( clearInfos, 3000 );
 })
 
 .controller( 'groupCtrl', function( $http, $scope, $timeout ){

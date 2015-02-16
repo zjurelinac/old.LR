@@ -8,7 +8,8 @@ class AuthorizationError( Exception ):
     pass
 
 class MetaModel( Model ):
-    database = db
+    class Meta:
+        database = db
 
 
 class User( MetaModel ):

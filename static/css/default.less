@@ -4,7 +4,7 @@
 @import "ui-base.less";
 
 body{
-    background      :   #DEECF3;
+    background      :   #E6EEF4;//#E4F0F3;//#DEECF3;
     color           :   #222;
     font-family     :   "Open Sans";
     font-size       :   16px;
@@ -59,6 +59,19 @@ a[ href ]{
     }
 }
 
+code{
+    color           :   #f45;
+    font-family     :   "Ubuntu Mono";
+    font-size       :   16px;
+}
+
+pre{
+    background      :   #fafafa;
+    border          :   1px solid #ddd;
+    margin-bottom   :   24px;
+    padding         :   24px;
+}
+
 p.dialog-text{
     color           :   #777;
     font-weight     :   300;
@@ -90,6 +103,7 @@ input[ type = "email" ],
 input[ type = "password" ]{
     background      :   #fafafa;
     border          :   1px solid #ddd;
+    box-sizing      :   border-box;
     color           :   #333;
     display         :   block;
     float           :   left;
@@ -99,6 +113,11 @@ input[ type = "password" ]{
     height          :   48px;
     padding         :   11px;
     width           :   384px;
+
+    &:focus{
+        border          :   1px solid fadeout( #09f, 50% );
+        outline         :   none;
+    }
 }
 
 textarea{
@@ -134,6 +153,7 @@ label{
 .form-line{
     .grid();
     margin-bottom   :   24px;
+    position        :   relative;
 }
 
 form.compact{
@@ -152,6 +172,22 @@ form.compact{
 
     .form-line{
         margin-bottom   :   12px;
+    }
+
+    .info{
+        border-bottom   :   1px solid #eee;
+        margin          :   0 -24px 24px -24px;
+        padding         :   0 24px 24px 24px;
+
+        p{
+            color           :   #f45;
+            //text-align      :   center;
+        }
+
+        &.small-margin{
+            border-bottom   :   none;
+            margin-bottom   :   0;
+        }
     }
 }
 
@@ -296,6 +332,7 @@ form.compact{
     background      :   #fff;
     border          :   1px solid #ddd;
     border-radius   :   2px;
+    height          :   288px;
 }
 
 .group-item-header{
@@ -453,8 +490,8 @@ p.email{
     border          :   1px solid #ddd;
     margin          :   24px auto;
     padding         :   48px 72px;
-    padding-bottom  :   24px;
-    width           :   480px;
+    padding-bottom  :   36px;
+    width           :   504px;
 }
 
 button.login-btn{
@@ -485,19 +522,10 @@ p.tos{
 }
 
 .errors{
-    border-bottom   :   1px solid #eee;
-    margin-bottom   :   24px;
-    padding-bottom  :   24px;
-
-    &:before{
-        color           :   #FF4455;
-        content         :   "Error";
-        display         :   block;
-        float           :   left;
-        font-size       :   22px;
-        font-weight     :   300;
-        width           :   192px;
-    }
+    background      :   #fafafa;
+    border          :   1px solid #ddd;
+    margin          :   -12px -24px 36px -24px;
+    padding         :   24px;
 }
 
 p.error{
@@ -534,11 +562,15 @@ p.error{
 }
 
 form.compact .errors{
-    margin-bottom   :   12px;
-    padding-bottom  :   12px;
+    margin          :   -12px -36px 12px -36px;
+    padding         :   24px 36px;
 
-    &:before{
-        width           :   80px;
+    p.error{
+        font-size       :   14px;
+
+        &:before{
+            font-size       :   18px;
+        }
     }
 }
 
@@ -565,7 +597,6 @@ form.compact .errors{
     font-weight     :   300;
     margin-right    :   24px;
 }
-
 
 .popup-wrapper{
     background      :   rgba( 0, 0, 0, 0.2 );
