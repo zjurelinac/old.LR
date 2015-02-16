@@ -277,7 +277,7 @@ def inviteUsers():
 
     if not users_str:
         flash( 'Please enter all the required data.', 'error' )
-        return redirect( url_for( '/group/' + str( group_id ) ) )
+        return redirect( '/group/' + str( group_id ) )
 
     owner       = User.get( User.id == session[ 'user_id' ] )
 
@@ -287,10 +287,19 @@ def inviteUsers():
         flash( 'Please enter all the required data.', 'error' )
         return redirect( url_for( 'index' ) )
 
-    users = [ User.get( User.name == u ) for u in users_str.split( ',' ) ]
+    try:
+        users = [ User.get( User.name == u ) for u in users_str.split( ',' ) ]
+        for u in users:
+            UserToGroup.create( user = u, group = group )
 
-    for u in users:
-        UserToGroup.create( user = u, group = group )
+    except User.DoesNotExist:
+        flash( 'No such user.', 'error' )
+        return redirect( '/group/' + str( group_id ) )
+
+    except IntegrityError:
+        flash( 'User already in this group.', 'error' )
+        return redirect( '/group/' + str( group_id ) )
+
 
     return redirect( '/group/' + str( group_id ) )
 
@@ -307,7 +316,9 @@ def deleteGroup( id ):
     except Group.DoesNotExist:
         abort( 500, { 'message' : 'Group does not exist.' } )
 
+    group.delete_instance( recursive = True )
 
+    return redirect( '/' )
 
 
 @app.route( '/link', methods = [ 'POST' ] )

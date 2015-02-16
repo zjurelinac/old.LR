@@ -12,6 +12,12 @@
         <div class = "logo">
             <a href = "/"><div class = "logo-img"></div></a>
         </div>
+        <nav class = "top-nav">
+            <ul>
+                <li><a href = "/">All groups</a></li>
+                <li><a href = "/help">Help</a></li>
+            </ul>
+        </nav>
         <div class = "userbox">
             <div class = "userbox-user">
                 <h4>{{ user.name }}</h4>
@@ -36,7 +42,7 @@
 
             <form class = "compact" method = "post" action = "/user/delete">
             <div class = "info small-margin">
-                    <h3>Enter your password to permanently delete your account.</h3><br/>
+                    <h3>Enter your password to permanently delete your account, including all the groups and links you've shared.</h3><br/>
                     <p><b>After this, there is no turning back!</b></p>
                 </div>
                 {% with messages = get_flashed_messages( with_categories = true ) %}

@@ -64,7 +64,7 @@ angular.module( 'linkerApp', [],
         console.log( $scope.hideInfos )
     };
 
-    $timeout( clearInfos, 3000 );
+    $timeout( clearInfos, 5000 );
 })
 
 .controller( 'groupCtrl', function( $http, $scope, $timeout ){
@@ -83,7 +83,7 @@ angular.module( 'linkerApp', [],
         console.log( $scope.hideInfos )
     }
 
-    $timeout( clearInfos, 3000 );
+    $timeout( clearInfos, 5000 );
 
     $scope.autoCompleteUser = function(){
         if( $scope.inviteUser.length < 3 ){

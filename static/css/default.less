@@ -46,6 +46,10 @@ b{
     font-weight     :   bold;
 }
 
+em{
+    font-style      :   italic;
+}
+
 a[ href ]{
     color           :   #FF4455;
     text-decoration :   none;
@@ -92,10 +96,10 @@ button{
         font-size   :   15px;
         padding     :   6px 18px;
     }
+}
 
-    &.right{
-        float       :   right;
-    }
+ .right{
+    float       :   right;
 }
 
 input[ type = "text" ],
@@ -181,7 +185,6 @@ form.compact{
 
         p{
             color           :   #f45;
-            //text-align      :   center;
         }
 
         &.small-margin{
@@ -195,7 +198,6 @@ form.compact{
 .top-header{
     background      :   #fff;
     border-bottom   :   1px solid #e5e5e5;
-    color           :   #fff;
     height          :   72px;
     width           :   100%;
 }
@@ -212,6 +214,36 @@ form.compact{
     &:hover{
         background-color:   #f45;
         cursor          :   pointer;
+    }
+}
+
+.top-nav{
+    float           :   left;
+    padding-left    :   24px;
+
+    li{
+        box-sizing      :   border-box;
+        float           :   left;
+        font-size       :   16px;
+        font-weight     :   300;
+        height          :   72px;
+        padding         :   0 24px;
+
+        &.active{
+            font-weight     :   700;
+        }
+
+        a[ href ]{
+            color           :   inherit;
+            display         :   block;
+            line-height     :   72px;
+            text-decoration :   none;
+        }
+
+        &:hover{
+            border-bottom   :   4px solid #f45;
+            cursor          :   pointer;
+        }
     }
 }
 
@@ -398,6 +430,37 @@ form.compact{
             padding-left    :   32px;
             width           :   100%;
         }
+    }
+}
+
+.group-info{
+    background      :   #fff;
+    border          :   1px solid #ddd;
+    float           :   left;
+    margin          :   24px 0 24px -24px;
+    padding         :   24px;
+    width           :   960px;
+
+    a.option{
+        margin-right    :   24px;
+    }
+}
+
+.group-members{
+    overflow        :   hidden;
+    margin-bottom   :   12px;
+    padding         :   12px 0;
+
+    li{
+        background      :   #f5f5f5 url( ../img/contacts-32.png ) no-repeat 8px center;
+        border          :   1px solid #ddd;
+        color           :   #333;
+        float           :   left;
+        font-size       :   14px;
+        font-weight     :   700;
+        margin          :   0 6px 6px 0;
+        padding         :   6px 12px;
+        padding-left    :   32px;
     }
 }
 

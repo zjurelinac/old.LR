@@ -16,6 +16,12 @@
         <div class = "logo">
             <a href = "/"><div class = "logo-img"></div></a>
         </div>
+        <nav class = "top-nav">
+            <ul>
+                <li><a href = "/">All groups</a></li>
+                <li><a href = "/help">Help</a></li>
+            </ul>
+        </nav>
         <div class = "userbox">
             <div class = "userbox-user">
                 <h4>{{ user.name }}</h4>
@@ -44,15 +50,25 @@
     <div class = "main-content">
         <header class = "content-header">
             <div class = "header-left">
-                <h1>{{ group.name }}
-                {% if group.isOwner %}
-                    <span class = "small">
-                        [ <a href = "" class = "blue" ng-click = "popupInvite = true;">Invite users</a> |
-                        <a href = "" ng-click = "popupDelete = true;">Delete group</a> ]
-                    </span>
-                {% endif %}</h1>
+                <h1>{{ group.name }}</h1>
             </div>
             <button class = "option" ng-click = "popupShare = true;">Share link</button>
+            <div class = "group-info">
+                <h3>Members</h3>
+                <ul class = "group-members">
+                    {% for u in group.users %}
+                    <li>{{ u.name }}</li>
+                    {% endfor %}
+                </ul>
+                <p class = "small">
+                    {% if group.isOwner %}
+                        <a href = "" ng-click = "popupInvite = true;" class = "option blue">Invite users</a>
+                        <a href = "" ng-click = "popupDelete = true;" class = "option right">Delete group</a>
+                    {% else %}
+                        <a href = "">Leave group</a>
+                    {% endif %}
+                </p>
+            </div>
         </header>
         <div class = "links-list">
             {% if group.links %}
@@ -84,7 +100,7 @@
             {% else %}
                 <div class = "empty-message">
                     <h3 class = "empty-title">No links</h3>
-                    <p>There are as of yet <b>no links</b> shared in this group. You can be the first one to do so!</p>
+                    <p>There are as of yet <b>no links</b> shared in this group. You can be the first to share one!</p>
                 </div>
             {% endif %}
         </div>
@@ -123,7 +139,7 @@
             </header>
             <form method = "post" action = "/group/invite" autocomplete = "off">
                 <div class = "form-line">
-                    <p class = "dialog-text">Choose more users to invite into group <b>{{ group.name }}</b>.</p>
+                    <p class = "dialog-text">Choose more users to invite into <b>{{ group.name }}</b>.</p>
                 </div>
                 <div class = "form-line abs-anchor">
                     <label for = "user-list">Invite users:</label>
