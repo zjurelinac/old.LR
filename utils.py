@@ -8,7 +8,7 @@ from math       import *
 
 
 def hashfunc( str ):
-    return base64.b85encode( hashlib.sha512( str.encode() ).digest() ).decode( 'ascii' )
+    return base64.b64encode( hashlib.sha512( str.encode() ).digest() ).decode( 'ascii' )
 
 
 def random_string( len ):

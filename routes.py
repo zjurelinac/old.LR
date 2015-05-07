@@ -31,6 +31,10 @@ def add_header( response ):
     return response
 
 
+@app.route( '/dbg' )
+def debugView():
+    return "Debug"
+
 
 @app.route( '/' )
 def index():
@@ -55,7 +59,7 @@ def index():
 @app.route( '/signup', methods = [ 'GET' ] )
 def showSignup():
     if( 'logged_in' in session ):
-        return redirect( url_for( 'index' ) )
+        return redirect( '/' )
 
     return render_template( 'signup.html' )
 
@@ -155,7 +159,7 @@ def showChangePassword():
 @app.route( '/user/change-password', methods = [ 'POST' ] )
 def changePassword():
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     oldpass     = request.form.get( 'old-password' )
     newpass1    = request.form.get( 'new-password' )
@@ -191,7 +195,7 @@ def showDeleteUser():
 @app.route( '/user/delete', methods = [ 'POST' ] )
 def deleteUser():
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     password = request.form.get( 'password' )
 
@@ -213,7 +217,7 @@ def deleteUser():
 @app.route( '/group/<int:id>', methods = [ 'GET' ] )
 def showGroup( id ):
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     user    = User.get( User.id == session[ 'user_id' ] )
 
@@ -238,7 +242,7 @@ def showGroup( id ):
 @app.route( '/group', methods = [ 'POST' ] )
 def createGroup():
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     name        = request.form.get( 'group-name' )
     users_str   = request.form.get( 'users-list' )
@@ -266,7 +270,7 @@ def createGroup():
 @app.route( '/group/invite', methods = [ 'POST' ] )
 def inviteUsers():
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     group_id    = request.form.get( 'group-id' )
     users_str   = request.form.get( 'users-list' )
@@ -307,7 +311,7 @@ def inviteUsers():
 @app.route( '/group/delete/<int:id>', methods = [ 'GET' ] )
 def deleteGroup( id ):
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     user = User.get( User.id == session[ 'user_id' ] )
 
@@ -324,7 +328,7 @@ def deleteGroup( id ):
 @app.route( '/link', methods = [ 'POST' ] )
 def shareLink():
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     user = User.get( User.id == session[ 'user_id' ] )
 
@@ -349,7 +353,7 @@ def shareLink():
 @app.route( '/link/delete/<int:id>' )
 def deleteLink( id ):
     if 'logged_in' not in session:
-        return redirect( url_for( 'login' ) )
+        return redirect( '/login' )
 
     try:
         link = Link.get( Link.id == id )
