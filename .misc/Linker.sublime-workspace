@@ -1,0 +1,1809 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"ma",
+				"margin-left"
+			],
+			[
+				"page-item",
+				"page-item-title"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"min-",
+				"min-height"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fontwe",
+				"font-weight"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"border-",
+				"border-bottom-width"
+			],
+			[
+				"clas",
+				"classmethod"
+			],
+			[
+				"class",
+				"classmethod	class"
+			],
+			[
+				"rel",
+				"related_name"
+			],
+			[
+				"Meta",
+				"MetaModel	class"
+			],
+			[
+				"margin-",
+				"margin-right"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"border-bot",
+				"border-bottom"
+			],
+			[
+				"content",
+				"content-wrapper"
+			],
+			[
+				"margi",
+				"margin-bottom"
+			],
+			[
+				"new",
+				"newpass2	statement"
+			],
+			[
+				"render",
+				"render_template	function"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"backgro",
+				"background"
+			],
+			[
+				"prett",
+				"pretty_date	function"
+			],
+			[
+				"lin",
+				"link-descr"
+			],
+			[
+				"grou",
+				"group_id	statement"
+			],
+			[
+				"link",
+				"link_url	statement"
+			],
+			[
+				"users",
+				"users_str	statement"
+			],
+			[
+				"in",
+				"invitedUsers"
+			],
+			[
+				"ng-re",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"backg",
+				"background"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"border",
+				"border-box"
+			],
+			[
+				"box-s",
+				"box-sizing"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
+				"User",
+				"UserDoesNotExist"
+			],
+			[
+				"show",
+				"showLogin"
+			],
+			[
+				"hash",
+				"hashfunc	function"
+			],
+			[
+				"pas",
+				"passwd	statement"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"form",
+				"form-line"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"appl",
+				"applyManyTimes"
+			],
+			[
+				"top",
+				"topsort"
+			],
+			[
+				"blac",
+				"blacken"
+			],
+			[
+				"radn",
+				"randVector"
+			],
+			[
+				"world",
+				"worldsize"
+			],
+			[
+				"rand",
+				"randVector"
+			],
+			[
+				"from",
+				"fromListM"
+			],
+			[
+				"per",
+				"unsafePerformIO"
+			],
+			[
+				"other",
+				"otherwise"
+			],
+			[
+				"sta",
+				"startsAt"
+			],
+			[
+				"mer",
+				"mergev"
+			],
+			[
+				"V",
+				"Vector"
+			],
+			[
+				"merge",
+				"mergesort"
+			],
+			[
+				"Int",
+				"Intermediate"
+			],
+			[
+				"net",
+				"newtonIters"
+			],
+			[
+				"drop",
+				"dropNth"
+			],
+			[
+				"chunk",
+				"chunkInto"
+			],
+			[
+				"pro",
+				"probabilityFilter"
+			],
+			[
+				"ex",
+				"extendedGcd"
+			],
+			[
+				"gcd",
+				"gcdAll"
+			],
+			[
+				"prob",
+				"probFilterAcc"
+			],
+			[
+				"var",
+				"varianceHelp"
+			],
+			[
+				"vari",
+				"varianceAcc"
+			],
+			[
+				"va",
+				"varianceAcc"
+			],
+			[
+				"mean",
+				"meanVal"
+			],
+			[
+				"max",
+				"maxUnzip"
+			],
+			[
+				"add",
+				"addPredecessor"
+			],
+			[
+				"mod",
+				"modMult"
+			],
+			[
+				"is",
+				"isValidGrid"
+			],
+			[
+				"li",
+				"lightsOutLite"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"half",
+				"halfList"
+			],
+			[
+				"col",
+				"colFields"
+			],
+			[
+				"parse",
+				"parseCSV"
+			],
+			[
+				"tria",
+				"triangleCounter"
+			],
+			[
+				"sort",
+				"sortByNum"
+			],
+			[
+				"mult",
+				"multLists"
+			],
+			[
+				"accu",
+				"accumulateWords"
+			],
+			[
+				"counter",
+				"counter-increment"
+			],
+			[
+				"border-bottom",
+				"border-bottom-width"
+			],
+			[
+				"button",
+				"button-transition"
+			],
+			[
+				"se",
+				"settings/"
+			],
+			[
+				"light-fore",
+				"light-foreground-second"
+			],
+			[
+				"input",
+				"input-background"
+			],
+			[
+				"ico",
+				"icons/"
+			],
+			[
+				"dark-fore",
+				"dark-foreground"
+			],
+			[
+				"bor",
+				"border-left"
+			],
+			[
+				"s",
+				"magnifying-glass-4x.png	w:32 h:32"
+			],
+			[
+				"grid-three",
+				"grid-three-up-8x.png	w:64 h:64"
+			],
+			[
+				"l",
+				"list-rich-8x.png	w:64 h:64"
+			],
+			[
+				"fo",
+				"font-weight"
+			],
+			[
+				"foregro",
+				"foreground-dark-color"
+			],
+			[
+				"esca",
+				"htmlEscape"
+			],
+			[
+				"outp",
+				"outputEnd"
+			],
+			[
+				"genera",
+				"generateOutput"
+			],
+			[
+				"out",
+				"outputEnd"
+			],
+			[
+				"code",
+				"codeInline"
+			],
+			[
+				"cos",
+				"console"
+			],
+			[
+				"esc",
+				"htmlEscape"
+			],
+			[
+				"math",
+				"mathBlock"
+			],
+			[
+				"start",
+				"startsWith"
+			],
+			[
+				"line",
+				"lineStart"
+			],
+			[
+				"user",
+				"user_id"
+			],
+			[
+				"not",
+				"notes_count"
+			],
+			[
+				"date",
+				"date_last_modified"
+			],
+			[
+				"ext",
+				"is_externally_visible"
+			],
+			[
+				"reg",
+				"registration_date"
+			],
+			[
+				"last",
+				"last_login_time"
+			],
+			[
+				"login",
+				"login_attempts"
+			],
+			[
+				"password_",
+				"password_reset_date"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"Paragrap",
+				"ParagraphTag"
+			],
+			[
+				"get",
+				"getLast5"
+			],
+			[
+				"categ",
+				"Categories"
+			],
+			[
+				"dt_",
+				"dt_last_modified"
+			],
+			[
+				"use",
+				"user_id"
+			],
+			[
+				"$route",
+				"$routeParams	AngularJS"
+			],
+			[
+				"$loca",
+				"$locationProvider	AngularJS"
+			],
+			[
+				"bord",
+				"border-bottom"
+			],
+			[
+				"next",
+				"next_url	(local, instance)"
+			],
+			[
+				"$routeP",
+				"$routeProvider	AngularJS"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/sigma/Web/Linker/templates/base.html",
+			"settings":
+			{
+				"buffer_size": 4932,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/sigma/Web/Linker/static/css/default.less",
+			"settings":
+			{
+				"buffer_size": 6562,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/sigma/Web/Linker/templates/group.html",
+			"settings":
+			{
+				"buffer_size": 1892,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/sigma/Web/Linker/templates/groups.html",
+			"settings":
+			{
+				"buffer_size": 3336,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/sigma/Web/Linker/routes.py",
+			"settings":
+			{
+				"buffer_size": 2979,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/C++/C++.sublime-build",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"insl",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"ins",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"colo",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"toggle si",
+				"View: Toggle Side Bar"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"TODo",
+				"TodoReview: Project Files"
+			],
+			[
+				"open",
+				"Git: Open..."
+			],
+			[
+				"toggle map",
+				"View: Toggle Minimap"
+			],
+			[
+				"mini",
+				"View: Toggle Minimap"
+			],
+			[
+				"minim",
+				"View: Toggle Minimap"
+			],
+			[
+				"toggle",
+				"View: Toggle Minimap"
+			],
+			[
+				"minima",
+				"View: Toggle Minimap"
+			],
+			[
+				"di",
+				"Package Control: Disable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"toggle sid",
+				"View: Toggle Side Bar"
+			],
+			[
+				"toggle s",
+				"View: Toggle Side Bar"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment File Settings – Default"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"listpa",
+				"Package Control: List Packages"
+			],
+			[
+				"togg",
+				"Toggle Comment"
+			],
+			[
+				"python",
+				"Python: Disable Pep8 Linting On View"
+			],
+			[
+				"list ap",
+				"Package Control: List Packages"
+			],
+			[
+				"all",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"all er",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"all err",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"linter a",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			],
+			[
+				"clip",
+				"Clipboard Manager: Show History"
+			],
+			[
+				"sear",
+				"Stackoverflow: Search from Input"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"tog",
+				"Toggle Comment"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"toggl",
+				"Toggle Block Comment"
+			],
+			[
+				"key",
+				"FindKeyConflicts: All Conflicts"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"colorcoder",
+				"Tweak Colorcode to current color scheme"
+			],
+			[
+				"findk",
+				"FindKeyConflicts: All Conflicts"
+			],
+			[
+				"lis",
+				"Package Control: List Packages"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pac",
+				"Package Control: List Packages"
+			],
+			[
+				"pack",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"to",
+				"View: Toggle Menu"
+			],
+			[
+				"view",
+				"View: Toggle Menu"
+			],
+			[
+				"gdb",
+				"SublimeGDB: Start Debugging"
+			],
+			[
+				"package ",
+				"Package Control: Remove Package"
+			],
+			[
+				"list p",
+				"Package Control: Install Package"
+			],
+			[
+				"INSTALL",
+				"Package Control: Install Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"vi",
+				"View: Toggle Menu"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"quick",
+				"Git: Quick Commit"
+			],
+			[
+				"git qu",
+				"Git: Quick Commit"
+			],
+			[
+				"git quic",
+				"Git: Quick Commit"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"package list",
+				"Package Control: List Packages"
+			],
+			[
+				"git me",
+				"Git: Merge Branch"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"git add ",
+				"Git: Add..."
+			],
+			[
+				"git pu",
+				"Git: Push"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git br",
+				"Git: Change Branch"
+			],
+			[
+				"git chec",
+				"Git: Checkout Current File"
+			],
+			[
+				"git bran",
+				"Git: New Branch"
+			],
+			[
+				"git che",
+				"Git: Change Branch"
+			],
+			[
+				"commit",
+				"Set Syntax: Git Commit Message"
+			],
+			[
+				"toggle men",
+				"View: Toggle Menu"
+			],
+			[
+				"al",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"vie",
+				"View: Toggle Menu"
+			],
+			[
+				"vmen",
+				"View: Toggle Menu"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"PACKAGE",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Lorem ipsum"
+			]
+		],
+		"width": 601.0
+	},
+	"console":
+	{
+		"height": 177.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/sigma/Documents/Writings/o.txt",
+		"/home/sigma/Documents/FER/Seminar/Resources/Code/maxflow.py",
+		"/home/sigma/Documents/FER/Seminar/Resources/Code/demonstration.py",
+		"/home/sigma/Desktop/Link to Code/gui.py",
+		"/home/sigma/Documents/FER/Seminar/Resources/Code/pushRelabel.py",
+		"/home/sigma/Programming/Python/pyFrisc/config/definitions/frisc.asm.yaml",
+		"/home/sigma/Programming/Python/pyFrisc/application.py",
+		"/home/sigma/Programming/Python/pyFrisc/assembler.py",
+		"/home/sigma/Programming/Python/UTR/Lab3/SimPa.py",
+		"/home/sigma/Programming/Python/UTR/Lab5/SimTS.py",
+		"/home/sigma/Web/Linker_1/redesign/index.html",
+		"/home/sigma/Web/Linker_1/redesign/css/default.less",
+		"/home/sigma/Web/Linker/templates/landing.html",
+		"/home/sigma/Web/Linker/templates/group.html",
+		"/home/sigma/Web/Linker/templates/500.html",
+		"/home/sigma/Web/Linker_1/app/templates/404.html",
+		"/home/sigma/Web/Linker/test/css/default.less",
+		"/home/sigma/Web/Linker/test/groups.html",
+		"/home/sigma/Web/Linker2/models.py",
+		"/home/sigma/Web/Linker2/routes.py",
+		"/home/sigma/Web/Linker2/test/css/default.less",
+		"/home/sigma/Web/Linker2/test/css/ui-base.less",
+		"/home/sigma/Web/Linker2/test/group.html",
+		"/home/sigma/Web/Linker2/test/groups.html",
+		"/home/sigma/Web/Linker2/run.py",
+		"/home/sigma/Web/Linker/app/routes.py",
+		"/home/sigma/Web/Linker2/app.py",
+		"/home/sigma/Web/Linker/app/run.py",
+		"/home/sigma/Web/Linker/app/utils.py",
+		"/home/sigma/Web/Linker/redesign/index.html",
+		"/home/sigma/Web/Linker/redesign/group.html",
+		"/home/sigma/Web/Linker/redesign/css/ui-base.less",
+		"/home/sigma/Web/Linker/redesign/css/default.less",
+		"/home/sigma/Web/Linker/app/models.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/application",
+		"/home/sigma/Web/LinkerDeploy/linker/README",
+		"/home/sigma/Web/LinkerDeploy/info.txt",
+		"/home/sigma/Web/Linker/app/app.py",
+		"/home/sigma/.selected_editor",
+		"/home/sigma/.fr-Nv6Ui7/proba.py",
+		"/home/sigma/Web/Linker/redesign/landing.html",
+		"/home/sigma/Web/Linker/redesign/settings.html",
+		"/home/sigma/Web/Linker/app/templates/index.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/404.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/index.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/group.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/signup.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/login.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/500.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/delete_account.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/templates/change_password.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/app.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/run.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/routes.py",
+		"/home/sigma/Web/LinkerDeploy/linker/setup.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/static/css/default.less",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/static/css/default.min.css",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/static/css/reset.css",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/static/css/ui-base.less",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/utils.py",
+		"/home/sigma/Web/Linker/app/static/js/ngapp.js",
+		"/home/sigma/Web/Linker/app/templates/group.html",
+		"/home/sigma/Web/Linker/app/templates/delete_account.html",
+		"/home/sigma/Web/Linker/app/templates/change_password.html",
+		"/home/sigma/Web/Linker/app/static/css/default.less",
+		"/home/sigma/Web/Linker/app/static/js/less.min.js",
+		"/home/sigma/Web/Linker/app/templates/signup.html",
+		"/home/sigma/Web/Linker/app/templates/login.html",
+		"/home/sigma/Web/Linker/app/templates/500.html",
+		"/home/sigma/Web/Linker/app/templates/404.html",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi.py",
+		"/home/sigma/Web/Linker/linker/wsgi/application",
+		"/home/sigma/Web/Linker/linker/setup.py",
+		"/home/sigma/.local/share/Trash/files/myflaskapp.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/README.md",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/myflaskapp.py",
+		"/home/sigma/Web/LinkerDeploy/linker/wsgi/static/README",
+		"/home/sigma/Web/LinkerDeploy/linker/requirements.txt",
+		"/home/sigma/Web/LinkerDeploy/linker/README.md",
+		"/home/sigma/Web/Linker/linker/wsgi/app.py",
+		"/media/sigma/DATA/Save/Web/GrupaKemija/info.txt",
+		"/media/sigma/DATA/Save/Prog/Kemija/TODO",
+		"/media/sigma/DATA/Save/Prog/Kemija/README.md",
+		"/home/sigma/Programming/Dismat1/ZadaciLab/Lab1/resetka.md",
+		"/home/sigma/Programming/Dismat1/ZadaciLab/Lab1/remiks.md",
+		"/home/sigma/Programming/Dismat1/ZadaciLab/Lab1/sumgame.md",
+		"/home/sigma/Programming/Dismat1/ZadaciLab/Lab1/rekmiks.md",
+		"/home/sigma/Web/Notes/README.md",
+		"/home/sigma/Web/Notes/app_save/__init__.py",
+		"/home/sigma/Web/Notes/app_save/conf.py",
+		"/home/sigma/Web/Notes/Additional Data/TODO.txt",
+		"/home/sigma/Programming/OS/Lab1/obrada.cpp",
+		"/home/sigma/Programming/OS/OSLabs/Lab2/lamport.cpp",
+		"/home/sigma/Programming/OS/OSLabs/Lab4/simulacija.cpp",
+		"/home/sigma/Programming/OS/OSLabs/Lab3/semafori.cpp",
+		"/home/sigma/Programming/OS/OSLabs/Lab3/monitori.cpp",
+		"/home/sigma/Programming/OS/OSLabs/Lab3/stari_most.cpp",
+		"/home/sigma/Web/NoteStack1/rest/api.py",
+		"/home/sigma/Web/Linker/css/default.less",
+		"/home/sigma/Web/Linker/group.html",
+		"/home/sigma/Web/Linker/login.html",
+		"/home/sigma/Web/Linker/signup.html",
+		"/home/sigma/Web/Linker/index.html",
+		"/home/sigma/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/sigma/Web/NoteStack1/rest/main.py",
+		"/home/sigma/Web/Linker/app/config.py",
+		"/home/sigma/Web/NoteStack1/rest/app.py",
+		"/home/sigma/Web/NoteStack1/rest/models.py",
+		"/home/sigma/Web/NoteStack1/rest/utils.py",
+		"/home/sigma/Web/NoteStack1/rest/views.py",
+		"/home/sigma/Web/NoteStack1/rest/models_old.py",
+		"/home/sigma/Web/Personal/index.html",
+		"/home/sigma/Web/Personal/css/default.less",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/power.hs",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/lcm.hs",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/primeTime.hs",
+		"/home/sigma/.config/sublime-text-3/Packages/SublimeHaskell/Settings/SublimeHaskell.sublime-settings",
+		"/home/sigma/Web/NoteStack1/css/ui-base.less",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/hanoi.hs",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/powerOfTwo.hs",
+		"/home/sigma/Programming/Haskell/Problems/CodeWars/removeDuplicates.hs",
+		"/home/sigma/Web/Linker/js/less.min.js",
+		"/home/sigma/Web/Linker/css/reset.css",
+		"/home/sigma/Web/NoteStack/rest/api.py",
+		"/home/sigma/Web/NoteStack/rest/models.py",
+		"/home/sigma/Programming/Haskell/Review/Homework 5/HKozak/homework-5/homework.hs",
+		"/home/sigma/Programming/Haskell/Homework/Old/hw5.hs",
+		"/home/sigma/Programming/Haskell/Review/Homework 5/Miculinic/05/homework.hs"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"sys",
+			"px",
+			"red3",
+			"h4",
+			"h5",
+			"h4",
+			"unseen-count",
+			"group-item-header",
+			"group-item",
+			"tail",
+			"num",
+			"border",
+			"48px",
+			"Sans",
+			"nts",
+			"hash",
+			"8px",
+			"lineMarkup",
+			"abbrev",
+			"?",
+			"lmdate",
+			"dt_",
+			"light_blue",
+			"PASSWORD_BCRYPT",
+			"\\\\n",
+			"\\n",
+			"<script src = \"https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js\"></script>",
+			"C5",
+			"24px",
+			"f0f0f0",
+			"96px",
+			"single-note",
+			"login",
+			"clock",
+			"10",
+			"background-size",
+			"24px",
+			"title",
+			"\n			",
+			";\n",
+			"accentBlue",
+			"ol",
+			";\n",
+			"				\n",
+			"MOVE",
+			"is LCD ready",
+			"url",
+			"message",
+			"purchase",
+			"planemetr",
+			"accent2",
+			"date",
+			");\n",
+			"border-radius",
+			"132px",
+			"<img src = \"\"/>",
+			"0059FF",
+			"elit",
+			"adipisicing",
+			"Users in conversation",
+			"Participants",
+			"Participantsa",
+			"Participants",
+			"{\n",
+			"borderLi",
+			");\n",
+			"cFg1",
+			" \n",
+			";\n",
+			");\n",
+			"960px",
+			"alert"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"item-status",
+			"list-item-header group-item-header",
+			"list-item group-item",
+			"lineStart",
+			"abbr",
+			"last_mod_date",
+			"bluegreen",
+			"\\n",
+			"sn",
+			"wait until LCD ready",
+			"Participants"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/sigma/Web/Linker/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4932,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2356,
+								2356
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"is_xml": false,
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/sigma/Web/Linker/static/css/default.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6562,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5872,
+								5872
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5347.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/sigma/Web/Linker/templates/group.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1892,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1423,
+								1423
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"is_xml": false,
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/sigma/Web/Linker/templates/groups.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								643,
+								643
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"is_xml": false,
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/sigma/Web/Linker/routes.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2979,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1701,
+								1701
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 84.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clipboard_manager":
+	{
+		"height": 116.0
+	},
+	"output.exec":
+	{
+		"height": 122.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 116.0
+	},
+	"output.haskell_error_checker":
+	{
+		"height": 122.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 122.0
+	},
+	"output.package_dev":
+	{
+		"height": 147.0
+	},
+	"project": "Linker.sublime-project",
+	"replace":
+	{
+		"height": 74.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"def",
+				"Testing Ground/New Design/default.less"
+			],
+			[
+				"param",
+				"Testing Ground/New Design/parameters.less"
+			],
+			[
+				"base",
+				"app/templates/base.html"
+			],
+			[
+				"ui",
+				"app/static/styles/ui.less"
+			],
+			[
+				"de",
+				"app/static/styles/default.less"
+			],
+			[
+				"ng",
+				"app/static/scripts/ngmain.js"
+			],
+			[
+				"rea",
+				"README.md"
+			],
+			[
+				"main",
+				"app/static/styles/main.less"
+			],
+			[
+				"cont",
+				"app/controllers.py"
+			],
+			[
+				"mod",
+				"app/models.py"
+			],
+			[
+				"cot",
+				"app/controllers.py"
+			],
+			[
+				"mode",
+				"app/models.py"
+			],
+			[
+				"",
+				"~/Web/Cognite/note.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Programming/Python/FRISC/other/FriscPy.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 195.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

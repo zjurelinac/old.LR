@@ -1,7 +1,10 @@
 from peewee     import *
 from datetime   import datetime
 from run        import db
+from utils      import hashfunc
 
+import peewee
+import re
 
 # Helper classes
 class AuthorizationError( Exception ):
@@ -20,11 +23,32 @@ class User( MetaModel ):
 
     @classmethod
     def register( cls, name, email, password ):
-        pass
+        if not name or len( name ) < 3 or len( name ) > 128:
+            raise ValueError( 'Name too short or too long' )
+        elif not email or not re.match( r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email ):
+            raise ValueError( 'Wrong email format' )
+        elif not password or len( password ) < 8:
+            raise ValueError( 'Password too short' )
+
+        try:
+            u = cls( name = name, email = email, password = hashfunc( password ) )
+            u.save()
+            return u
+        except IntegrityError:
+            raise ValueError( 'This email is already in use' )
+
 
     @classmethod
     def authenticate( cls, email, password ):
-        pass
+        try:
+            u = cls.get( email = email )
+        except DoesNotExist:
+            raise ValueError( 'No user with a given email' )
+
+        if u.password != hashfunc( password ):
+            raise ValueError( 'Passwords do not match' )
+
+        return u
 
     @classmethod
     def delete( cls, email, password ):
@@ -34,9 +58,14 @@ class User( MetaModel ):
     def autocomplete( cls, name ):
         pass
 
-    def change_password( old, new ):
-        pass
+    def change_password( self, old, new ):
+        if self.password != hashfunc( old ):
+            raise ValueError( 'Passwords do not match' )
+        if len( new ) < 8:
+            raise ValueError( 'New password too short' )
 
+        self.password = hashfunc( new )
+        self.save()
 
 class Group( MetaModel ):
     name = CharField( unique = True )

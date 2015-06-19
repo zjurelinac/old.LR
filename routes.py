@@ -29,7 +29,7 @@ def prettify( s ):
 # User routes
 @app.route( '/' )
 def show_landing():
-    return 'landing'
+    return render_template( 'landing.html' )
 
 @app.route( '/user/login', methods = [ 'GET' ] )
 def show_login():
@@ -67,7 +67,7 @@ def signout():
 # Group routes
 @app.route( '/groups', methods = [ 'GET' ] )
 def show_groups():
-    pass
+    return render_template( 'groups.html' )
 
 @app.route( '/groups', methods = [ 'POST' ] )
 def create_group():
@@ -75,7 +75,7 @@ def create_group():
 
 @app.route( '/groups/<int:gid>', methods = [ 'GET' ] )
 def show_group( gid ):
-    pass
+    return render_template( 'group.html' )
 
 @app.route( '/groups/<int:gid>/delete', methods = [ 'POST' ] )
 def delete_group( gid ):

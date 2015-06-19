@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block page_title %}Name of the group{% endblock %}
+{% block page_subtitle %}list of all the users &middot; <b class = "red">Invite</b>{% endblock %}
+{% block front_content %}<p class = "text centered">A short description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nobis omnis laboriosam, amet maxime voluptatem eveniet fugiat molestias doloremque? Nemo cumque ipsa, vero voluptates non praesentium iure esse id sint.</p>{% endblock %}
+{% block front_action %}
+    <div class = "front-action">
+        <button class = "red-button big">Share a link</button>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <div class = "page-items">
+        <div class = "page-item link-item">
+            <div class = "content-wrapper">
+                <div class = "page-item-title">
+                    <h2><a target = "_blank" href = "http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html">http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html</a></h2>
+                    <div class = "link-status new"></div>
+                </div>
+                <div class = "list">
+                    <span class = "author">Mirko Slavkovic</span>
+                    <span class = "users"> Ivo Stipic &middot; Slavko Ivic &middot; Marko Horvat
+                    &middot; Luka Horvat &middot; 2 other people</span>
+                    <span class = "date">yesterday at 14:32</span>
+                </div>
+                <div class = "text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

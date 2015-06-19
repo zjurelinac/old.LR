@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block right_box %}
+    <ul class = "user-box">
+        <li class = "user">Mirko Slavkovic</li>
+        <li><a href = "">Settings</a></li>
+        <li><a href = "">Sign out</a></li>
+    </ul>
+{% endblock %}
+{% block page_title %}All groups{% endblock %}
+{% block page_subtitle %}List of all the groups you're in{% endblock %}
+{% block front_content %}
+    <p class = "text centered"><br/>You can create a new group by clicking on the button below.<br/>
+        Order groups by
+        <select>
+            <option>Last activity</option>
+            <option>Title (ascending)</option>
+            <option>Title (descending)</option>
+        </select>
+    </p>
+{% endblock %}
+{% block front_action %}
+    <div class = "front-action">
+        <button class = "red-button big">Create new group</button>
+    </div>
+{% endblock %}
+{% block page_options %}{% endblock %}
+{% block page_content %}
+    <div class = "page-items">
+        <div class = "page-item group-item">
+            <div class = "content-wrapper">
+                <div class = "page-item-title">
+                <h2><a href = "/groups/1">Filozofija</a></h2>
+                    <div class = "ticket">3 new links</div>
+                </div>
+                <div class = "list">
+                    <span class = "primary">Mirko Slavkovic &middot;</span><span class = "secondary"> Ivo Stipic</span>
+                </div>
+                <div class = "text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
+                </div>
+            </div>
+        </div>
+
+        <div class = "page-item group-item">
+            <div class = "content-wrapper">
+                <div class = "page-item-title">
+                    <h2>Programiranje i nove tehnologije</h2>
+                    <div class = "ticket">1 new link</div>
+                </div>
+                <div class = "list">
+                    <span class = "primary">Mirko Slavkovic &middot;</span><span class = "secondary"> Ivo Stipic</span>
+                </div>
+                <div class = "text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
+                </div>
+            </div>
+        </div>
+
+        <div class = "page-item group-item">
+            <div class = "content-wrapper">
+                <div class = "page-item-title">
+                    <h2>Zabavni članci, stripovi i slike</h2>
+                </div>
+                <div class = "list">
+                    <span class = "primary">Mirko Slavkovic &middot;</span><span class = "secondary"> Ivo Stipic</span>
+                </div>
+                <div class = "text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

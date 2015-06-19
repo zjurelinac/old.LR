@@ -21,6 +21,7 @@ body{
     color           :   #444;
     font-family     :   @basefont;
     font-size       :   16px;
+    height          :   100%;
     line-height     :   1.5;
 }
 
@@ -48,6 +49,20 @@ h4{
     font-size       :   0.9em;
 }
 
+a[ href ]{
+    color           :   @red1;
+
+
+    &:hover{
+        cursor          :   pointer;
+        text-decoration :   underline;
+    }
+}
+
+b{
+    font-weight     :   700;
+}
+
 /**************************************************************************************************/
 
 .red{
@@ -69,6 +84,10 @@ h4{
     text-transform  :   uppercase;
 }
 
+.centered{
+    text-align      :   center;
+}
+
 .primary{
     .upper;
     .strong;
@@ -88,6 +107,7 @@ h4{
     font-size       :   0.9em;
     line-height     :   1.667em;
     margin-top      :   0.417em;
+    margin-bottom   :   1.667em;
 }
 
 .ticket{
@@ -98,11 +118,16 @@ h4{
     font-size       :   0.75em;
     font-weight     :   700;
     height          :   2em;
-    left            :   1em;
     line-height     :   2em;
     padding         :   0 0.5em;
     position        :   relative;
     top             :   1em;
+}
+
+.content-wrapper{
+    .clear();
+    margin          :   0 auto;
+    width           :   960px;
 }
 
 /**************************************************************************************************/
@@ -152,13 +177,14 @@ button.big{
 
 /**************************************************************************************************/
 
-.content-wrapper{
-    .clear();
-    margin          :   0 auto;
-    width           :   960px;
+.body-full-window{
+    background      :   @bg1;
 }
 
+/**************************************************************************************************/
+
 .page-top{
+    .clear();
     background      :   @bg1;
     color           :   #fff;
     height          :   72px;
@@ -167,7 +193,7 @@ button.big{
 }
 
 .app-logo{
-    .clear();
+    float           :   left;
 }
 
 .app-logo-img{
@@ -180,6 +206,33 @@ button.big{
     font-weight     :   700;
     line-height     :   48px;
     margin-left     :   0.4em;
+}
+
+.user-box{
+    .clear();
+    float           :   right;
+
+    li{
+        display         :   block;
+        float           :   left;
+        font-size       :   0.9em;
+        line-height     :   48px;
+        padding         :   0 12px;
+
+        a[ href ]{
+            color           :   #ccc;
+            text-decoration :   none;
+
+            &:hover{
+                color           :    @red1;
+            }
+        }
+    }
+
+    li.user{
+        color           :   #fff;
+        font-weight     :   700;
+    }
 }
 
 .page-front{
@@ -195,6 +248,10 @@ button.big{
 
 .front-header{
     text-align      :   center;
+}
+
+.extra-space{
+    padding         :   24px 0;
 }
 
 .front-spacer{
@@ -214,6 +271,7 @@ button.big{
 
 .page-options{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
+    display         :   none;
     min-height      :   360px;
 }
 
@@ -238,7 +296,63 @@ button.big{
 
     h2{
         float           :   left;
+        height          :   2em;
+        margin-right    :   0.5em;
+        max-width       :   840px;
+        overflow        :   hidden;
+        word-wrap       :   break-word;
     }
+}
+
+.landing-items .page-item-title h2{
+    float           :   none;
+    padding-bottom  :   12px;
+    text-align      :   center;
+}
+
+.page-item-title h2 a[ href ]{
+    color           :   @blue;
+
+    &:hover{
+        color           :   @red1;
+    }
+}
+
+.group-item .page-item-title h2 a[ href ]{
+    text-decoration     :   none;
+}
+
+.link-status{
+    .ticket;
+
+    &.new:before{
+        content         :   "new";
+    }
+
+    &:hover{
+        background      :   @blue;
+    }
+
+    &.new:hover:before{
+        content         :   "mark as seen";
+        cursor          :   pointer;
+    }
+}
+
+.author{
+    .primary;
+}
+
+.users{
+    .secondary;
+    margin-left     :   12px;
+}
+
+.date{
+    .secondary;
+    background      :   url( ../img/icons/clock.png ) no-repeat left 2px;
+    margin-left     :   12px;
+    padding-left    :   18px;
 }
 
 .page-footer{
