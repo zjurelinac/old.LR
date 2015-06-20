@@ -1,7 +1,7 @@
 from peewee     import *
 from datetime   import datetime
 from run        import db
-from utils      import hashfunc
+from utils      import hashfunc, shorten_array
 
 import peewee
 import re
@@ -55,8 +55,12 @@ class User( MetaModel ):
         pass
 
     @classmethod
-    def autocomplete( cls, name ):
-        pass
+    def autocomplete( cls, query ):
+        if not query or len( query ) < 3:
+            raise ValueError( 'Query too short' )
+
+        return [ { 'id' : x.id, 'name' : x.name, 'email' : x.email }
+            for x in cls.select().where( User.name ** ( '%' + query + '%' ) ) ]
 
     def change_password( self, old, new ):
         if self.password != hashfunc( old ):
@@ -86,6 +90,17 @@ class Group( MetaModel ):
     @classmethod
     def get( cls, id, user ):
         pass
+
+    @classmethod
+    def all( cls, user ):
+        return [ {
+            'id' : g.id,
+            'name' : g.name,
+            'descr' : g.description,
+            'owner' : g.owner.name,
+            'users' : shorten_array( [ x.user.name for x in g.user_rels ], 5 ) }
+        for g in cls.select().where( Group.owner == user ) ]
+
 
     @classmethod
     def invite_user( cls, id, owner, user ):

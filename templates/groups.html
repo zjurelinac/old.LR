@@ -42,12 +42,14 @@
                     <input type = "text" name = "invited-users" style = "display: none;"/>
                     <ul class = "invited-users">
                         <li>Mirko Mirkovic</li>
+                        <li>Pero Perkovic</li>
                     </ul>
                     <div class = "suggest-wrapper">
                         <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user" autocomplete = "off"/>
                         <ul class = "suggest-dropdown">
-                            <li>Mirko Marković</li>
-                            <li>Mirko Zlikovski</li>
+                            <li>Mirko Marković <span class = "email">mirko@mail.com</span></li>
+                            <li>Hrvoje Horvatović <span class = "email">hrvoje.horvatovic@company.com</span></li>
+                            <li>Mirko Zlikovski <span class = "email">zliko.mirko@yuhoo.com</span></li>
                         </ul>
                     </div>
                 </div>
@@ -75,11 +77,14 @@
                 <div class = "page-item group-item">
                 <div class = "content-wrapper">
                     <div class = "page-item-title">
-                    <h2><a href = "/groups/1">{{ gr.name }}</a></h2>
-                        <div class = "ticket">3 new links</div>
+                        <h2><a href = "/groups/1">{{ gr.name }}</a></h2>
+                        <!-- <div class = "ticket">3 new links</div> -->
                     </div>
-                    <div class = "list">
-                        <span class = "primary">Mirko Slavkovic &middot;</span><span class = "secondary"> Ivo Stipic</span>
+                    <div class = "list user-list">
+                        <span class = "primary">{{ gr.owner }}</span>
+                        {% for us in gr.users %}
+                            <span class = "secondary">{{ us }}</span>
+                        {% endfor %}
                     </div>
                     <div class = "text">
                         {{ gr.descr }}
@@ -89,7 +94,7 @@
             {% endfor %}
 
         {% endif %}
-        <div class = "page-item group-item">
+       <!--  <div class = "page-item group-item">
             <div class = "content-wrapper">
                 <div class = "page-item-title">
                 <h2><a href = "/groups/1">Filozofija</a></h2>
@@ -102,6 +107,6 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 {% endblock %}

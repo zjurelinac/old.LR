@@ -84,12 +84,7 @@ def signout():
 @app.route( '/groups', methods = [ 'GET' ] )
 def show_groups():
     user = g.get( 'user', None );
-    groups = Group.select().where( Group.owner == user )
-    groups_data = [ {
-        'id' : g.id,
-        'name' : g.name,
-        'descr' : g.description } for g in groups ]
-    return render_template( 'groups.html', user = user, groups = groups_data )
+    return render_template( 'groups.html', user = user, groups = Group.all( user ) )
 
 @app.route( '/groups', methods = [ 'POST' ] )
 def create_group():

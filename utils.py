@@ -60,3 +60,6 @@ def pretty_date( time = False ):
     if day_diff < 365:
         return str( round( day_diff / 30 ) ) + " months ago"
     return str( round( day_diff / 365 ) ) + " years ago"
+
+def shorten_array( a, n ):
+    return a[ :n ] + ( [ str( len( a ) - n ) + ' others' ] if len( a ) > n else [] )
