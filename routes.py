@@ -92,10 +92,15 @@ def create_group():
 
 @app.route( '/groups/<int:gid>', methods = [ 'GET' ] )
 def show_group( gid ):
-    return render_template( 'group.html', user = g.get( 'user', None ) )
+    user = g.get( 'user', None )
+    return render_template( 'group.html', user = user, group = Group.get_single( gid, user ) )
 
 @app.route( '/groups/<int:gid>/delete', methods = [ 'POST' ] )
 def delete_group( gid ):
+    pass
+
+@app.route( '/groups/<int:gid>/invite', methods = [ 'POST' ] )
+def invite_to_group( gid ):
     pass
 
 

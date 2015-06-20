@@ -35,7 +35,7 @@ class User( MetaModel ):
             u.save()
             return u
         except IntegrityError:
-            raise ValueError( 'This email is already in use' )
+            raise ValueError( 'Email is already in use' )
 
 
     @classmethod
@@ -81,42 +81,84 @@ class Group( MetaModel ):
         if not name:
             raise ValueError( 'Incorrect name' )
         elif Group.select().where( Group.owner == owner and Group.name == name ).exists():
-            raise ValueError( 'This group name already in use' )
+            raise ValueError( 'Group name already in use' )
 
         g = cls( name = name, description = descr, owner = owner )
         g.save()
         return g
 
     @classmethod
-    def get( cls, id, user ):
-        pass
+    def get_single( cls, id, user ):
+        group = cls.get( id = id )
+
+        if group.owner == user or group.user_rels.where( UserToGroup.user == user ).exists():
+            return {
+                'id' : group.id,
+                'name' : group.name,
+                'descr' : group.description,
+                'owner' : group.owner.name,
+                'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ) }
+        else:
+            raise AuthorizationError( 'Not allowed to see the group' )
 
     @classmethod
     def all( cls, user ):
         return [ {
-            'id' : g.id,
-            'name' : g.name,
-            'descr' : g.description,
-            'owner' : g.owner.name,
-            'users' : shorten_array( [ x.user.name for x in g.user_rels ], 5 ) }
-        for g in cls.select().where( Group.owner == user ) ]
+            'id' : group.id,
+            'name' : group.name,
+            'descr' : group.description,
+            'owner' : group.owner.name,
+            'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ) }
+        for group in cls.select().where( Group.owner == user ) ]
 
 
     @classmethod
-    def invite_user( cls, id, owner, user ):
-        pass
+    def add_user( cls, id, owner, user ):
+        group = Group.get( id = id )
+
+        if group.owner != owner:
+            raise AuthorizationError( 'Not allowed to make changes to the group' )
+
+        try:
+            UserToGroup.create( user = user, group = group )
+        except IntegrityError:
+            raise ValueError( 'User is already in the group' )
 
     @classmethod
     def remove_user( cls, id, owner, user ):
-        pass
+        group = Group.get( id = id )
+
+        if group.owner != owner:
+            raise AuthorizationError( 'Not allowed to make changes to the group' )
+
+        utg = UserToGroup.select().where( UserToGroup.user == user & UserToGroup.group == group ).first()
+        utg.delete_instance()
 
     @classmethod
     def change( cls, id, name, descr, owner ):
-        pass
+        group = Group.get( id = id )
+
+        if group.owner != owner:
+            raise AuthorizationError( 'Not allowed to make changes to the group' )
+
+        if not name:
+            name = group.name
+
+        if not descr:
+            descr = group.descr
+
+        group.name = name
+        group.description = descr
+        group.save()
 
     @classmethod
     def delete( cls, id, owner ):
-        pass
+        group = Group.get( id = id )
+
+        if group.owner != owner:
+            raise AuthorizationError( 'Not allowed to make changes to this group' )
+
+        group.delete_instance( True )
 
     # def get_last_activity( self ):
     #     q = self.links.select().order_by( Link.date.desc() )

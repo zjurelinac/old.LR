@@ -4,6 +4,7 @@
 
 @bg1        :   #26364F;
 @bg2        :   #32425C;
+@bg25       :   #3B4D6A;
 @bg3        :   #4477DD;
 @bg4        :   #E5E8E9;
 @bg5        :   #F2F3FA;
@@ -110,6 +111,10 @@ b{
     margin-bottom   :   1.667em;
 }
 
+.inverted{
+    color           :   #eee;
+}
+
 .ticket{
     background      :   @red1;
     color           :   #fff;
@@ -159,6 +164,16 @@ button{
     &:hover{
         background          :   @red2;
         border-bottom-color :   @red1;
+    }
+}
+
+.blue-button{
+    background          :   @bg2;
+    border-bottom-color :   @bg1;
+
+    &:hover{
+        background          :   @bg25;
+        border-bottom-color :   @bg2;
     }
 }
 
@@ -309,6 +324,23 @@ textarea{
     text-transform  :   uppercase;
 }
 
+.group-members{
+    font-weight     :   700;
+
+    .owner{
+        color           :   #fff;
+    }
+
+    .member{
+        color           :   #bbb;
+    }
+
+    span:after{
+        content         :   " \00B7";
+    }
+
+}
+
 .front-action{
     padding-top     :   48px;
     text-align      :   center;
@@ -317,7 +349,7 @@ textarea{
 .page-options{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
     //display         :   none;
-    min-height      :   360px;
+    //min-height      :   360px;
 }
 
 .name-input{
@@ -364,6 +396,7 @@ textarea{
 .suggest-dropdown{
     background      :   @bg1;
     color           :   #eee;
+    display         :   none;
     position        :   absolute;
     left            :   -6px;
 
@@ -398,6 +431,7 @@ textarea{
 }
 
 .options-wrapper{
+    display         :   none;
     padding         :   48px 0;
 }
 
