@@ -38,6 +38,19 @@
             <form method = "post" action = "/groups">
                 <input type = "text" name = "name" class = "long name-input" placeholder = "Group name"/>
                 <textarea name = "description" class = "long" placeholder = "Description"></textarea>
+                <div class = "invite-wrapper">
+                    <input type = "text" name = "invited-users" style = "display: none;"/>
+                    <ul class = "invited-users">
+                        <li>Mirko Mirkovic</li>
+                    </ul>
+                    <div class = "suggest-wrapper">
+                        <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user" autocomplete = "off"/>
+                        <ul class = "suggest-dropdown">
+                            <li>Mirko Marković</li>
+                            <li>Mirko Zlikovski</li>
+                        </ul>
+                    </div>
+                </div>
                 <button type = "submit" class = "red-button">Create group</button>
             </form>
         </div>
