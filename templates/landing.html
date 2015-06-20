@@ -1,17 +1,33 @@
 {% extends "base.html" %}
+
+{% block title %}Linker &ndash; Landing page{% endblock %}
+
 {% block page_title %}Keep all your links in one place{% endblock %}
+
 {% block page_subtitle %}and <b style = "color: #fff;">share them</b> with people you choose{% endblock %}
+
+{% block right_box %}
+    <form method = "post" action = "/user/login" class = "top-form">
+        <input type = "text" name = "email" placeholder = "Email"/>
+        <input type = "password" name = "password" placeholder = "Password"/>
+        <button type = "submit" class = "red-button">Login</button>
+    </form>
+{% endblock %}
+
 {% block front_content %}
-    <div class = "front-content extra-space">
-        <!--<p class = "text centered">Better than bookmarks, easier than Facebook</p>-->
+    <div class = "front-content">
+        <p class = "text centered">And do it all for <b>free!!!</b></p>
     </div>
 {% endblock %}
+
 {% block front_action %}
     <div class = "front-action">
         <button class = "red-button big">Sign up!</button>
     </div>
 {% endblock %}
+
 {% block page_options %} {% endblock %}
+
 {% block page_content %}
     <div class = "page-items landing-items">
         <div class = "page-item">

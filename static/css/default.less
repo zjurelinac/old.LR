@@ -136,7 +136,7 @@ button{
     border          :   none;
     border-bottom   :   4px solid #ddd;
     color           :   #fff;
-    font-size       :   14px;
+    font-size       :   13px;
     font-weight     :   600;
     height          :   36px;
     line-height     :   24px;
@@ -175,6 +175,32 @@ button.big{
     }
 }
 
+input, textarea{
+    background      :   @bg4;
+    border          :   none;
+    box-sizing      :   border-box;
+    font-family     :   @basefont;
+    font-size       :   0.9em;
+}
+
+input{
+    height          :   36px;
+    line-height     :   24px;
+    padding         :   6px;
+}
+
+input.long, textarea.long{
+    background      :   #fff;
+    display         :   block;
+    margin          :   12px 0;
+    width           :   100%;
+}
+
+textarea{
+    height          :   108px;
+    padding         :   6px;
+}
+
 /**************************************************************************************************/
 
 .body-full-window{
@@ -208,9 +234,12 @@ button.big{
     margin-left     :   0.4em;
 }
 
-.user-box{
+.right-box{
     .clear();
     float           :   right;
+}
+
+.user-box{
 
     li{
         display         :   block;
@@ -232,6 +261,21 @@ button.big{
     li.user{
         color           :   #fff;
         font-weight     :   700;
+    }
+}
+
+.top-form{
+    input{
+        background      :   @bg2;
+        border          :   1px solid #678;
+        color           :   #eee;
+        font-weight     :   700;
+        margin          :   6px 0;
+    }
+
+    button{
+        position        :   relative;
+        top             :    -1px;
     }
 }
 
@@ -271,8 +315,12 @@ button.big{
 
 .page-options{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
-    display         :   none;
+    //display         :   none;
     min-height      :   360px;
+}
+
+.name-input{
+    font-weight     :   700;
 }
 
 .options-wrapper{

@@ -2,7 +2,7 @@
 <html ng-app = "linkerApp">
 <head>
     <meta charset = "UTF-8"/>
-    <title>Linker</title>
+    <title>{% block title %}Linker{% endblock %}</title>
     <link rel = "stylesheet/less" type = "text/css"
         href = "{{ url_for( 'static', filename = './css/default.less' ) }}"/>
     <link rel = "shortcut icon" type = "image/x-icon"
@@ -15,10 +15,9 @@
             <img src = "{{ url_for( 'static', filename = './img/logo.png' ) }}" class = "app-logo-img"/>
             <div class = "app-name">Linker</div>
         </div>
-        {% block right_box %}
-            <div class = "right-box">
-            </div>
-        {% endblock %}
+        <div class = "right-box">
+            {% block right_box %}{% endblock %}
+        </div>
     </header>
 
     <div class = "page-front">

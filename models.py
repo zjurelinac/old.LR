@@ -68,13 +68,20 @@ class User( MetaModel ):
         self.save()
 
 class Group( MetaModel ):
-    name = CharField( unique = True )
+    name = CharField()
     description = TextField()
     owner = ForeignKeyField( User, related_name = 'owned_groups' )
 
     @classmethod
-    def create( cls, name, owner ):
-        pass
+    def new( cls, name, descr, owner ):
+        if not name:
+            raise ValueError( 'Incorrect name' )
+        elif Group.select().where( Group.owner == owner and Group.name == name ).exists():
+            raise ValueError( 'This group name already in use' )
+
+        g = cls( name = name, description = descr, owner = owner )
+        g.save()
+        return g
 
     @classmethod
     def get( cls, id, user ):

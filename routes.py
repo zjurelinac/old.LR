@@ -1,4 +1,4 @@
-from flask      import  abort, flash, jsonify, redirect, render_template, request, session, url_for
+from flask      import  abort, flash, g, jsonify, redirect, render_template, request, session, url_for
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
 from run        import  app
@@ -6,6 +6,13 @@ from utils      import  hashfunc, pretty_date
 
 
 # Request handling
+@app.before_request
+def set_user():
+    if session.get( 'logged_in' ):
+        g.user = User.get( email = session[ 'user' ] )
+    else:
+        g.user = None
+
 @app.after_request
 def add_header( response ):
     # """
@@ -37,7 +44,15 @@ def show_login():
 
 @app.route( '/user/login', methods = [ 'POST' ] )
 def process_login():
-    pass
+    email = request.form.get( 'email' )
+    password = request.form.get( 'password' )
+    try:
+        u = User.authenticate( email, password )
+        session[ 'logged_in' ] = True
+        session[ 'user' ] = u.email
+        return redirect( '/groups' )
+    except Exception as e:
+        return 'failed ' + str( e )
 
 @app.route( '/user/register', methods = [ 'GET' ] )
 def show_register():
@@ -59,15 +74,22 @@ def change_password():
 def delete_account():
     pass
 
-@app.route( '/user/signout', methods = [ 'POST' ] )
+@app.route( '/user/signout', methods = [ 'GET' ] )
 def signout():
-    pass
+    session.clear()
+    return redirect( '/' )
 
 
 # Group routes
 @app.route( '/groups', methods = [ 'GET' ] )
 def show_groups():
-    return render_template( 'groups.html' )
+    user = g.get( 'user', None );
+    groups = Group.select().where( Group.owner == user )
+    groups_data = [ {
+        'id' : g.id,
+        'name' : g.name,
+        'descr' : g.description } for g in groups ]
+    return render_template( 'groups.html', user = user, groups = groups_data )
 
 @app.route( '/groups', methods = [ 'POST' ] )
 def create_group():
@@ -75,7 +97,7 @@ def create_group():
 
 @app.route( '/groups/<int:gid>', methods = [ 'GET' ] )
 def show_group( gid ):
-    return render_template( 'group.html' )
+    return render_template( 'group.html', user = g.get( 'user', None ) )
 
 @app.route( '/groups/<int:gid>/delete', methods = [ 'POST' ] )
 def delete_group( gid ):
