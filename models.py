@@ -91,7 +91,7 @@ class Group( MetaModel ):
     def get_single( cls, id, user ):
         group = cls.get( id = id )
 
-        if group.owner == user or group.user_rels.where( UserToGroup.user == user ).exists():
+        if group.is_group_member( user ):
             return {
                 'id' : group.id,
                 'name' : group.name,
@@ -108,13 +108,17 @@ class Group( MetaModel ):
             'name' : group.name,
             'descr' : group.description,
             'owner' : group.owner.name,
-            'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ) }
-        for group in cls.select().where( Group.owner == user ) ]
+            'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ),
+            'links_count' : group.get_links_count( user ) }
+        for group in list( cls.select().where( Group.owner == user ) ) + list( [ g.group for g in user.group_rels ] ) ]
 
 
     @classmethod
     def add_user( cls, id, owner, user ):
         group = Group.get( id = id )
+
+        if user == owner:
+            raise ValueError( 'Owner is always a group member' )
 
         if group.owner != owner:
             raise AuthorizationError( 'Not allowed to make changes to the group' )
@@ -160,6 +164,16 @@ class Group( MetaModel ):
 
         group.delete_instance( True )
 
+    def is_group_member( self, user ):
+        return ( self.owner == user or
+            UserToGroup.select().where( UserToGroup.user == user & UserToGroup.group == self ).exists() )
+
+    def get_links_count( self, user ):
+        if not self.is_group_member( user ):
+            raise AuthorizationError( 'Not allowed to obtain this information' + self.name + ' ' + user.name )
+
+        return self.links.count()
+
     # def get_last_activity( self ):
     #     q = self.links.select().order_by( Link.date.desc() )
     #     return q.get().date if q.count() > 0 else datetime.min
@@ -174,15 +188,33 @@ class Link( MetaModel ):
 
     @classmethod
     def add( cls, url, descr, owner, group_id ):
-        pass
+        group = Group.get( id = group_id )
+
+        if not group.is_group_member( owner ):
+            raise AuthorizationError( 'Cannot add a link into a group you\'re not a member of' )
+
+        if url is null: # + other checks
+            raise ValueError( 'Incorrect URL' )
+
+        link = cls( url = url, description = descr, owner = owner, date = datetime.now(), group = group )
+        link.save()
+
+        return link
 
     @classmethod
     def delete( cls, id, group_id, user ):
-        pass
+        group = Group.get( id = group_id )
+        link = Link.get( id = id )
+
+        if link.owner != user and group.owner != user:
+            raise AuthorizationError( 'Not allowed to delete link' )
+
+        link.delete_instance( True )
 
     @classmethod
-    def mark_seen( cls, id, user ):
-        pass
+    def mark_seen( cls, id, group_id, user ):
+        group = Group.get( id = group_id )
+        link = Link.get( id = id )
 
 
 class Comment( MetaModel ):
