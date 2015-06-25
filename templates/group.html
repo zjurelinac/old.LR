@@ -2,6 +2,8 @@
 
 {% block title %}Group name &ndash; Linker{% endblock %}
 
+{% block body_properties %}ng-controller = "groupCtrl"{% endblock %}
+
 {% block right_box %}
     <ul class = "user-box">
         <li class = "user">{{ user.name }}</li>
@@ -10,21 +12,37 @@
     </ul>
 {% endblock %}
 
-{% block page_title %}{{ group.name }}{% endblock %}
+{% block page_title %}
+    <h1 class = "page-title">{{ group.name }}
+    {% if group.is_owner %}
+        <a class = "edit edit-group-name">edit</a>
+    {% endif %}
+    </h1>
+    {% if group.is_owner %}
+        <input type = "text" class = "group-name-input" name = "group-name"/>
+    {% endif %}
+{% endblock %}
 
-{% block page_subtitle %}   <span class = "group-members">
-                                <span class = "owner">{{ group.owner }}</span>
-                                {% for us in group.users %}
-                                    <span class = "member">{{ us }}</span>
-                                {% endfor %}
-                            </span>
-                            <b class = "red">Invite</b>{% endblock %}
+{% block page_subtitle %}
+    <span class = "group-members">
+        <span class = "owner">{{ group.owner }}</span>
+        {% for us in group.users %}
+            <span class = "member">{{ us }}</span>
+        {% endfor %}
+        {% if group.is_owner %}
+            <span class = "red invite-link"><a>Invite</a></span>
+        {% endif %}
+    </span>
+{% endblock %}
 
-{% block front_content %}<p class = "text centered">{{ group.descr }}</p>{% endblock %}
+{% block front_content %}
+    <p class = "text centered">{{ group.descr }}
+    <!-- <a class = "edit edit-group-descr"></a> --></p>
+{% endblock %}
 
 {% block front_action %}
     <div class = "front-action">
-        <button class = "red-button big">Share a link</button>
+        <button class = "red-button big">Add a link</button>
     </div>
 {% endblock %}
 
@@ -38,7 +56,7 @@
                 <button type = "submit" class = "red-button">Share link</button>
             </form>
         </div>
-        <div class = "content-wrapper options-wrapper" style = "display: block;">
+        <div class = "content-wrapper options-wrapper">
             <h3>Invite users</h3>
             <form method = "post" action = "/groups/{{ group.id }}/invite">
                 <div class = "invite-wrapper">
@@ -71,7 +89,62 @@
 
 {% block page_content %}
     <div class = "page-items">
-        <div class = "page-item link-item">
+        {% if not group.links %}
+            <div class = "page-item link-item">
+            <div class = "content-wrapper">
+                <div class = "page-item-title">
+                    <h2>No links yet in this group</h2>
+                </div>
+                <div class = "text">
+                If you'd like to add one, click on the <b>big red button</b> above.
+                </div>
+            </div>
+        </div>
+        {% else %}
+            {% for link in group.links %}
+                <div class = "page-item link-item">
+                    <div class = "content-wrapper">
+                        <div class = "page-item-title">
+                            <h2><a target = "_blank" href = "{{ link.url }}">{{ link.url }}</a></h2>
+                            <div class = "link-status new"></div>
+                        </div>
+                        <div class = "span-list">
+                            <span class = "primary">{{ link.owner }}</span>
+
+                            <span>
+                                {% for u in link.seen %}
+                                    <span class = "secondary">{{ u }}</span>
+                                {% endfor %}
+                            </span>
+
+                            <span class = "date tertiary">{{ link.date | prettify }}</span>
+                        </div>
+                        <div class = "text">{{ link.descr }}</div>
+                        <div class = "comments">
+                            {% for comment in link.comments %}
+                                <div class = "comment">
+                                    <div class = "comment-header span-list">
+                                        <span class = "primary">{{ comment.owner }}</span>
+                                        <span class = "date tertiary">{{ comment.date | prettify }}</span>
+                                        <p class = "text">{{ comment.content }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class = "add-comment collapsed">
+                                <span class = "primary">Leave a comment:</span>
+                                <form method = "post" class = "comment-form">
+                                    <textarea name = "comment-contents" class = "comment-contents">
+
+                                    </textarea>
+                                    <button class = "red-button">Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- <div class = "page-item link-item">
             <div class = "content-wrapper">
                 <div class = "page-item-title">
                     <h2><a target = "_blank" href = "http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html">http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html</a></h2>
@@ -87,6 +160,6 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 {% endblock %}

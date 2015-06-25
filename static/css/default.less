@@ -12,6 +12,7 @@
 @red0       :   #db2839;
 @red1       :   #FF3C46;
 @red2       :   #FF4F5F;
+@red3       :   #FF5F6F;
 
 @blue       :   #08F;
 
@@ -50,12 +51,14 @@ h4{
     font-size       :   0.9em;
 }
 
+a:hover{
+    cursor          :   pointer;
+}
+
 a[ href ]{
     color           :   @red1;
 
-
     &:hover{
-        cursor          :   pointer;
         text-decoration :   underline;
     }
 }
@@ -129,10 +132,20 @@ b{
     top             :   1em;
 }
 
+.emph{
+    font-weight     :   700;
+    line-height     :   2em;
+    text-transform  :   uppercase;
+}
+
 .content-wrapper{
     .clear();
     margin          :   0 auto;
     width           :   960px;
+}
+
+.spacer-120{
+    height          :    120px;
 }
 
 /**************************************************************************************************/
@@ -190,6 +203,10 @@ button.big{
     }
 }
 
+.wide{
+    width           :   100%;
+}
+
 input, textarea{
     background      :   @bg4;
     border          :   none;
@@ -243,11 +260,16 @@ textarea{
 }
 
 .app-name{
+    color           :   #fff;
     float           :   left;
     font-size       :   1.3em;
     font-weight     :   700;
     line-height     :   48px;
     margin-left     :   0.4em;
+
+    &:hover{
+        color           :   @red1;
+    }
 }
 
 .right-box{
@@ -310,6 +332,40 @@ textarea{
     text-align      :   center;
 }
 
+.edit{
+    color           :   @red1;
+    display         :   inline-block;
+    font-size       :   0.4em;
+    font-weight     :   400;
+    height          :   18px;
+    line-height     :   18px;
+    margin-left     :   6px;
+    margin-right    :   -40px;
+    position        :   relative;
+    top             :   -18px;
+    width           :   24px;
+
+    &:hover{
+        text-decoration     :   underline;
+    }
+}
+
+.invite-link:hover{
+    text-decoration     :   underline;
+}
+
+.group-name-input{
+    background      :   none;
+    color           :   #fff;
+    display         :   none;
+    font-size       :   2.5em;
+    font-weight     :   300;
+    height          :   1.8em;
+    line-height     :   1.8em;
+    padding         :   0;
+    text-align      :   center;
+}
+
 .extra-space{
     padding         :   24px 0;
 }
@@ -339,6 +395,9 @@ textarea{
         content         :   " \00B7";
     }
 
+    span:last-child:after{
+        content         :   "";
+    }
 }
 
 .front-action{
@@ -350,6 +409,10 @@ textarea{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
     //display         :   none;
     //min-height      :   360px;
+
+    &.always-on .options-wrapper{
+        display         :   block;
+    }
 }
 
 .name-input{
@@ -435,6 +498,22 @@ textarea{
     padding         :   48px 0;
 }
 
+.login-wrapper{
+    margin          :   0 auto;
+    width           :   400px;
+    text-align      :   center;
+}
+
+.error{
+    .upper;
+    color           :   #fff;
+
+    &:before{
+        content         :   "ERROR: ";
+        font-weight     :   400;
+    }
+}
+
 .page-content{
     //padding         :   48px 0;
 }
@@ -479,12 +558,26 @@ textarea{
     }
 }
 
-.user-list span{
-    &:after{
-        content         :   " \00B7";
+.span-list{
+
+    .primary{
+        margin-right    :   12px;
     }
-    &:last-child:after{
-        content         :   "";
+
+    .tertiary{
+        .upper;
+        .dim;
+    }
+
+    .secondary{
+        &:after{
+            content         :   " \00B7";
+        }
+
+        &:last-child:after{
+            content         :   "";
+            margin-right    :   12px;
+        }
     }
 }
 
@@ -509,20 +602,52 @@ textarea{
     }
 }
 
-.author{
-    .primary;
-}
-
-.users{
-    .secondary;
-    margin-left     :   12px;
-}
-
 .date{
-    .secondary;
     background      :   url( ../img/icons/clock.png ) no-repeat left 2px;
-    margin-left     :   12px;
     padding-left    :   18px;
+}
+
+.links{
+    background      :   url( ../img/icons/link.png ) no-repeat left 2px;
+    padding-left    :   18px;
+}
+
+.comments{
+    display         :   none;
+    max-height      :   480px;
+    overflow-y      :   auto;
+}
+
+.comment{
+    border-left     :   4px solid @red0;
+    display         :   none;
+    padding         :   12px 24px;
+
+    &:nth-child( odd ){
+        background      :   @bg5;
+        border-left     :   4px solid @red1;
+    }
+
+    p.text{
+        margin-bottom   :   0;
+    }
+}
+
+.add-comment{
+    display         :   none;
+    padding         :   12px 24px;
+
+    &.collapsed .comment-form{
+        display         :   none;
+    }
+}
+
+.comment-contents{
+    background      :   none;
+    border          :   1px solid #ccc;
+    height          :   72px;
+    margin-bottom   :   12px;
+    width           :   100%;
 }
 
 .page-footer{

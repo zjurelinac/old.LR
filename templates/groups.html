@@ -2,6 +2,8 @@
 
 {% block title %}All groups &ndash; Linker{% endblock %}
 
+{% block body_properties %}ng-controller = "allGroupsCtrl"{% endblock %}
+
 {% block right_box %}
     <ul class = "user-box">
         <li class = "user">{{ user.name }}</li>
@@ -10,7 +12,7 @@
     </ul>
 {% endblock %}
 
-{% block page_title %}All groups{% endblock %}
+{% block page_title %}<h1 class = "page-title">All groups</h1>{% endblock %}
 
 {% block page_subtitle %}List of all the groups you're in{% endblock %}
 
@@ -58,33 +60,35 @@
             <div class = "page-item group-item">
                 <div class = "content-wrapper">
                     <div class = "page-item-title">
-                        <h2><a href = "/groups/{{ gr.id }}">No groups yet</a></h2>
+                        <h2>No groups yet</h2>
                     </div>
                     <div class = "text">
-                        If you want to create one, click on the big red button above.
+                        If you want to create one, click on the <b>big red button</b> above.
                     </div>
                 </div>
             </div>
         {% else %}
             {% for gr in groups %}
                 <div class = "page-item group-item">
-                <div class = "content-wrapper">
-                    <div class = "page-item-title">
-                        <h2><a href = "/groups/{{ gr.id }}">{{ gr.name }}</a></h2>
-                        <!-- <div class = "ticket">3 new links</div> -->
-                    </div>
-                    <div class = "list user-list">
-                        <span class = "primary">{{ gr.owner }}</span>
-                        {% for us in gr.users %}
-                            <span class = "secondary">{{ us }}</span>
-                        {% endfor %}
-                        <span class = "secondary">{{ gr.links_count }} links</span>
-                    </div>
-                    <div class = "text">
-                        {{ gr.descr }}
+                    <div class = "content-wrapper">
+                        <div class = "page-item-title">
+                            <h2><a href = "/groups/{{ gr.id }}">{{ gr.name }}</a></h2>
+                            <!-- <div class = "ticket">3 new links</div> -->
+                        </div>
+                        <div class = "span-list">
+                            <span class = "primary">{{ gr.owner }}</span>
+                            <span>
+                                {% for us in gr.users %}
+                                    <span class = "secondary">{{ us }}</span>
+                                {% endfor %}
+                            </span>
+                            <span class = "tertiary links">{{ gr.links_count }} links</span>
+                        </div>
+                        <div class = "text">
+                            {{ gr.descr }}
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
 
         {% endif %}

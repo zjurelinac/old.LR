@@ -8,12 +8,14 @@
     <link rel = "shortcut icon" type = "image/x-icon"
         href = "{{ url_for( 'static', filename = './favicon.ico' ) }}"/>
     <script src = "{{ url_for( 'static', filename = './js/less.min.js' ) }}"></script>
+    <script src = "{{ url_for( 'static', filename = './js/angular.min.js' ) }}"></script>
+    <script src = "{{ url_for( 'static', filename = './js/app.js' ) }}"></script>
 </head>
 <body {% block body_properties %}{% endblock %}>
     <header class = "page-top">
         <div class = "app-logo">
             <img src = "{{ url_for( 'static', filename = './img/logo.png' ) }}" class = "app-logo-img"/>
-            <div class = "app-name">Linker</div>
+            <a href = "/"><div class = "app-name">Linker</div></a>
         </div>
         <div class = "right-box">
             {% block right_box %}{% endblock %}
@@ -23,7 +25,7 @@
     <div class = "page-front">
         <div class = "content-wrapper front-wrapper">
             <header class = "front-header">
-                <h1 class = "page-title">{% block page_title %}Template page{% endblock %}</h1>
+                {% block page_title %}<h1 class = "page-title">Template page</h1>{% endblock %}
                 <h4 class = "page-subtitle">
                     {% block page_subtitle %}
                         This is a template for all the other pages of this app.

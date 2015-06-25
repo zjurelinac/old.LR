@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Group name &ndash; Linker{% endblock %}
+{% block body_properties %}class = "body-full-window"{% endblock %}
+{% block page_title %}
+    <h1 class = "page-title">Login</h1>
+{% endblock %}
+
+{% block page_subtitle %}{% endblock %}
+
+{% block front_content %}
+    <div class = "front-content extra-space">
+        <div class = "login-wrapper">
+            <p class = "text">Fill in this form to log into the application.</p>
+            <form method = "post" action = "/user/login">
+                {% for m in get_flashed_messages() %}
+                    <span class = "error">{{ m }}</span>
+                {% endfor %}
+                <input type = "text" class = "long" name = "email" placeholder = "Email"/>
+                <input type = "password" class = "long" name = "password" placeholder = "Password"/>
+                <button type = "submit" class = "red-button big wide">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block front_action %}
+    <div class = "spacer-120"></div>
+{% endblock %}
+
+{% block page_content %}
+{% endblock %}

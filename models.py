@@ -22,11 +22,13 @@ class User( MetaModel ):
     password = CharField()
 
     @classmethod
-    def register( cls, name, email, password ):
+    def register( cls, name, email, password, password2 ):
         if not name or len( name ) < 3 or len( name ) > 128:
             raise ValueError( 'Name too short or too long' )
         elif not email or not re.match( r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email ):
             raise ValueError( 'Wrong email format' )
+        elif password != password2:
+            raise ValueError( 'Passwords do not match' )
         elif not password or len( password ) < 8:
             raise ValueError( 'Password too short' )
 
@@ -34,9 +36,9 @@ class User( MetaModel ):
             u = cls( name = name, email = email, password = hashfunc( password ) )
             u.save()
             return u
+
         except IntegrityError:
             raise ValueError( 'Email is already in use' )
-
 
     @classmethod
     def authenticate( cls, email, password ):
@@ -52,7 +54,8 @@ class User( MetaModel ):
 
     @classmethod
     def delete( cls, email, password ):
-        pass
+        u = User.authenticate( email, password )
+        u.delete_instance( True )
 
     @classmethod
     def autocomplete( cls, query ):
@@ -88,21 +91,23 @@ class Group( MetaModel ):
         return g
 
     @classmethod
-    def get_single( cls, id, user ):
+    def get_dict( cls, id, user ):
         group = cls.get( id = id )
 
-        if group.is_group_member( user ):
+        if group.is_member_of( user ):
             return {
                 'id' : group.id,
                 'name' : group.name,
                 'descr' : group.description,
                 'owner' : group.owner.name,
-                'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ) }
+                'is_owner' : user == group.owner,
+                'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ),
+                'links' : [ l.get_dict( group, user ) for l in group.links ] }
         else:
             raise AuthorizationError( 'Not allowed to see the group' )
 
     @classmethod
-    def all( cls, user ):
+    def get_all( cls, user ):
         return [ {
             'id' : group.id,
             'name' : group.name,
@@ -111,7 +116,6 @@ class Group( MetaModel ):
             'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ),
             'links_count' : group.get_links_count( user ) }
         for group in list( cls.select().where( Group.owner == user ) ) + list( [ g.group for g in user.group_rels ] ) ]
-
 
     @classmethod
     def add_user( cls, id, owner, user ):
@@ -164,12 +168,12 @@ class Group( MetaModel ):
 
         group.delete_instance( True )
 
-    def is_group_member( self, user ):
+    def is_member_of( self, user ):
         return ( self.owner == user or
-            UserToGroup.select().where( UserToGroup.user == user & UserToGroup.group == self ).exists() )
+            self in [ utg.group for utg in user.group_rels ] )
 
     def get_links_count( self, user ):
-        if not self.is_group_member( user ):
+        if not self.is_member_of( user ):
             raise AuthorizationError( 'Not allowed to obtain this information' + self.name + ' ' + user.name )
 
         return self.links.count()
@@ -190,10 +194,10 @@ class Link( MetaModel ):
     def add( cls, url, descr, owner, group_id ):
         group = Group.get( id = group_id )
 
-        if not group.is_group_member( owner ):
+        if not group.is_member_of( owner ):
             raise AuthorizationError( 'Cannot add a link into a group you\'re not a member of' )
 
-        if url is null: # + other checks
+        if url is None: # + other checks
             raise ValueError( 'Incorrect URL' )
 
         link = cls( url = url, description = descr, owner = owner, date = datetime.now(), group = group )
@@ -216,6 +220,28 @@ class Link( MetaModel ):
         group = Group.get( id = group_id )
         link = Link.get( id = id )
 
+        if not group.is_member_of( user ):
+            raise AuthorizationError( 'Not allowed to see the link' )
+
+        try:
+            UserToLink.create( user = user, link = link )
+        except IntegrityError:
+            raise ValueError( 'User already seen the link' )
+
+    def get_dict( self, group, user ):
+        if not group.is_member_of( user ):
+            raise AuthorizationError( 'Not allowed to obtain the information' )
+
+        return {
+            'url' : self.url,
+            'descr' : self.description,
+            'owner' : self.owner.name,
+            'date' : self.date,
+            'seen' : shorten_array( [ utl.user.name for utl in
+                UserToLink.select().where( UserToLink.link == self ) ], 5 ),
+            'comments' : [ c.get_dict( self, user ) for c in self.comments ]
+        }
+
 
 class Comment( MetaModel ):
     content = TextField()
@@ -224,13 +250,33 @@ class Comment( MetaModel ):
     owner = ForeignKeyField( User, related_name = 'comments' )
 
     @classmethod
-    def create( cls, content, link, owner ):
-        pass
+    def add( cls, content, link_id, owner ):
+        if not content:
+            raise ValueError( 'No contents provided for a comment' )
+
+        link = Link.get( id = link_id )
+
+        if not link.group.is_member_of( owner ):
+            raise AuthorizationError( 'Not allowed to add a comment' )
+
+        comment = Comment( content = content, date = datetime.now(), link = link, owner = owner )
+        comment.save()
+
+        return comment
 
     @classmethod
     def delete( cls, id, user ):
         pass
 
+    def get_dict( self, link, user ):
+        if not link.group.is_member_of( user ):
+            raise AuthorizationError( 'Not allowed to obtain the information' )
+
+        return {
+            'content' : self.content,
+            'date' : self.date,
+            'owner' : self.owner.name
+        }
 
 class UserToGroup( MetaModel ):
     user = ForeignKeyField( User, related_name = 'group_rels' )

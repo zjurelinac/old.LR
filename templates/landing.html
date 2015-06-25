@@ -2,9 +2,12 @@
 
 {% block title %}Linker &ndash; Landing page{% endblock %}
 
-{% block page_title %}Keep all your links in one place{% endblock %}
+{% block page_title %}
+    <h3><b>Linker</b></h3>
+    <h1 class = "page-title">Keep all your links in one place</h1>
+{% endblock %}
 
-{% block page_subtitle %}and <b style = "color: #fff;">share them</b> with people you choose{% endblock %}
+{% block page_subtitle %}{% endblock %}
 
 {% block right_box %}
     <form method = "post" action = "/user/login" class = "top-form">
@@ -16,17 +19,34 @@
 
 {% block front_content %}
     <div class = "front-content">
-        <p class = "text centered">And do it all for <b>free!!!</b></p>
+        <p class = "text centered">Organize and share them with people you choose. <br/>
+        <span class = "emph">And do it all for <b>free!</b></span></p>
     </div>
 {% endblock %}
 
 {% block front_action %}
     <div class = "front-action">
-        <button class = "red-button big">Sign up!</button>
+        <a href = "#signup"><button class = "red-button big">Sign up!</button></a>
     </div>
 {% endblock %}
 
-{% block page_options %} {% endblock %}
+{% block page_options %}
+    <div class = "page-options always-on" id = "signup">
+        <div class = "content-wrapper options-wrapper">
+            <h3>Sign up for Linker</h3>
+            {% for m in get_flashed_messages() %}
+                <span class = "error">{{ m }}</span>
+            {% endfor %}
+            <form method = "post" action = "/user/register">
+                <input type = "text" name = "name" class = "long" placeholder = "Your name"/>
+                <input type = "email" name = "email" class = "long name-input" placeholder = "Email address"/>
+                <input type = "password" name = "password" class = "long" placeholder = "Password"/>
+                <input type = "password" name = "password2" class = "long" placeholder = "Repeat password"/>
+                <button type = "submit" class = "red-button">Sign up!</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
 
 {% block page_content %}
     <div class = "page-items landing-items">
