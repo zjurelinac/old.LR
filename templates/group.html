@@ -125,7 +125,7 @@
                 <div class = "content-wrapper">
                     <div class = "page-item-title">
                         <h2><a target = "_blank" href = "{{ link.url }}">{{ link.url }}</a></h2>
-                        {% if not link.seen_by_owner %}
+                        {% if not link.seen_by_user %}
                             <a href = "/groups/{{ group.id }}/links/{{ link.id }}/mark-seen">
                                 <div class = "link-status new"></div>
                             </a>
@@ -141,6 +141,11 @@
                         </span>
 
                         <span class = "date tertiary">{{ link.date | prettify }}</span>
+                        {% if group.is_owner or link.is_owner %}
+                            <span class = "delete">
+                                <a href = "/groups/{{ group.id }}/links/{{ link.id }}/delete">Delete</a>
+                            </span>
+                        {% endif %}
                     </div>
                     <div class = "text">{{ link.descr }}</div>
                     <div class = "comments">

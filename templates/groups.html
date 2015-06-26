@@ -72,7 +72,9 @@
                 <div class = "content-wrapper">
                     <div class = "page-item-title">
                         <h2><a href = "/groups/{{ gr.id }}">{{ gr.name }}</a></h2>
-                        <!-- <div class = "ticket">3 new links</div> -->
+                        {% if gr.unseen_count > 0 %}
+                            <div class = "ticket">{{ gr.unseen_count }} new link{{ gr.unseen_count | pluralize }}</div>
+                        {% endif %}
                     </div>
                     <div class = "span-list">
                         <span class = "primary">{{ gr.owner }}</span>
@@ -81,7 +83,7 @@
                                 <span class = "secondary">{{ us }}</span>
                             {% endfor %}
                         </span>
-                        <span class = "tertiary links">{{ gr.links_count }} links</span>
+                        <span class = "tertiary links">{{ gr.links_count }} link{{ gr.links_count | pluralize }}</span>
                     </div>
                     <div class = "text">
                         {{ gr.descr }}

@@ -184,7 +184,7 @@ class Group( MetaModel ):
         if not self.is_member_of( user ):
             raise AuthorizationError( 'Not allowed to obtain this information' )
 
-        return 0
+        return self.links.count() - self.links.join( UserToLink ).where( UserToLink.user == user ).count()
     # def get_last_activity( self ):
     #     q = self.links.select().order_by( Link.date.desc() )
     #     return q.get().date if q.count() > 0 else datetime.min
@@ -248,7 +248,8 @@ class Link( MetaModel ):
             'owner' : self.owner.name,
             'date' : self.date,
             'seen' : shorten_array( [ u.name for u in users_seen ], 5 ),
-            'seen_by_owner' : user in users_seen,
+            'is_owner' : user == self.owner,
+            'seen_by_user' : user in users_seen,
             'comments' : [ c.get_dict( self, user ) for c in self.comments ]
         }
 

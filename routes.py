@@ -36,6 +36,10 @@ def prettify( s ):
 def markupify( s ):
     return s
 
+@app.template_filter( 'pluralize' )
+def pluralize( i ):
+    return 's' if i != 1 else ''
+
 # User routes
 @app.route( '/' )
 def show_landing():
