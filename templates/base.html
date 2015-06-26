@@ -24,6 +24,7 @@
 
     <div class = "page-front">
         <div class = "content-wrapper front-wrapper">
+            {% block front_beginning %} {% endblock %}
             <header class = "front-header">
                 {% block page_title %}<h1 class = "page-title">Template page</h1>{% endblock %}
                 <h4 class = "page-subtitle">
@@ -42,6 +43,7 @@
                     <button class = "red-button big">Action</button>
                 </div>
             {% endblock %}
+            {% block front_ending %} {% endblock %}
         </div>
     </div>
 

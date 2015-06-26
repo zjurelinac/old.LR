@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}All groups &ndash; Linker{% endblock %}
+{% block title %}All groups &mdash; Linker{% endblock %}
 
 {% block body_properties %}ng-controller = "allGroupsCtrl"{% endblock %}
 
@@ -28,6 +28,13 @@
 
 {% block page_options %}
     <div class = "page-options">
+        <div class = "errors" ng-hide = "hideErrors">
+            <div class = "content-wrapper">
+                {% for m in get_flashed_messages() %}
+                    <span class = "error">{{ m }}</span>
+                {% endfor %}
+            </div>
+        </div>
         <div class = "content-wrapper options-wrapper" ng-show = "isCreateShown">
             <h3>Create a new group</h3>
             <form method = "post" action = "/groups">
@@ -40,9 +47,10 @@
                     </ul>
                     <div class = "suggest-wrapper">
                         <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user"
-                        autocomplete = "off" ng-model = "nameStart" ng-enter = "addUser()" ng-change = "updateAutocomplete()"/>
+                        autocomplete = "off" ng-model = "nameStart" ng-enter = "addUser()"
+                        ng-change = "updateAutocomplete()" ng-keypress = "updateSelection( $event )"/>
                         <ul class = "suggest-dropdown" ng-show = "isAutocompleteShown">
-                            <li ng-repeat = "u in suggestions" >
+                            <li ng-repeat = "u in suggestions" ng-class = "{selected : $index == $parent.selectionIndex }">
                                 <a ng-click = "$parent.autocompleteClick( $index )">
                                     [[ u.name ]] <span class = "email">[[ u.email ]]</span>
                                 </a>
@@ -51,7 +59,7 @@
                     </div>
                 </div>
                 <button type = "submit" class = "red-button">Create group</button>
-                <button type = "submit" class = "blue-button">Cancel</button>
+                <button type = "button" class = "blue-button right" ng-click = "hideCreate()">Cancel</button>
             </form>
         </div>
     </div>
@@ -59,7 +67,28 @@
 
 {% block page_content %}
     <div class = "page-items">
-        {% if not groups %}
+        {% for gr in groups %}
+            <div class = "page-item group-item">
+                <div class = "content-wrapper">
+                    <div class = "page-item-title">
+                        <h2><a href = "/groups/{{ gr.id }}">{{ gr.name }}</a></h2>
+                        <!-- <div class = "ticket">3 new links</div> -->
+                    </div>
+                    <div class = "span-list">
+                        <span class = "primary">{{ gr.owner }}</span>
+                        <span>
+                            {% for us in gr.users %}
+                                <span class = "secondary">{{ us }}</span>
+                            {% endfor %}
+                        </span>
+                        <span class = "tertiary links">{{ gr.links_count }} links</span>
+                    </div>
+                    <div class = "text">
+                        {{ gr.descr }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
             <div class = "page-item group-item">
                 <div class = "content-wrapper">
                     <div class = "page-item-title">
@@ -70,44 +99,6 @@
                     </div>
                 </div>
             </div>
-        {% else %}
-            {% for gr in groups %}
-                <div class = "page-item group-item">
-                    <div class = "content-wrapper">
-                        <div class = "page-item-title">
-                            <h2><a href = "/groups/{{ gr.id }}">{{ gr.name }}</a></h2>
-                            <!-- <div class = "ticket">3 new links</div> -->
-                        </div>
-                        <div class = "span-list">
-                            <span class = "primary">{{ gr.owner }}</span>
-                            <span>
-                                {% for us in gr.users %}
-                                    <span class = "secondary">{{ us }}</span>
-                                {% endfor %}
-                            </span>
-                            <span class = "tertiary links">{{ gr.links_count }} links</span>
-                        </div>
-                        <div class = "text">
-                            {{ gr.descr }}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-
-        {% endif %}
-       <!--  <div class = "page-item group-item">
-            <div class = "content-wrapper">
-                <div class = "page-item-title">
-                <h2><a href = "/groups/1">Filozofija</a></h2>
-                    <div class = "ticket">3 new links</div>
-                </div>
-                <div class = "list">
-                    <span class = "primary">Mirko Slavkovic &middot;</span><span class = "secondary"> Ivo Stipic</span>
-                </div>
-                <div class = "text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
-                </div>
-            </div>
-        </div> -->
+        {% endfor %}
     </div>
 {% endblock %}

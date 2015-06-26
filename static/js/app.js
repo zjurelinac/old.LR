@@ -5,11 +5,11 @@ angular.module( 'linkerApp', [],
     })
 
 .directive( 'ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
+    return function ( scope, element, attrs ) {
+        element.bind("keydown keypress", function( event ) {
+            if( event.which === 13 ) {
+                scope.$apply( function(){
+                    scope.$eval( attrs.ngEnter );
                 });
 
                 event.preventDefault();
@@ -19,22 +19,59 @@ angular.module( 'linkerApp', [],
 })
 
 .controller( 'allGroupsCtrl', function( $http, $scope, $timeout ){
+    $scope.hideErrors = false;
     $scope.isCreateShown = false;
     $scope.isAutocompleteShown = false;
     $scope.suggestions = [];
     $scope.invited = [];
     $scope.invitedMails = [];
     $scope._invited = "";
+    $scope.selectionIndex = -1;
+
+    var alreadySelected = function( item ){
+        console.log( 'testing ', item, $scope.invited );
+        for( var i = 0; i < $scope.invited.length; ++i )
+            if( $scope.invited[ i ].email == item.email )
+                return true;
+        return false;
+    }
 
     $scope.showCreate = function(){
         $scope.isCreateShown = true;
+        $scope.hideErrors = true;
     }
 
-    $scope.addUser = function( id ){
+    $scope.hideCreate = function(){
+        $scope.isCreateShown = false;
+    }
+
+    $scope.updateSelection = function( e ){
+        if( e.keyCode == 40 && $scope.selectionIndex < $scope.suggestions.length-1 ){
+            e.preventDefault();
+            ++$scope.selectionIndex;
+        } else if( e.keyCode == 38 && $scope.selectionIndex >= 0 ){
+            e.preventDefault();
+            --$scope.selectionIndex;
+        }
+    }
+
+    $scope.addUser = function(){
+        if( $scope.selectionIndex < 0 ) return;
+
+        var item = $scope.suggestions[ $scope.selectionIndex ];
+        if( !alreadySelected( item ) ){
+            $scope.invited.push( item );
+            $scope.invitedMails.push( item.email );
+            $scope._invited = $scope.invitedMails.toString();
+        }
+
+        $scope.nameStart = "";
+        $scope.suggestions = [];
+        $scope.isAutocompleteShown = false;
+        $scope.selectionIndex = -1;
     }
 
     $scope.removeUser = function( id ){
-        console.log( 'remove' + id );
         $scope.invited.splice( id, 1 );
         $scope.invitedMails.splice( id, 1 );
         $scope._invited = $scope.invitedMails.toString();
@@ -44,8 +81,8 @@ angular.module( 'linkerApp', [],
         if( $scope.nameStart.length < 3 ){
             $scope.suggestions = [];
             $scope.isAutocompleteShown = false;
+            $scope.selectionIndex = -1;
         } else {
-            console.log( 'try' );
             $http.post( '/user/autocomplete', { 'name_start' : $scope.nameStart } )
                 .success( function( data ){
                     $scope.suggestions = data.users;
@@ -55,16 +92,8 @@ angular.module( 'linkerApp', [],
     }
 
     $scope.autocompleteClick = function( id ){
-        // var temp = $scope.suggestions[ id ];
-        // if( $scope._invited.indexOf( temp ) == -1 ){
-        //     $scope.invited.push( temp.name );
-        //     $scope._invited.push( temp );
-        // } else {
-        //     console.log( 'duplicate' );
-        // }
-
         var item = $scope.suggestions[ id ];
-        if( $scope.invited.indexOf( item ) == -1 ){
+        if( !alreadySelected( item ) ){
             $scope.invited.push( item );
             $scope.invitedMails.push( item.email );
             $scope._invited = $scope.invitedMails.toString();
@@ -73,9 +102,41 @@ angular.module( 'linkerApp', [],
         $scope.nameStart = "";
         $scope.suggestions = [];
         $scope.isAutocompleteShown = false;
+        $scope.selectionIndex = -1;
     }
 } )
 
 .controller( 'groupCtrl', function( $http, $scope, $timeout ){
+    $scope.isShareShown = false;
+    $scope.isInviteShown = false;
+    $scope.isDeleteShown = false;
+    $scope.isEditShown = false;
 
+    $scope.showInvite = function(){
+        $scope.isShareShown = false;
+        $scope.isInviteShown = true;
+        $scope.isDeleteShown = false;
+        $scope.isEditShown = false;
+    }
+
+    $scope.showShare = function(){
+        $scope.isShareShown = true;
+        $scope.isInviteShown = false;
+        $scope.isDeleteShown = false;
+        $scope.isEditShown = false;
+    }
+
+    $scope.showDelete = function(){
+        $scope.isShareShown = false;
+        $scope.isInviteShown = false;
+        $scope.isDeleteShown = true;
+        $scope.isEditShown = false;
+    }
+
+    $scope.showEdit = function(){
+        $scope.isShareShown = false;
+        $scope.isInviteShown = false;
+        $scope.isDeleteShown = false;
+        $scope.isEditShown = true;
+    }
 })

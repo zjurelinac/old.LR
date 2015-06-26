@@ -152,6 +152,10 @@ def show_group( gid ):
     user = g.get( 'user', None )
     return render_template( 'group.html', user = user, group = Group.get_dict( gid, user ) )
 
+@app.route( '/groups/<int:gid>/edit', methods = [ 'POST' ] )
+def edit_group( gid ):
+    return 'edit group'
+
 @app.route( '/groups/<int:gid>/delete', methods = [ 'POST' ] )
 def delete_group( gid ):
     if not session.get( 'logged_in' ):
@@ -176,7 +180,16 @@ def add_link( gid ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    owner = g.get( 'user', None )
+    url = request.form.get( 'url' )
+    descr = request.form.get( 'description' )
+
+    try:
+        link = Link.add( url, descr, owner, gid )
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/groups/' + str( gid ) )
 
 @app.route( '/groups/<int:gid>/links/<int:lid>/delete', methods = [ 'POST' ] )
 def delete_link( gid, lid ):
@@ -186,13 +199,20 @@ def delete_link( gid, lid ):
 
     pass
 
-@app.route( '/groups/<int:gid>/links/<int:lid>/mark-seen', methods = [ 'POST' ] )
+@app.route( '/groups/<int:gid>/links/<int:lid>/mark-seen' )
 def mark_as_seen( gid, lid ):
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    user = g.get( 'user', None )
+
+    try:
+        Link.mark_seen( lid, gid, user )
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/groups/' + str( gid ) )
 
 
 # Comment routes

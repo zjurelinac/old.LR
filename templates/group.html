@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Group name &ndash; Linker{% endblock %}
+{% block title %}{{ group.name }} &mdash; Linker{% endblock %}
 
 {% block body_properties %}ng-controller = "groupCtrl"{% endblock %}
 
@@ -12,14 +12,21 @@
     </ul>
 {% endblock %}
 
+{% block front_beginning %}<form method = "post" action = "/groups/{{ group.id }}/edit">{% endblock %}
+{% block front_ending %}</form>{% endblock %}
+
 {% block page_title %}
-    <h1 class = "page-title">{{ group.name }}
+    <h1 class = "page-title" ng-hide = "isEditShown">{{ group.name }}
     {% if group.is_owner %}
-        <a class = "edit edit-group-name">edit</a>
+        <span class = "options">
+            <span class = "inline-option edit-option" ng-click = "showEdit()"></span>
+            <span class = "inline-option delete-option" ng-click = "showDelete()"></span>
+        </span>
     {% endif %}
     </h1>
     {% if group.is_owner %}
-        <input type = "text" class = "group-name-input" name = "group-name"/>
+        <input type = "text" class = "group-name-input" name = "group-name" value = "{{ group.name }}"
+        ng-show = "isEditShown"/>
     {% endif %}
 {% endblock %}
 
@@ -30,136 +37,145 @@
             <span class = "member">{{ us }}</span>
         {% endfor %}
         {% if group.is_owner %}
-            <span class = "red invite-link"><a>Invite</a></span>
+            <span class = "red invite-link" ng-click = "showInvite()"><a>Invite</a></span>
         {% endif %}
     </span>
 {% endblock %}
 
 {% block front_content %}
-    <p class = "text centered">{{ group.descr }}
-    <!-- <a class = "edit edit-group-descr"></a> --></p>
+    <p class = "text centered" ng-hide = "isEditShown">{{ group.descr }}</p>
+    <div class = "group-edit" ng-show = "isEditShown">
+        <textarea class = "group-description-textarea">{{ group.descr }}</textarea>
+        <div class = "button-wrapper">
+            <button type = "submit" class = "red-button">Save</button>
+            <button type = "button" class = "lblue-button right">Cancel</button>
+        </div>
+    </div>
 {% endblock %}
 
 {% block front_action %}
-    <div class = "front-action">
-        <button class = "red-button big">Add a link</button>
+    <div class = "front-action" ng-hide = "isEditShown">
+        <button type = "button" class = "red-button big" ng-click = "showShare()">Add a link</button>
     </div>
 {% endblock %}
 
 {% block page_options %}
     <div class = "page-options">
-        <div class = "content-wrapper options-wrapper">
+        <div class = "errors" ng-hide = "hideErrors">
+            <div class = "content-wrapper">
+                {% for m in get_flashed_messages() %}
+                    <span class = "error">{{ m }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class = "content-wrapper options-wrapper" ng-show = "isShareShown">
             <h3>Share a link</h3>
-            <form method = "post" action = "/groups">
-                <input type = "text" name = "url" class = "long name-input" placeholder = "Link URL"/>
+            <form method = "post" action = "/groups/{{ group.id }}/links">
+                <input type = "text" name = "url" class = "long name-input"
+                placeholder = "Link URL" required = "required"/>
                 <textarea name = "description" class = "long" placeholder = "Description"></textarea>
                 <button type = "submit" class = "red-button">Share link</button>
             </form>
         </div>
-        <div class = "content-wrapper options-wrapper">
-            <h3>Invite users</h3>
-            <form method = "post" action = "/groups/{{ group.id }}/invite">
-                <div class = "invite-wrapper">
-                    <input type = "text" name = "invited-users" style = "display: none;"/>
-                    <ul class = "invited-users">
-                        <li>Mirko Mirkovic</li>
-                        <li>Pero Perkovic</li>
-                    </ul>
-                    <div class = "suggest-wrapper">
-                        <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user" autocomplete = "off"/>
-                        <ul class = "suggest-dropdown">
-                            <li>Mirko Marković <span class = "email">mirko@mail.com</span></li>
-                            <li>Hrvoje Horvatović <span class = "email">hrvoje.horvatovic@company.com</span></li>
-                            <li>Mirko Zlikovski <span class = "email">zliko.mirko@yuhoo.com</span></li>
+        {% if group.is_owner %}
+            <div class = "content-wrapper options-wrapper" ng-show = "isInviteShown">
+                <h3>Invite users</h3>
+                <form method = "post" action = "/groups/{{ group.id }}/invite">
+                    <div class = "invite-wrapper">
+                        <input type = "text" name = "invited-users" style = "display: none;"/>
+                        <ul class = "invited-users">
+                            <li>Mirko Mirkovic</li>
+                            <li>Pero Perkovic</li>
                         </ul>
+                        <div class = "suggest-wrapper">
+                            <input type = "text" name = "add-user" class = "add-user"
+                            placeholder = "Invite user" autocomplete = "off"/>
+                            <ul class = "suggest-dropdown">
+                                <li>Mirko Marković <span class = "email">mirko@mail.com</span></li>
+                                <li>Hrvoje Horvatović <span class = "email">hrvoje.horvatovic@company.com</span></li>
+                                <li>Mirko Zlikovski <span class = "email">zliko.mirko@yuhoo.com</span></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <button type = "submit" class = "red-button">Invite users</button>
-            </form>
-        </div>
-        <div class = "content-wrapper options-wrapper">
-            <h3>Delete group</h3>
-            <p class = "text inverted">By deleting this group all the links shared in it and all
-            comments posted on them will also be deleted. Are you sure you want to continue?</p>
-            <button class = "red-button">Delete</button>
-            <button class = "blue-button">Cancel</button>
-        </div>
+                    <button type = "submit" class = "red-button">Invite users</button>
+                </form>
+            </div>
+            <div class = "content-wrapper options-wrapper" ng-show = "isDeleteShown">
+                <h3>Delete group</h3>
+                <p class = "text inverted">By deleting this group all the links shared in it and all
+                comments posted on them will also be deleted. Are you sure you want to continue?</p>
+                <button class = "red-button">Delete</button>
+                <button class = "blue-button right">Cancel</button>
+            </div>
+            <!-- <div class = "content-wrapper options-wrapper" ng-show = "isKickShown">
+                <h3>Kick user?</h3>
+                <p class = "text inverted">By deleting this group all the links shared in it and all
+                comments posted on them will also be deleted. Are you sure you want to continue?</p>
+                <button class = "red-button">Delete</button>
+                <button class = "blue-button right">Cancel</button>
+            </div> -->
+        {% endif %}
     </div>
 {% endblock %}
 
 {% block page_content %}
     <div class = "page-items">
-        {% if not group.links %}
+        {% for link in group.links %}
             <div class = "page-item link-item">
-            <div class = "content-wrapper">
-                <div class = "page-item-title">
-                    <h2>No links yet in this group</h2>
-                </div>
-                <div class = "text">
-                If you'd like to add one, click on the <b>big red button</b> above.
-                </div>
-            </div>
-        </div>
-        {% else %}
-            {% for link in group.links %}
-                <div class = "page-item link-item">
-                    <div class = "content-wrapper">
-                        <div class = "page-item-title">
-                            <h2><a target = "_blank" href = "{{ link.url }}">{{ link.url }}</a></h2>
-                            <div class = "link-status new"></div>
-                        </div>
-                        <div class = "span-list">
-                            <span class = "primary">{{ link.owner }}</span>
+                <div class = "content-wrapper">
+                    <div class = "page-item-title">
+                        <h2><a target = "_blank" href = "{{ link.url }}">{{ link.url }}</a></h2>
+                        {% if not link.seen_by_owner %}
+                            <a href = "/groups/{{ group.id }}/links/{{ link.id }}/mark-seen">
+                                <div class = "link-status new"></div>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class = "span-list">
+                        <span class = "primary">{{ link.owner }}</span>
 
-                            <span>
-                                {% for u in link.seen %}
-                                    <span class = "secondary">{{ u }}</span>
-                                {% endfor %}
-                            </span>
-
-                            <span class = "date tertiary">{{ link.date | prettify }}</span>
-                        </div>
-                        <div class = "text">{{ link.descr }}</div>
-                        <div class = "comments">
-                            {% for comment in link.comments %}
-                                <div class = "comment">
-                                    <div class = "comment-header span-list">
-                                        <span class = "primary">{{ comment.owner }}</span>
-                                        <span class = "date tertiary">{{ comment.date | prettify }}</span>
-                                        <p class = "text">{{ comment.content }}</p>
-                                    </div>
-                                </div>
+                        <span>
+                            {% for u in link.seen %}
+                                <span class = "secondary">{{ u }}</span>
                             {% endfor %}
-                            <div class = "add-comment collapsed">
-                                <span class = "primary">Leave a comment:</span>
-                                <form method = "post" class = "comment-form">
-                                    <textarea name = "comment-contents" class = "comment-contents">
+                        </span>
 
-                                    </textarea>
-                                    <button class = "red-button">Comment</button>
-                                </form>
+                        <span class = "date tertiary">{{ link.date | prettify }}</span>
+                    </div>
+                    <div class = "text">{{ link.descr }}</div>
+                    <div class = "comments">
+                        {% for comment in link.comments %}
+                            <div class = "comment">
+                                <div class = "comment-header span-list">
+                                    <span class = "primary">{{ comment.owner }}</span>
+                                    <span class = "date tertiary">{{ comment.date | prettify }}</span>
+                                    <p class = "text">{{ comment.content }}</p>
+                                </div>
                             </div>
+                        {% endfor %}
+                        <div class = "add-comment collapsed">
+                            <span class = "primary">Leave a comment:</span>
+                            <form method = "post" class = "comment-form">
+                                <textarea name = "comment-contents" class = "comment-contents">
+
+                                </textarea>
+                                <button class = "red-button">Comment</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-        <!-- <div class = "page-item link-item">
-            <div class = "content-wrapper">
-                <div class = "page-item-title">
-                    <h2><a target = "_blank" href = "http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html">http://practicaldistributism.blogspot.com/2009/10/how-do-we-achieve-wider-distribution-of.html</a></h2>
-                    <div class = "link-status new"></div>
-                </div>
-                <div class = "list">
-                    <span class = "author">Mirko Slavkovic</span>
-                    <span class = "users"> Ivo Stipic &middot; Slavko Ivic &middot; Marko Horvat
-                    &middot; Luka Horvat &middot; 2 other people</span>
-                    <span class = "date">yesterday at 14:32</span>
-                </div>
-                <div class = "text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam consequuntur eum dolorum, blanditiis, aliquid cupiditate suscipit? Deserunt animi eius autem aliquid harum sapiente ex, adipisci natus, obcaecati possimus, ut saepe.
+            </div>
+        {% else %}
+            <div class = "page-item link-item">
+                <div class = "content-wrapper">
+                    <div class = "page-item-title">
+                        <h2>No links yet in this group</h2>
+                    </div>
+                    <div class = "text">
+                    If you'd like to add one, click on the <b>big red button</b> above.
+                    </div>
                 </div>
             </div>
-        </div> -->
+        {% endfor %}
     </div>
 {% endblock %}

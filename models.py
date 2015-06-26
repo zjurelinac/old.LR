@@ -115,7 +115,8 @@ class Group( MetaModel ):
             'descr' : group.description,
             'owner' : group.owner.name,
             'users' : shorten_array( [ x.user.name for x in group.user_rels ], 5 ),
-            'links_count' : group.get_links_count( user ) }
+            'links_count' : group.get_links_count( user ),
+            'unseen_count' : group.get_unseen_count( user ) }
         for group in list( cls.select().where( Group.owner == user ) ) + list( [ g.group for g in user.group_rels ] ) ]
 
     @classmethod
@@ -161,7 +162,7 @@ class Group( MetaModel ):
         group.save()
 
     @classmethod
-    def delete( cls, id, owner ):
+    def remove( cls, id, owner ):
         group = Group.get( id = id )
 
         if group.owner != owner:
@@ -175,10 +176,15 @@ class Group( MetaModel ):
 
     def get_links_count( self, user ):
         if not self.is_member_of( user ):
-            raise AuthorizationError( 'Not allowed to obtain this information' + self.name + ' ' + user.name )
+            raise AuthorizationError( 'Not allowed to obtain this information' )
 
         return self.links.count()
 
+    def get_unseen_count( self, user ):
+        if not self.is_member_of( user ):
+            raise AuthorizationError( 'Not allowed to obtain this information' )
+
+        return 0
     # def get_last_activity( self ):
     #     q = self.links.select().order_by( Link.date.desc() )
     #     return q.get().date if q.count() > 0 else datetime.min
@@ -198,7 +204,7 @@ class Link( MetaModel ):
         if not group.is_member_of( owner ):
             raise AuthorizationError( 'Cannot add a link into a group you\'re not a member of' )
 
-        if url is None: # + other checks
+        if url is None or len( url ) < 0: # + other checks
             raise ValueError( 'Incorrect URL' )
 
         link = cls( url = url, description = descr, owner = owner, date = datetime.now(), group = group )
@@ -207,7 +213,7 @@ class Link( MetaModel ):
         return link
 
     @classmethod
-    def delete( cls, id, group_id, user ):
+    def remove( cls, id, group_id, user ):
         group = Group.get( id = group_id )
         link = Link.get( id = id )
 
@@ -233,13 +239,16 @@ class Link( MetaModel ):
         if not group.is_member_of( user ):
             raise AuthorizationError( 'Not allowed to obtain the information' )
 
+        users_seen = [ utl.user for utl in UserToLink.select().where( UserToLink.link == self ) ]
+
         return {
+            'id' : self.id,
             'url' : self.url,
             'descr' : self.description,
             'owner' : self.owner.name,
             'date' : self.date,
-            'seen' : shorten_array( [ utl.user.name for utl in
-                UserToLink.select().where( UserToLink.link == self ) ], 5 ),
+            'seen' : shorten_array( [ u.name for u in users_seen ], 5 ),
+            'seen_by_owner' : user in users_seen,
             'comments' : [ c.get_dict( self, user ) for c in self.comments ]
         }
 

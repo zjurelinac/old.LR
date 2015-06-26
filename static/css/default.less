@@ -14,7 +14,9 @@
 @red2       :   #FF4F5F;
 @red3       :   #FF5F6F;
 
-@blue       :   #08F;
+@blue1      :   #08F;
+@blue0      :   #06E;
+@blue2      :   #09F;
 
 /**************************************************************************************************/
 
@@ -34,7 +36,7 @@ h1{
 }
 
 h2{
-    color           :   @blue;
+    color           :   @blue1;
     font-size       :   1.5em;
     font-weight     :   300;
     line-height     :   2em;
@@ -145,7 +147,11 @@ b{
 }
 
 .spacer-120{
-    height          :    120px;
+    height          :   120px;
+}
+
+.right{
+    float           :   right;
 }
 
 /**************************************************************************************************/
@@ -187,6 +193,16 @@ button{
     &:hover{
         background          :   @bg25;
         border-bottom-color :   @bg2;
+    }
+}
+
+.lblue-button{
+    background          :   @blue1;
+    border-bottom-color :   @blue0;
+
+    &:hover{
+        background          :   @blue2;
+        border-bottom-color :   @blue1;
     }
 }
 
@@ -336,21 +352,47 @@ textarea{
     text-align      :   center;
 }
 
-.edit{
-    color           :   @red1;
+.errors{
+    background      :   @red1;
+    width           :   100%;
+
+    .error{
+        display         :   block;
+        padding         :   12px 0;
+    }
+}
+
+.options{
+    margin-right    :   -76px;
+    padding-left    :   12px;
+}
+
+.inline-option{
+    background      :   no-repeat center center;
+    background-size :   18px 18px;
     display         :   inline-block;
-    font-size       :   0.4em;
-    font-weight     :   400;
-    height          :   18px;
-    line-height     :   18px;
-    margin-left     :   6px;
-    margin-right    :   -40px;
-    position        :   relative;
-    top             :   -18px;
+    height          :   24px;
+    margin-right    :   -4px;
     width           :   24px;
 
     &:hover{
-        text-decoration     :   underline;
+        cursor          :   pointer;
+    }
+}
+
+.edit-option{
+    background-image:   url( ../img/icons/edit.png );
+
+    &:hover{
+        background-image:   url( ../img/icons/edit-alt.png );
+    }
+}
+
+.delete-option{
+    background-image:   url( ../img/icons/delete.png );
+
+    &:hover{
+        background-image:   url( ../img/icons/delete-alt.png );
     }
 }
 
@@ -361,13 +403,28 @@ textarea{
 .group-name-input{
     background      :   none;
     color           :   #fff;
-    display         :   none;
     font-size       :   2.5em;
     font-weight     :   300;
     height          :   1.8em;
     line-height     :   1.8em;
     padding         :   0;
     text-align      :   center;
+}
+
+.group-description-textarea{
+    .text;
+    background      :   none;
+    color           :   #fff;
+    display         :   block;
+    height          :   72px;
+    margin          :   0 auto;
+    text-align      :   center;
+    width           :   50%;
+}
+
+.button-wrapper{
+    margin          :   12px auto;
+    width           :   50%;
 }
 
 .extra-space{
@@ -411,7 +468,6 @@ textarea{
 
 .page-options{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
-    //min-height      :   360px;
 
     &.always-on .options-wrapper{
         display         :   block;
@@ -438,7 +494,6 @@ textarea{
 
 .invited-users{
     .upper;
-    //float           :   left;
     border-bottom   :   1px solid #ddd;
     font-weight     :   700;
     line-height     :   24px;
@@ -483,7 +538,7 @@ textarea{
         line-height     :   18px;
         padding         :   9px 18px 9px 12px;
 
-        &:hover{
+        &:hover, &.selected{
             background      :   @red1;
             color           :   #fff;
             cursor          :   pointer;
@@ -563,7 +618,7 @@ textarea{
 }
 
 .page-item-title h2 a[ href ]{
-    color           :   @blue;
+    color           :   @blue1;
 
     &:hover{
         color           :   @red1;
@@ -605,12 +660,16 @@ textarea{
     }
 
     &:hover{
-        background      :   @blue;
+        background      :   @blue1;
     }
 
     &.new:hover:before{
         content         :   "mark as seen";
         cursor          :   pointer;
+    }
+
+    &.seen{
+        background      :   @blue1;
     }
 }
 
