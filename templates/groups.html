@@ -22,33 +22,36 @@
 
 {% block front_action %}
     <div class = "front-action">
-        <button class = "red-button big">Create new group</button>
+        <button class = "red-button big" ng-click = "showCreate()">Create new group</button>
     </div>
 {% endblock %}
 
 {% block page_options %}
     <div class = "page-options">
-        <div class = "content-wrapper options-wrapper">
+        <div class = "content-wrapper options-wrapper" ng-show = "isCreateShown">
             <h3>Create a new group</h3>
             <form method = "post" action = "/groups">
                 <input type = "text" name = "name" class = "long name-input" placeholder = "Group name"/>
                 <textarea name = "description" class = "long" placeholder = "Description"></textarea>
                 <div class = "invite-wrapper">
-                    <input type = "text" name = "invited-users" style = "display: none;"/>
+                    <input type = "text" name = "invited-users" class = "hidden" ng-model = "_invited"/>
                     <ul class = "invited-users">
-                        <li>Mirko Mirkovic</li>
-                        <li>Pero Perkovic</li>
+                        <li ng-repeat = "u in invited" ng-click = "$parent.removeUser( $index )">[[ u.name ]]</li>
                     </ul>
                     <div class = "suggest-wrapper">
-                        <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user" autocomplete = "off"/>
-                        <ul class = "suggest-dropdown">
-                            <li>Mirko Marković <span class = "email">mirko@mail.com</span></li>
-                            <li>Hrvoje Horvatović <span class = "email">hrvoje.horvatovic@company.com</span></li>
-                            <li>Mirko Zlikovski <span class = "email">zliko.mirko@yuhoo.com</span></li>
+                        <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user"
+                        autocomplete = "off" ng-model = "nameStart" ng-enter = "addUser()" ng-change = "updateAutocomplete()"/>
+                        <ul class = "suggest-dropdown" ng-show = "isAutocompleteShown">
+                            <li ng-repeat = "u in suggestions" >
+                                <a ng-click = "$parent.autocompleteClick( $index )">
+                                    [[ u.name ]] <span class = "email">[[ u.email ]]</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <button type = "submit" class = "red-button">Create group</button>
+                <button type = "submit" class = "blue-button">Cancel</button>
             </form>
         </div>
     </div>

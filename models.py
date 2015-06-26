@@ -58,12 +58,13 @@ class User( MetaModel ):
         u.delete_instance( True )
 
     @classmethod
-    def autocomplete( cls, query ):
+    def autocomplete( cls, query, user ):
         if not query or len( query ) < 3:
             raise ValueError( 'Query too short' )
 
+        # filter out the asker
         return [ { 'id' : x.id, 'name' : x.name, 'email' : x.email }
-            for x in cls.select().where( User.name ** ( '%' + query + '%' ) ) ]
+            for x in cls.select().where( User.name ** ( '%' + query + '%' ) ).where( User.email != user.email ) ]
 
     def change_password( self, old, new ):
         if self.password != hashfunc( old ):

@@ -234,6 +234,10 @@ textarea{
     resize          :   none;
 }
 
+.hidden{
+    display         :   none;
+}
+
 /**************************************************************************************************/
 
 .body-full-window{
@@ -407,7 +411,6 @@ textarea{
 
 .page-options{
     background      :   @bg3 url( ../img/network_large_transparent.png ) repeat-x 400px center;
-    //display         :   none;
     //min-height      :   360px;
 
     &.always-on .options-wrapper{
@@ -422,7 +425,7 @@ textarea{
 .invite-wrapper{
     .clear;
     background      :   #fff;
-    height          :   36px;
+    min-height          :   36px;
     margin          :   12px 0;
     padding         :   0 6px;
 
@@ -435,10 +438,12 @@ textarea{
 
 .invited-users{
     .upper;
-    float           :   left;
+    //float           :   left;
+    border-bottom   :   1px solid #ddd;
     font-weight     :   700;
     line-height     :   24px;
-    padding         :   6px 0;
+    min-height      :   24px;
+    padding         :   6px;
 
     li{
         display         :   inline;
@@ -446,6 +451,15 @@ textarea{
         &:after{
             content         :   "\00B7";
             margin          :    0 6px;
+        }
+
+        &:last-child:after{
+            content         :   "";
+        }
+
+        &:hover{
+            color       :   @red1;
+            cursor      :   pointer;
         }
     }
 }
@@ -459,7 +473,6 @@ textarea{
 .suggest-dropdown{
     background      :   @bg1;
     color           :   #eee;
-    display         :   none;
     position        :   absolute;
     left            :   -6px;
 
@@ -494,7 +507,6 @@ textarea{
 }
 
 .options-wrapper{
-    display         :   none;
     padding         :   48px 0;
 }
 

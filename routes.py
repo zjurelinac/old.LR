@@ -99,6 +99,16 @@ def signout():
     session.clear()
     return redirect( '/' )
 
+@app.route( '/user/autocomplete', methods = [ 'POST' ] )
+def autocomplete():
+    if not session.get( 'logged_in' ):
+        flash( 'Not authorized to perform this action, login first.' )
+        return redirect( '/user/login' )
+
+    user = g.get( 'user', None );
+    name_start = request.get_json().get( 'name_start' )
+    return jsonify( { 'users' : User.autocomplete( name_start, user ) } )
+
 
 # Group routes
 @app.route( '/groups', methods = [ 'GET' ] )
@@ -116,7 +126,22 @@ def create_group():
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    owner = g.get( 'user', None )
+    name = request.form.get( 'name' )
+    descr = request.form.get( 'description' )
+    users = request.form.get( 'invited-users' )
+
+    try:
+        group = Group.new( name, descr, owner )
+
+        for email in users.split( ',' ):
+            user = User.get( User.email == email )
+            Group.add_user( group.id, owner, user )
+
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/groups' )
 
 @app.route( '/groups/<int:gid>', methods = [ 'GET' ] )
 def show_group( gid ):
