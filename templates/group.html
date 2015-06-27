@@ -43,7 +43,7 @@
 {% endblock %}
 
 {% block front_content %}
-    <p class = "text centered" ng-hide = "isEditShown">{{ group.descr }}</p>
+    <p class = "text centered" ng-hide = "isEditShown">{{ group.descr | markupify | safe }}</p>
     <div class = "group-edit" ng-show = "isEditShown">
         <textarea class = "group-description-textarea" name = "group-description">{{ group.descr }}</textarea>
         <div class = "button-wrapper">
@@ -151,7 +151,7 @@
                             </span>
                         {% endif %}
                     </div>
-                    <div class = "text">{{ link.descr }}</div>
+                    <div class = "text">{{ link.descr | markupify | safe }}</div>
                     <div class = "comments">
                         {% for comment in link.comments %}
                             <div class = "comment">

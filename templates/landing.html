@@ -38,10 +38,10 @@
                 <span class = "error">{{ m }}</span>
             {% endfor %}
             <form method = "post" action = "/user/register">
-                <input type = "text" name = "name" class = "long" placeholder = "Your name"/>
-                <input type = "email" name = "email" class = "long name-input" placeholder = "Email address"/>
-                <input type = "password" name = "password" class = "long" placeholder = "Password"/>
-                <input type = "password" name = "password2" class = "long" placeholder = "Repeat password"/>
+                <input type = "text" name = "name" class = "long" placeholder = "Your name" required = "required" autocomplete = "off"/>
+                <input type = "email" name = "email" class = "long name-input" placeholder = "Email address" required = "required"/>
+                <input type = "password" name = "password" class = "long" placeholder = "Password" required = "required"/>
+                <input type = "password" name = "password2" class = "long" placeholder = "Repeat password" required = "required"/>
                 <button type = "submit" class = "red-button">Sign up!</button>
             </form>
         </div>

@@ -2,7 +2,7 @@ from flask      import  abort, flash, g, jsonify, redirect, render_template, req
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
 from run        import  app
-from utils      import  hashfunc, pretty_date
+from utils      import  hashfunc, markup_to_html, pretty_date
 
 
 # Request handling
@@ -34,7 +34,7 @@ def prettify( s ):
 
 @app.template_filter( 'markupify' )
 def markupify( s ):
-    return s
+    return markup_to_html( s )
 
 @app.template_filter( 'pluralize' )
 def pluralize( i ):
@@ -163,9 +163,10 @@ def create_group():
     try:
         group = Group.new( name, descr, owner )
 
-        for email in users.split( ',' ):
-            user = User.get( User.email == email )
-            Group.add_user( group.id, owner, user )
+        if users:
+            for email in users.split( ',' ):
+                user = User.get( User.email == email )
+                Group.add_user( group.id, owner, user )
 
     except Exception as e:
         flash( str( e ), 'error' )
@@ -305,4 +306,4 @@ def error404( e ):
 
 @app.errorhandler( 500 )
 def error500( e ):
-    return render_template( '500.html', error = e.description ), 500
+    return render_template( '500.html', error = str( e ) ), 500

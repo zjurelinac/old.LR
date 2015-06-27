@@ -1,6 +1,7 @@
 import base64
 import hashlib
 import random
+import re
 import string
 
 from datetime   import datetime
@@ -10,10 +11,10 @@ from math       import *
 def hashfunc( str ):
     return base64.b64encode( hashlib.sha512( str.encode() ).digest() ).decode( 'ascii' )
 
-
-def random_string( len ):
-    return ''.join( [ random.choice( string.ascii_letters + string.digits + '$%' )
-                      for _ in range( 0, len ) ] )
+def markup_to_html( str ):
+    str = re.sub( r'\*\*(.*?)\*\*', r'<b>\1</b>', str )
+    str = re.sub( r'\*(.*?)\*', r'<i>\1</i>', str )
+    return str
 
 def pretty_date( time = False ):
     """
@@ -60,6 +61,10 @@ def pretty_date( time = False ):
     if day_diff < 365:
         return str( round( day_diff / 30 ) ) + " months ago"
     return str( round( day_diff / 365 ) ) + " years ago"
+
+def random_string( len ):
+    return ''.join( [ random.choice( string.ascii_letters + string.digits + '$%' )
+                      for _ in range( 0, len ) ] )
 
 def shorten_array( a, n ):
     return a[ :n ] + ( [ str( len( a ) - n ) + ' others' ] if len( a ) > n else [] )

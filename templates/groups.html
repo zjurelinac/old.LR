@@ -38,7 +38,8 @@
         <div class = "content-wrapper options-wrapper" ng-show = "isCreateShown">
             <h3>Create a new group</h3>
             <form method = "post" action = "/groups">
-                <input type = "text" name = "name" class = "long bold" placeholder = "Group name" required = "required"/>
+                <input type = "text" name = "name" class = "long bold" placeholder = "Group name"
+                required = "required" autocomplete = "off"/>
                 <textarea name = "description" class = "long" placeholder = "Description"></textarea>
                 <div class = "invite-wrapper">
                     <input type = "text" name = "invited-users" class = "hidden" ng-model = "_invited"/>
@@ -86,7 +87,7 @@
                         <span class = "tertiary links">{{ gr.links_count }} link{{ gr.links_count | pluralize }}</span>
                     </div>
                     <div class = "text">
-                        {{ gr.descr }}
+                        {{ gr.descr | markupify | safe }}
                     </div>
                 </div>
             </div>
@@ -102,5 +103,15 @@
                 </div>
             </div>
         {% endfor %}
+        <div class = "items-options">
+            <div class = "content-wrapper">
+                <span class = "secondary">Ordered by:</span>
+                <select value = "0" name = "ordering">
+                    <option value = "0">Alphabetical</option>
+                    <option value = "1">Last shared</option>
+                    <option value = "2">Popularity</option>
+                </select>
+            </div>
+        </div>
     </div>
 {% endblock %}

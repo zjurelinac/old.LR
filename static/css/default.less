@@ -67,7 +67,11 @@ a[ href ]{
 }
 
 b{
-    font-weight     :   700;
+    font-weight     :     700;
+}
+
+i, em{
+    font-style      :     italic;
 }
 
 /**************************************************************************************************/
@@ -583,7 +587,20 @@ textarea{
 }
 
 .page-content{
-    //padding         :   48px 0;
+    position        :     relative;
+}
+
+.items-options{
+    padding         :     12px 0;
+    position        :     absolute;
+    left            :     0;
+    text-align      :     right;
+    top             :     0;
+    width           :     100%;
+
+    .secondary{
+        margin-right     :     12px;
+    }
 }
 
 .page-item{
