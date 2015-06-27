@@ -15,15 +15,15 @@ def set_user():
 
 @app.after_request
 def add_header( response ):
-    # """
-    # Add headers to both force latest IE rendering engine or Chrome Frame,
-    # and also to cache the rendered page for 10 minutes.
-    # """
-    # response.headers[ 'X-UA-Compatible' ] = 'IE=Edge,chrome=1'
-    # response.headers[ 'Last-Modified' ] = datetime.now()
-    # response.headers[ 'Cache-Control' ] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
-    # response.headers[ 'Pragma' ] = 'no-cache'
-    # response.headers[ 'Expires' ] = '-1'
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers[ 'X-UA-Compatible' ] = 'IE=Edge,chrome=1'
+    response.headers[ 'Last-Modified' ] = datetime.now()
+    response.headers[ 'Cache-Control' ] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers[ 'Pragma' ] = 'no-cache'
+    response.headers[ 'Expires' ] = '-1'
     return response
 
 
@@ -39,6 +39,7 @@ def markupify( s ):
 @app.template_filter( 'pluralize' )
 def pluralize( i ):
     return 's' if i != 1 else ''
+
 
 # User routes
 @app.route( '/' )
@@ -66,10 +67,6 @@ def process_login():
         flash( str( e ) )
         return redirect( '/user/login' )
 
-# @app.route( '/user/register', methods = [ 'GET' ] )
-# def show_register():
-#     pass
-
 @app.route( '/user/register', methods = [ 'POST' ] )
 def process_register():
     name = request.form.get( 'name' )
@@ -88,15 +85,43 @@ def process_register():
 
 @app.route( '/user/settings', methods = [ 'GET' ] )
 def show_settings():
-    pass
+    return render_template( 'settings.html', user = g.get( 'user', None ) )
 
 @app.route( '/user/change-password', methods = [ 'POST' ] )
 def change_password():
-    pass
+    if not session.get( 'logged_in' ):
+        flash( 'Not authorized to perform this action, login first.' )
+        return redirect( '/user/login' )
+
+    user = g.get( 'user', None )
+    old_password = request.form.get( 'old-password' )
+    new_password = request.form.get( 'new-password' )
+    new_password2 = request.form.get( 'new-password2' )
+
+    try:
+        user.change_password( old_password, new_password, new_password2 )
+        flash( 'Password changed successfully.', 'info' )
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/user/settings' )
 
 @app.route( '/user/delete', methods = [ 'POST' ] )
 def delete_account():
-    pass
+    if not session.get( 'logged_in' ):
+        flash( 'Not authorized to perform this action, login first.' )
+        return redirect( '/user/login' )
+
+    user = g.get( 'user', None )
+    password = request.form.get( 'password' )
+
+    try:
+        User.delete_account( user.email, password )
+        session.clear()
+        return redirect( '/' )
+    except Exception as e:
+        flash( str( e ), 'error' )
+        return redirect( '/user/settings' )
 
 @app.route( '/user/signout', methods = [ 'GET' ] )
 def signout():
@@ -158,15 +183,35 @@ def show_group( gid ):
 
 @app.route( '/groups/<int:gid>/edit', methods = [ 'POST' ] )
 def edit_group( gid ):
-    return 'edit group'
+    if not session.get( 'logged_in' ):
+        flash( 'Not authorized to perform this action, login first.' )
+        return redirect( '/user/login' )
 
-@app.route( '/groups/<int:gid>/delete', methods = [ 'POST' ] )
+    user = g.get( 'user', None )
+    name = request.form.get( 'group-name' )
+    descr = request.form.get( 'group-description' )
+
+    try:
+        Group.change( gid, name, descr, user )
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/groups/' + str( gid ) )
+
+@app.route( '/groups/<int:gid>/delete' )
 def delete_group( gid ):
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    user = g.get( 'user', None )
+
+    try:
+        Group.remove( gid, user )
+        return redirect( '/groups' )
+    except Exception as e:
+        flash( str( e ), 'error' )
+        return redirect( '/groups/' + str( gid ) )
 
 @app.route( '/groups/<int:gid>/invite', methods = [ 'POST' ] )
 def invite_to_group( gid ):
@@ -174,7 +219,17 @@ def invite_to_group( gid ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    owner = g.get( 'user', None )
+    users = request.form.get( 'invited-users' )
+
+    try:
+        for email in users.split( ',' ):
+            user = User.get( User.email == email )
+            Group.add_user( gid, owner, user )
+    except Exception as e:
+        flash( str( e ), 'error' )
+
+    return redirect( '/groups/' + str( gid ) )
 
 
 # Link routes
@@ -195,17 +250,17 @@ def add_link( gid ):
 
     return redirect( '/groups/' + str( gid ) )
 
-@app.route( '/groups/<int:gid>/links/<int:lid>/delete', methods = [ 'POST' ] )
+@app.route( '/groups/<int:gid>/links/<int:lid>/delete', methods = [ 'GET' ] )
 def delete_link( gid, lid ):
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    User = g.get( 'user', None )
+    user = g.get( 'user', None )
     try:
-        Link.delete( lid, gid, user )
+        Link.remove( lid, gid, user )
     except Exception as e:
-        flash( str( e ), error )
+        flash( str( e ), 'error' )
 
     return redirect( '/groups/' + str( gid ) )
 

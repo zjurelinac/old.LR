@@ -7,7 +7,7 @@
 {% block right_box %}
     <ul class = "user-box">
         <li class = "user">{{ user.name }}</li>
-        <li><a href = "">Settings</a></li>
+        <li><a href = "/user/settings">Settings</a></li>
         <li><a href = "/user/signout">Sign out</a></li>
     </ul>
 {% endblock %}
@@ -26,7 +26,7 @@
     </h1>
     {% if group.is_owner %}
         <input type = "text" class = "group-name-input" name = "group-name" value = "{{ group.name }}"
-        ng-show = "isEditShown"/>
+        ng-show = "isEditShown" autocomplete = "off" required = "required"/>
     {% endif %}
 {% endblock %}
 
@@ -45,10 +45,10 @@
 {% block front_content %}
     <p class = "text centered" ng-hide = "isEditShown">{{ group.descr }}</p>
     <div class = "group-edit" ng-show = "isEditShown">
-        <textarea class = "group-description-textarea">{{ group.descr }}</textarea>
+        <textarea class = "group-description-textarea" name = "group-description">{{ group.descr }}</textarea>
         <div class = "button-wrapper">
             <button type = "submit" class = "red-button">Save</button>
-            <button type = "button" class = "lblue-button right">Cancel</button>
+            <button type = "button" class = "lblue-button right" ng-click = "hideEdit()">Cancel</button>
         </div>
     </div>
 {% endblock %}
@@ -83,30 +83,33 @@
                 <h3>Invite users</h3>
                 <form method = "post" action = "/groups/{{ group.id }}/invite">
                     <div class = "invite-wrapper">
-                        <input type = "text" name = "invited-users" style = "display: none;"/>
+                        <input type = "text" name = "invited-users" class = "hidden" ng-model = "_invited"/>
                         <ul class = "invited-users">
-                            <li>Mirko Mirkovic</li>
-                            <li>Pero Perkovic</li>
+                            <li ng-repeat = "u in invited" ng-click = "$parent.removeUser( $index )">[[ u.name ]]</li>
                         </ul>
                         <div class = "suggest-wrapper">
-                            <input type = "text" name = "add-user" class = "add-user"
-                            placeholder = "Invite user" autocomplete = "off"/>
-                            <ul class = "suggest-dropdown">
-                                <li>Mirko Marković <span class = "email">mirko@mail.com</span></li>
-                                <li>Hrvoje Horvatović <span class = "email">hrvoje.horvatovic@company.com</span></li>
-                                <li>Mirko Zlikovski <span class = "email">zliko.mirko@yuhoo.com</span></li>
+                            <input type = "text" name = "add-user" class = "add-user" placeholder = "Invite user"
+                            autocomplete = "off" ng-model = "nameStart" ng-enter = "addUser()"
+                            ng-change = "updateAutocomplete()" ng-keypress = "updateSelection( $event )"/>
+                            <ul class = "suggest-dropdown" ng-show = "isAutocompleteShown">
+                                <li ng-repeat = "u in suggestions" ng-class = "{selected : $index == $parent.selectionIndex }">
+                                    <a ng-click = "$parent.autocompleteClick( $index )">
+                                        [[ u.name ]] <span class = "email">[[ u.email ]]</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <button type = "submit" class = "red-button">Invite users</button>
+                    <button type = "button" class = "blue-button right" ng-click = "hideInvite()">Cancel</button>
                 </form>
             </div>
             <div class = "content-wrapper options-wrapper" ng-show = "isDeleteShown">
                 <h3>Delete group</h3>
                 <p class = "text inverted">By deleting this group all the links shared in it and all
                 comments posted on them will also be deleted. Are you sure you want to continue?</p>
-                <button class = "red-button">Delete</button>
-                <button class = "blue-button right">Cancel</button>
+                <a href = "/groups/{{ group.id }}/delete"><button class = "red-button">Delete</button></a>
+                <button class = "blue-button right" ng-click = "hideDelete()">Cancel</button>
             </div>
             <!-- <div class = "content-wrapper options-wrapper" ng-show = "isKickShown">
                 <h3>Kick user?</h3>

@@ -53,7 +53,7 @@ class User( MetaModel ):
         return u
 
     @classmethod
-    def remove( cls, email, password ):
+    def delete_account( cls, email, password ):
         u = User.authenticate( email, password )
         u.delete_instance( True )
 
@@ -62,13 +62,14 @@ class User( MetaModel ):
         if not query or len( query ) < 3:
             raise ValueError( 'Query too short' )
 
-        # filter out the asker
         return [ { 'id' : x.id, 'name' : x.name, 'email' : x.email }
             for x in cls.select().where( User.name ** ( '%' + query + '%' ) ).where( User.email != user.email ) ]
 
-    def change_password( self, old, new ):
+    def change_password( self, old, new, new2 ):
         if self.password != hashfunc( old ):
             raise ValueError( 'Passwords do not match' )
+        if new != new2:
+            raise ValueError( 'New passwords do not match' )
         if len( new ) < 8:
             raise ValueError( 'New password too short' )
 

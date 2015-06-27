@@ -3,11 +3,10 @@
 <head>
     <meta charset = "UTF-8"/>
     <title>{% block title %}Linker{% endblock %}</title>
-    <link rel = "stylesheet/less" type = "text/css"
-        href = "{{ url_for( 'static', filename = './css/default.less' ) }}"/>
+    <link rel = "stylesheet" type = "text/css"
+        href = "{{ url_for( 'static', filename = './css/default.css' ) }}"/>
     <link rel = "shortcut icon" type = "image/x-icon"
         href = "{{ url_for( 'static', filename = './favicon.ico' ) }}"/>
-    <script src = "{{ url_for( 'static', filename = './js/less.min.js' ) }}"></script>
     <script src = "{{ url_for( 'static', filename = './js/angular.min.js' ) }}"></script>
     <script src = "{{ url_for( 'static', filename = './js/app.js' ) }}"></script>
 </head>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Settings &mdash; Linker{% endblock %}
+
+{% block page_title %}
+    <h1 class = "page-title">Settings</h1>
+{% endblock %}
+
+{% block page_subtitle %}Change your account settings{% endblock %}
+
+{% block front_content %}
+    <p class = "text centered">Here you can change your password or permanantly delete your account.</p>
+{% endblock %}
+
+{% block front_action %}{% endblock %}
+
+{% block right_box %}
+    <ul class = "user-box">
+        <li class = "user">{{ user.name }}</li>
+        <li><a href = ""> <span class = "red">Settings</span></a></li>
+        <li><a href = "/user/signout">Sign out</a></li>
+    </ul>
+{% endblock %}
+
+{% block page_options %}
+    <div class = "page-options">
+        <div class = "errors" ng-hide = "hideErrors">
+            <div class = "content-wrapper">
+                {% for m in get_flashed_messages() %}
+                    <span class = "error">{{ m }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class = "content-wrapper options-wrapper">
+            <h3>Change password</h3>
+            <form method = "post" action = "/user/change-password">
+                <input type = "password" name = "old-password" class = "long" placeholder = "Old password" required = "required"/>
+                <input type = "password" name = "new-password" class = "long bold" placeholder = "New password" required = "required"/>
+                <input type = "password" name = "new-password2" class = "long bold" placeholder = "Repeat new password" required = "required"/>
+                <button class = "red-button">Change</button>
+            </form>
+        </div>
+
+        <div class = "content-wrapper options-wrapper">
+            <h3>Delete your account</h3>
+            <form method = "post" action = "/user/delete"/>
+                <p class = "text inverted">If you permanently delete your account,
+                all your data will also be completely lost, including all the groups you owned
+                and links you shared. Are you really sure you want to continue? <b>If so, enter your password:</b>
+                <input type = "password" name = "password" class = "long bold" placeholder = "Password" required = "required"/></p>
+                <button class = "red-button">Delete</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_content %}{% endblock %}
