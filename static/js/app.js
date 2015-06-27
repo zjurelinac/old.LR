@@ -139,4 +139,8 @@ angular.module( 'linkerApp', [],
         $scope.isDeleteShown = false;
         $scope.isEditShown = true;
     }
+
+    $scope.hideShare = function(){
+        $scope.isShareShown = false;
+    }
 })

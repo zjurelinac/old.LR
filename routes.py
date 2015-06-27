@@ -201,7 +201,13 @@ def delete_link( gid, lid ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
 
-    pass
+    User = g.get( 'user', None )
+    try:
+        Link.delete( lid, gid, user )
+    except Exception as e:
+        flash( str( e ), error )
+
+    return redirect( '/groups/' + str( gid ) )
 
 @app.route( '/groups/<int:gid>/links/<int:lid>/mark-seen' )
 def mark_as_seen( gid, lid ):

@@ -75,6 +75,7 @@
                 placeholder = "Link URL" required = "required"/>
                 <textarea name = "description" class = "long" placeholder = "Description"></textarea>
                 <button type = "submit" class = "red-button">Share link</button>
+                <button type = "button" class = "blue-button right" ng-click = "hideShare()">Cancel</button>
             </form>
         </div>
         {% if group.is_owner %}

@@ -53,7 +53,7 @@ class User( MetaModel ):
         return u
 
     @classmethod
-    def delete( cls, email, password ):
+    def remove( cls, email, password ):
         u = User.authenticate( email, password )
         u.delete_instance( True )
 
@@ -276,7 +276,7 @@ class Comment( MetaModel ):
         return comment
 
     @classmethod
-    def delete( cls, id, user ):
+    def remove( cls, id, user ):
         pass
 
     def get_dict( self, link, user ):
