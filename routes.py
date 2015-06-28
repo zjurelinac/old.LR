@@ -1,9 +1,13 @@
 from flask      import  abort, flash, g, jsonify, redirect, render_template, request, session, url_for
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
-from run        import  app
+from run        import  app, db
 from utils      import  hashfunc, markup_to_html, pretty_date
 
+# TODO: Implement sorting of links
+# TODO: Add leave group option
+# TODO: Add kick user option
+# TODO: Enable comments
 
 # Request handling
 @app.before_request
@@ -40,6 +44,11 @@ def markupify( s ):
 def pluralize( i ):
     return 's' if i != 1 else ''
 
+# Clear route
+@app.route( '/clear' )
+def clear():
+    db.drop_tables( [ User, Group, Link, UserToGroup, UserToLink ], True )
+    return 'success'
 
 # User routes
 @app.route( '/' )
