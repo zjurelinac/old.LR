@@ -1,3 +1,4 @@
+"""Module containing utility functions"""
 import base64
 import hashlib
 import random
@@ -9,15 +10,24 @@ from math       import *
 
 
 def hashfunc( str ):
+    """Returns a hash value of a given string
+
+    Takes a string and returns its SHA512 hash value, encoded in base64
+    """
     return base64.b64encode( hashlib.sha512( str.encode() ).digest() ).decode( 'ascii' )
 
 def markup_to_html( str ):
+    """Transforms a simple markup string into html
+
+    Supported are: bold as '**bold part**' and italic as '*italicized part*'
+    """
     str = re.sub( r'\*\*(.*?)\*\*', r'<b>\1</b>', str )
     str = re.sub( r'\*(.*?)\*', r'<i>\1</i>', str )
     return str
 
 def pretty_date( time = False ):
-    """
+    """Returns a string containing a human-readable date
+
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
@@ -63,8 +73,12 @@ def pretty_date( time = False ):
     return str( round( day_diff / 365 ) ) + " years ago"
 
 def random_string( len ):
+    """Returns a random string of a given length
+    """
     return ''.join( [ random.choice( string.ascii_letters + string.digits + '$%' )
                       for _ in range( 0, len ) ] )
 
 def shorten_array( a, n ):
+    """Shortens a given array to at most n elements, appending the number of elements that were cut off
+    """
     return a[ :n ] + ( [ str( len( a ) - n ) + ' others' ] if len( a ) > n else [] )

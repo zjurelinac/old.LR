@@ -1,4 +1,6 @@
-from flask      import  abort, flash, g, jsonify, redirect, render_template, request, session, url_for
+"""
+"""
+from flask      import  flash, g, jsonify, redirect, render_template, request, session
 from models     import  *
 from peewee     import  IntegrityError, DoesNotExist
 from run        import  app, db
@@ -12,6 +14,8 @@ from utils      import  hashfunc, markup_to_html, pretty_date
 # Request handling
 @app.before_request
 def set_user():
+    """
+    """
     if session.get( 'logged_in' ):
         g.user = User.get( email = session[ 'user' ] )
     else:
@@ -34,37 +38,51 @@ def add_header( response ):
 # Template helpers
 @app.template_filter( 'prettify' )
 def prettify( s ):
+    """
+    """
     return pretty_date( s )
 
 @app.template_filter( 'markupify' )
 def markupify( s ):
+    """
+    """
     return markup_to_html( s )
 
 @app.template_filter( 'pluralize' )
 def pluralize( i ):
+    """
+    """
     return 's' if i != 1 else ''
 
 # Clear route
 @app.route( '/clear' )
 def clear():
+    """
+    """
     db.drop_tables( [ User, Group, Link, UserToGroup, UserToLink ], True )
     return 'success'
 
 # User routes
 @app.route( '/' )
 def show_landing():
+    """
+    """
     if session.get( 'logged_in' ):
         return redirect( '/groups' )
     return render_template( 'landing.html' )
 
 @app.route( '/user/login', methods = [ 'GET' ] )
 def show_login():
+    """
+    """
     if session.get( 'logged_in' ):
         return redirect( '/groups' )
     return render_template( 'login.html' )
 
 @app.route( '/user/login', methods = [ 'POST' ] )
 def process_login():
+    """
+    """
     email = request.form.get( 'email' )
     password = request.form.get( 'password' )
     try:
@@ -78,6 +96,8 @@ def process_login():
 
 @app.route( '/user/register', methods = [ 'POST' ] )
 def process_register():
+    """
+    """
     name = request.form.get( 'name' )
     email = request.form.get( 'email' )
     password = request.form.get( 'password' )
@@ -94,10 +114,14 @@ def process_register():
 
 @app.route( '/user/settings', methods = [ 'GET' ] )
 def show_settings():
+    """
+    """
     return render_template( 'settings.html', user = g.get( 'user', None ) )
 
 @app.route( '/user/change-password', methods = [ 'POST' ] )
 def change_password():
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -117,6 +141,8 @@ def change_password():
 
 @app.route( '/user/delete', methods = [ 'POST' ] )
 def delete_account():
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -134,11 +160,15 @@ def delete_account():
 
 @app.route( '/user/signout', methods = [ 'GET' ] )
 def signout():
+    """
+    """
     session.clear()
     return redirect( '/' )
 
 @app.route( '/user/autocomplete', methods = [ 'POST' ] )
 def autocomplete():
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -151,6 +181,8 @@ def autocomplete():
 # Group routes
 @app.route( '/groups', methods = [ 'GET' ] )
 def show_groups():
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -160,6 +192,8 @@ def show_groups():
 
 @app.route( '/groups', methods = [ 'POST' ] )
 def create_group():
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -184,6 +218,8 @@ def create_group():
 
 @app.route( '/groups/<int:gid>', methods = [ 'GET' ] )
 def show_group( gid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -193,6 +229,8 @@ def show_group( gid ):
 
 @app.route( '/groups/<int:gid>/edit', methods = [ 'POST' ] )
 def edit_group( gid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -210,6 +248,8 @@ def edit_group( gid ):
 
 @app.route( '/groups/<int:gid>/delete' )
 def delete_group( gid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -225,6 +265,8 @@ def delete_group( gid ):
 
 @app.route( '/groups/<int:gid>/invite', methods = [ 'POST' ] )
 def invite_to_group( gid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -245,6 +287,8 @@ def invite_to_group( gid ):
 # Link routes
 @app.route( '/groups/<int:gid>/links', methods = [ 'POST' ] )
 def add_link( gid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -262,6 +306,8 @@ def add_link( gid ):
 
 @app.route( '/groups/<int:gid>/links/<int:lid>/delete', methods = [ 'GET' ] )
 def delete_link( gid, lid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -276,6 +322,8 @@ def delete_link( gid, lid ):
 
 @app.route( '/groups/<int:gid>/links/<int:lid>/mark-seen' )
 def mark_as_seen( gid, lid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -293,6 +341,8 @@ def mark_as_seen( gid, lid ):
 # Comment routes
 @app.route( '/groups/<int:gid>/links/<int:lid>/comments', methods = [ 'POST' ] )
 def add_comment( gid, lid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -301,6 +351,8 @@ def add_comment( gid, lid ):
 
 @app.route( '/groups/<int:gid>/links/<int:lid>/comments/<int:cid>', methods = [ 'POST' ] )
 def delete_comment( gid, lid, cid ):
+    """
+    """
     if not session.get( 'logged_in' ):
         flash( 'Not authorized to perform this action, login first.' )
         return redirect( '/user/login' )
@@ -311,8 +363,12 @@ def delete_comment( gid, lid, cid ):
 # Error handling
 @app.errorhandler( 404 )
 def error404( e ):
+    """
+    """
     return render_template( '404.html' ), 404
 
 @app.errorhandler( 500 )
 def error500( e ):
+    """
+    """
     return render_template( '500.html', error = str( e ) ), 500

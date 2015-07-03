@@ -17,12 +17,14 @@ class MetaModel( Model ):
 
 
 class User( MetaModel ):
-    name = CharField()
-    email = CharField( unique = True )
-    password = CharField()
+    name = CharField() #: User's real name
+    email = CharField( unique = True ) #: User's email address
+    password = CharField() #: Hash of user's password
 
     @classmethod
     def register( cls, name, email, password, password2 ):
+        """Register a new user with provided data
+        """
         if not name or len( name ) < 3 or len( name ) > 128:
             raise ValueError( 'Name too short or too long' )
         elif not email or not re.match( r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email ):
@@ -42,6 +44,8 @@ class User( MetaModel ):
 
     @classmethod
     def authenticate( cls, email, password ):
+        """Try to authenticate a given user
+        """
         try:
             u = cls.get( email = email )
         except DoesNotExist:

@@ -1,3 +1,7 @@
+"""Runserver script
+
+Imports all the application parts, creates those tables which are missing and then starts the application.
+"""
 from app    import app, db
 from routes import *
 from models import *

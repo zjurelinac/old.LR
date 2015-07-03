@@ -1,3 +1,10 @@
+"""
+Ovo je datoteka u kojoj su neki random podaci za testiranje, nema izravne veze s aplikacijom.
+Pokreće se iz cmd-a, samo `python db_init.py`, i onda u bazu podataka ubaci ove pokazne stvari,
+deset korisnika, deset grupa i 3 linka, jedan link oznaci vidjenim. Stvori i jedan komentar,
+ali u ovoj verziji jos nisam stavio punu podrsku za komentiranje, to bi mogao i ti, ako ce ti se dat
+jednom kad naucis sve detalje
+"""
 from models import *
 
 db.create_tables( [ User, Group, Link, Comment, UserToGroup, UserToLink ], safe = True )

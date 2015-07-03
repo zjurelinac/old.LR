@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Linker’s documentation! &mdash; Linker 2.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Linker 2.0.1 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="#" class="icon icon-home"> Linker
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to Linker&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#module-models">Models.py</a></li>
+<li><a class="reference internal" href="#module-routes">Routes.py</a></li>
+<li><a class="reference internal" href="#module-app">App.py</a></li>
+<li><a class="reference internal" href="#module-run">Run.py</a></li>
+<li><a class="reference internal" href="#module-utils">Utils.py</a></li>
+</ul>
+</li>
+</ul>
+</div>
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">Linker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Welcome to Linker&#8217;s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="welcome-to-linker-s-documentation">
+<h1>Welcome to Linker&#8217;s documentation!<a class="headerlink" href="#welcome-to-linker-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Here&#8217;s a fairly short and basic description of the application code</p>
+<div class="section" id="module-models">
+<span id="models-py"></span><h2>Models.py<a class="headerlink" href="#module-models" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="models.AuthorizationError">
+<em class="property">exception </em><code class="descclassname">models.</code><code class="descname">AuthorizationError</code><a class="headerlink" href="#models.AuthorizationError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.MetaModel">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">MetaModel</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.MetaModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.User">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">User</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.User" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="classmethod">
+<dt id="models.User.authenticate">
+<em class="property">classmethod </em><code class="descname">authenticate</code><span class="sig-paren">(</span><em>email</em>, <em>password</em><span class="sig-paren">)</span><a class="headerlink" href="#models.User.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to authenticate a given user</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.email">
+<code class="descname">email</code><em class="property"> = &lt;peewee.CharField object&gt;</em><a class="headerlink" href="#models.User.email" title="Permalink to this definition">¶</a></dt>
+<dd><p>User&#8217;s email address</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.name">
+<code class="descname">name</code><em class="property"> = &lt;peewee.CharField object&gt;</em><a class="headerlink" href="#models.User.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>User&#8217;s real name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.password">
+<code class="descname">password</code><em class="property"> = &lt;peewee.CharField object&gt;</em><a class="headerlink" href="#models.User.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of user&#8217;s password</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="models.User.register">
+<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>name</em>, <em>email</em>, <em>password</em>, <em>password2</em><span class="sig-paren">)</span><a class="headerlink" href="#models.User.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a new user with provided data</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Group">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Group</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.Group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.Link">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Link</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.Link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.Comment">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Comment</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.Comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.UserToGroup">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">UserToGroup</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.UserToGroup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="models.UserToLink">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">UserToLink</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#models.UserToLink" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-routes">
+<span id="routes-py"></span><h2>Routes.py<a class="headerlink" href="#module-routes" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="routes.add_comment">
+<code class="descclassname">routes.</code><code class="descname">add_comment</code><span class="sig-paren">(</span><em>gid</em>, <em>lid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.add_comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.add_header">
+<code class="descclassname">routes.</code><code class="descname">add_header</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.add_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add headers to both force latest IE rendering engine or Chrome Frame,
+and also to cache the rendered page for 10 minutes.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="routes.add_link">
+<code class="descclassname">routes.</code><code class="descname">add_link</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.add_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.autocomplete">
+<code class="descclassname">routes.</code><code class="descname">autocomplete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.autocomplete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.change_password">
+<code class="descclassname">routes.</code><code class="descname">change_password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.change_password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.clear">
+<code class="descclassname">routes.</code><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.create_group">
+<code class="descclassname">routes.</code><code class="descname">create_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.create_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.delete_account">
+<code class="descclassname">routes.</code><code class="descname">delete_account</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.delete_account" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.delete_comment">
+<code class="descclassname">routes.</code><code class="descname">delete_comment</code><span class="sig-paren">(</span><em>gid</em>, <em>lid</em>, <em>cid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.delete_comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.delete_group">
+<code class="descclassname">routes.</code><code class="descname">delete_group</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.delete_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.delete_link">
+<code class="descclassname">routes.</code><code class="descname">delete_link</code><span class="sig-paren">(</span><em>gid</em>, <em>lid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.delete_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.edit_group">
+<code class="descclassname">routes.</code><code class="descname">edit_group</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.edit_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.error404">
+<code class="descclassname">routes.</code><code class="descname">error404</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.error404" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.error500">
+<code class="descclassname">routes.</code><code class="descname">error500</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.error500" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.invite_to_group">
+<code class="descclassname">routes.</code><code class="descname">invite_to_group</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.invite_to_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.mark_as_seen">
+<code class="descclassname">routes.</code><code class="descname">mark_as_seen</code><span class="sig-paren">(</span><em>gid</em>, <em>lid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.mark_as_seen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.markupify">
+<code class="descclassname">routes.</code><code class="descname">markupify</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.markupify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.pluralize">
+<code class="descclassname">routes.</code><code class="descname">pluralize</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.pluralize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.prettify">
+<code class="descclassname">routes.</code><code class="descname">prettify</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.prettify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.process_login">
+<code class="descclassname">routes.</code><code class="descname">process_login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.process_login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.process_register">
+<code class="descclassname">routes.</code><code class="descname">process_register</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.process_register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.set_user">
+<code class="descclassname">routes.</code><code class="descname">set_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.set_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.show_group">
+<code class="descclassname">routes.</code><code class="descname">show_group</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="headerlink" href="#routes.show_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.show_groups">
+<code class="descclassname">routes.</code><code class="descname">show_groups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.show_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.show_landing">
+<code class="descclassname">routes.</code><code class="descname">show_landing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.show_landing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.show_login">
+<code class="descclassname">routes.</code><code class="descname">show_login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.show_login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.show_settings">
+<code class="descclassname">routes.</code><code class="descname">show_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.show_settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="routes.signout">
+<code class="descclassname">routes.</code><code class="descname">signout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routes.signout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app">
+<span id="app-py"></span><h2>App.py<a class="headerlink" href="#module-app" title="Permalink to this headline">¶</a></h2>
+<p>App configuration file and initialization file</p>
+<p>The Flask <cite>app</cite> object is created here, as well as the peewee <cite>db</cite> database.
+This module also contains app configuration options, such as database name, a not-so-secret key and debug status</p>
+</div>
+<div class="section" id="module-run">
+<span id="run-py"></span><h2>Run.py<a class="headerlink" href="#module-run" title="Permalink to this headline">¶</a></h2>
+<p>Runserver script</p>
+<p>Imports all the application parts, creates those tables which are missing and then starts the application.</p>
+</div>
+<div class="section" id="module-utils">
+<span id="utils-py"></span><h2>Utils.py<a class="headerlink" href="#module-utils" title="Permalink to this headline">¶</a></h2>
+<p>Module containing utility functions</p>
+<dl class="function">
+<dt id="utils.hashfunc">
+<code class="descclassname">utils.</code><code class="descname">hashfunc</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.hashfunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a hash value of a given string</p>
+<p>Takes a string and returns its SHA512 hash value, encoded in base64</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.markup_to_html">
+<code class="descclassname">utils.</code><code class="descname">markup_to_html</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.markup_to_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms a simple markup string into html</p>
+<p>Supported are: bold as &#8216;<strong>bold part</strong>&#8216; and italic as &#8216;<em>italicized part</em>&#8216;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.pretty_date">
+<code class="descclassname">utils.</code><code class="descname">pretty_date</code><span class="sig-paren">(</span><em>time=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.pretty_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string containing a human-readable date</p>
+<p>Get a datetime object or a int() Epoch timestamp and return a
+pretty string like &#8216;an hour ago&#8217;, &#8216;Yesterday&#8217;, &#8216;3 months ago&#8217;,
+&#8216;just now&#8217;, etc</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.random_string">
+<code class="descclassname">utils.</code><code class="descname">random_string</code><span class="sig-paren">(</span><em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.random_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random string of a given length</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.shorten_array">
+<code class="descclassname">utils.</code><code class="descname">shorten_array</code><span class="sig-paren">(</span><em>a</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.shorten_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortens a given array to at most n elements, appending the number of elements that were cut off</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Zvonimir Jurelinac.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
