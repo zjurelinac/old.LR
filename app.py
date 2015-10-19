@@ -18,7 +18,7 @@ APP_ROOT = os.path.dirname( os.path.realpath( __file__ ) )
 # Ime datoteke u kojoj je baza podataka
 DATABASE = "linker.db"
 # Tajni ključ za enkripciju cookiea u kojima se čuvaju podaci o trenutnoj sjednici
-SECRET_KEY = "t!3pbh+o3zh9l3xtm!=5$+uy^7#7s7+aarxc=yb5v4!$b!o^77"
+# UKLONJEN!
 # Vrti li se aplikacija u debug modu, ako da, onda za svaku grešku i iznimku ispiše detalje i gdje je nastala - kao Java Stack Trace
 DEBUG = True
 
